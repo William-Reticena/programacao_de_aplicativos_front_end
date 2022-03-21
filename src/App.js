@@ -1,9 +1,15 @@
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { AppRoutes } from "./routes";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Bem vindo ao aplicativo!</h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={<AppRoutes />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
