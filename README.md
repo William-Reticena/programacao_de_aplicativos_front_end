@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Primeiro baixe e instale o [node.js](https://nodejs.org/en/download/) e o [git](https://git-scm.com/downloads)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## No node instale o yarn globalmente com o comando
+```npm install --global yarn```
 
-## Available Scripts
+## Instalando o yarn no windows!
+As vezes o windows impede que os comandos do yarn sejam executados.
+Para isso entre no Windows PowerShell como administrador e rode os seguintes comandos de uma vez...
 
-In the project directory, you can run:
+```Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted```
 
-### `yarn start`
+Em teoria, isso é o suficiente para os scripts yarn executarem
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Configurando a ferramenta Git
+`NOTA:` Tudo que está entre tags, deve ser substítuido pelos itens respectivos, dentro das mesmas. Utilize o Git Bash para as configurações.
+Para as configurações iniciais execute:
+  Comandos usados para indentificar os participantes na hora de um commit
+  
+```git config --global user.name "<nome do usuário>"```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```git config --global user.email <email do GitHub>```
 
-### `yarn test`
+### Geração da chave SSH para clone de repositórios remotos:
+```ssh-keygen -t rsa -b 4096 -C "<email do GitHub>"```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pegando a chave SSH:
+`NOTA:` Essa chave deve ser copiada no início ao fim (até o seu email) e deve ser colada no [SSH and GPG keys](https://github.com/settings/ssh/new) do GitHub
 
-### `yarn build`
+```cat ~/.ssh/id_rsa.pub```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Inicializando o agente SSH:
+```eval `ssh-agent -s` ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```ssh-add ~/.ssh/id_rsa```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Pronto está tudo configurado!!
 
-### `yarn eject`
+Agora para clonar o repositório cole no terminal:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```git clone git@github.com:William-Reticena/programacao_de_aplicativos_front_end.git```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Na pasta do repositório clonado apenas digite `yarn` e ele irá fazer a instalação de todas as dependências 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
