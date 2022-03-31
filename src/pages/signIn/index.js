@@ -1,5 +1,12 @@
 import React from "react";
+// import { Button } from "@mui/material";
+import { Button } from "./style"
 
 export function SignIn () {
-  return <h1>Você está no LOGIN!</h1>
+  return (
+    <>
+      <Button>teste</Button>
+      {/* <Button1>teste</Button1> */}
+    </>
+  )
 };
