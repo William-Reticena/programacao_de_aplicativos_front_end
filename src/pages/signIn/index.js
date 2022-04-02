@@ -1,7 +1,19 @@
 import React from "react";
 import Logo from "../../images/Logo-UTFPR.jpg";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import { Box, Button, Card, CardMedia, Container, FormControl, FormControlLabel, FormGroup, FormLabel, IconButton, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import {
+Box,
+Button,
+Card,
+CardMedia,
+Container,
+FormControl,
+FormControlLabel,
+Paper,
+Radio,
+RadioGroup,
+TextField,
+} from "@mui/material";
 
 
 const LabelWrapper = ({ user }) => (
@@ -13,39 +25,30 @@ const LabelWrapper = ({ user }) => (
 
 export function SignIn () {
   return (
-    <Container sx={{ /*background: "gray",*/ display: "flex", justifyContent: "center" }}>
+    <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
       <Paper sx={{width: "450px"}} elevation={5}>
-        <Box sx={{ justifyContent: "center", /*background: "red",*/ display: "flex", padding:"24px" }}>
+        <Box sx={{ justifyContent: "center", display: "flex", padding:"24px" }}>
             <Card sx={{ width: "300px" }} elevation={0}>
               <CardMedia component="img" image={Logo} />
             </Card>
         </Box>
 
-        <Box sx={{ justifyContent: "center", /*background: "red",*/ display: "flex", paddingBottom: "24px" }}>
+        <Box sx={{ justifyContent: "center", display: "flex", paddingBottom: "24px" }}>
           <form>
-              <FormControl sx={{ /*background: "pink",*/ padding: "16px", width: "350px" }}>
-                {/* <div style={{ marginLeft: "20px"}}> */}
-                <FormGroup row>
-                  <RadioGroup sx={{ flexDirection: "row", display: "flex" }}>
-                    {/* <div style={{ display: "inline", }}> */}
+              <FormControl sx={{ padding: "16px", width: "350px" }}>
+                  <RadioGroup sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap" }}>
                       <FormControlLabel
-                        control={<Radio /*sx={{ display: "none" }}*/ />}
+                        control={<Radio sx={{ display: "none" }} />}
                         label={<LabelWrapper user="Aluno" />}
                         value="student"
                       />
-                    {/* </div> */}
 
-                    {/* <div style={{ display: "inline"}}> */}
                       <FormControlLabel
-                        control={<Radio /*sx={{ display: "none" }}*/ />}
+                        control={<Radio sx={{ display: "none" }} />}
                         label={<LabelWrapper user="Professor" />}
                         value="teacher"
-                        />
-                    {/* </div> */}
-
+                      />
                   </RadioGroup>
-                </FormGroup>
-                {/* </div> */}
 
                 <TextField label="RA" name="RA" sx={{ margin: "8px" }} />
                 <TextField label="SENHA" name="password" type="password" sx={{ margin: "8px" }} />
