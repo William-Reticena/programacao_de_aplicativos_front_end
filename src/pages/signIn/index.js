@@ -1,6 +1,8 @@
 import React from "react";
 import Logo from "../../images/Logo-UTFPR.jpg";
+import { Link } from "react-router-dom";
 import { ChalkboardUser, GraduationCap } from "../../icons";
+import { STUDENT_HOME } from "../../routes/routes";
 import {
 Box,
 Button,
@@ -50,11 +52,36 @@ export function SignIn () {
                       />
                   </RadioGroup>
 
-                <TextField label="RA" name="RA" sx={{ margin: "8px" }} />
-                <TextField label="SENHA" name="password" type="password" sx={{ margin: "8px" }} />
+                <TextField
+                  label="RA"
+                  name="RA"
+                  sx={{ margin: "8px" }}
+                />
+                <TextField
+                  label="SENHA"
+                  name="password"
+                  type="password"
+                  sx={{ margin: "8px" }}
+                />
 
-                <Button size="large" variant="contained" sx={{ margin: "8px" }}>Login</Button>
-                <Button size="large" sx={{ margin: "8px" }}>Cadastre-se</Button>
+                <Link to={STUDENT_HOME} style={{ textDecoration: "none" }}>
+                  <Button
+                    size="large"
+                    variant="contained"
+                    sx={{ margin: "8px", width: "calc(100% - 15px)" }}
+                  >
+                    Login
+                  </Button>
+                </Link>
+
+                <Link to="#" style={{ textDecoration: "none" }}>
+                  <Button
+                    size="large"
+                    sx={{ margin: "8px", width: "calc(100% - 15px)" }}
+                  >
+                    Cadastre-se
+                  </Button>
+                </Link>
               </FormControl>
           </form>
         </Box>
