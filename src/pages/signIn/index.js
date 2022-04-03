@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../images/Logo-UTFPR.jpg";
 import { Link } from "react-router-dom";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import { STUDENT_HOME } from "../../routes/routes";
+import { REGISTER, STUDENT_HOME } from "../../routes/routes";
 import {
 Box,
 Button,
@@ -74,7 +74,7 @@ export function SignIn () {
                   </Button>
                 </Link>
 
-                <Link to="#" style={{ textDecoration: "none" }}>
+                <Link to={REGISTER} style={{ textDecoration: "none" }}>
                   <Button
                     size="large"
                     sx={{ margin: "8px", width: "calc(100% - 15px)" }}
