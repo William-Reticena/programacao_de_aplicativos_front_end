@@ -1,24 +1,17 @@
 import React from "react";
-import { InformationsCard } from "../../components";
-import {
-AppBar,
-Grid,
-Typography,
-} from "@mui/material";
+import { Header, InformationsCard } from "../../components";
+import { Grid, Typography, } from "@mui/material";
 
 export function StudentHome () {
   return (
     <>
-      <AppBar sx={{ height: "80px" }}>
-        oskdodke
-      </AppBar>
+      <Header />
 
       <Grid container sx={{ marginTop: "80px" }}>
 
         <Grid item xs={2}>
           <div style={{ height: "200px", width: "150px", background: "red" }}></div>
         </Grid>
-
 
         <Grid item xs={8}>
           <div style={{ textAlign: "center", margin: "16px" }}>
@@ -30,10 +23,10 @@ export function StudentHome () {
             </Typography>
           </div>
 
-          {[1, 2, 3].map((infos) => (
+          {[0, 1, 2, 3, 4, 5].map((infos) => (
             <InformationsCard key={infos} />
           ))}
-          
+
         </Grid>
 
         <Grid item xs={2}>

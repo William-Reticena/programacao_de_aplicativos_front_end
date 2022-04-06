@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "../../images/Logo-UTFPR.jpg";
-import { Link } from "react-router-dom";
+import { Logo } from "../../images";
+import { NavigationButton } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
 import { REGISTER, STUDENT_HOME } from "../../routes/routes";
 import {
@@ -64,7 +64,7 @@ export function SignIn () {
                   sx={{ margin: "8px" }}
                 />
 
-                <Link to={STUDENT_HOME} style={{ textDecoration: "none" }}>
+                <NavigationButton to={STUDENT_HOME}>
                   <Button
                     size="large"
                     variant="contained"
@@ -72,16 +72,16 @@ export function SignIn () {
                   >
                     Login
                   </Button>
-                </Link>
+                </NavigationButton>
 
-                <Link to={REGISTER} style={{ textDecoration: "none" }}>
+                <NavigationButton to={REGISTER}>
                   <Button
                     size="large"
                     sx={{ margin: "8px", width: "calc(100% - 15px)" }}
                   >
                     Cadastre-se
                   </Button>
-                </Link>
+                </NavigationButton>
               </FormControl>
           </form>
         </Box>
