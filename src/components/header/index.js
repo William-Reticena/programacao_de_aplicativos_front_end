@@ -17,6 +17,7 @@ export function Header () {
           <TextField
             size="small"
             variant="standard"
+            placeholder="Pesquisar"
             sx={{ width: "calc(100% - 40px)",  }}
             InputProps={{
               disableUnderline: true,

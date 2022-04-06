@@ -1,6 +1,7 @@
 import React from "react";
 import { Header, InformationsCard } from "../../components";
-import { Grid, Typography, } from "@mui/material";
+import { Avatar, Button, FormControl, FormControlLabel, FormGroup, Grid, Paper, Typography, } from "@mui/material";
+import { CheckBox } from "@mui/icons-material";
 
 export function StudentHome () {
   return (
@@ -10,7 +11,42 @@ export function StudentHome () {
       <Grid container sx={{ marginTop: "80px" }}>
 
         <Grid item xs={2}>
-          <div style={{ height: "200px", width: "150px", background: "red" }}></div>
+          <Paper
+              elevation={5}
+              sx={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "24px", padding: "8px", position: "fixed", width: "12.5%" }}
+            >
+              <Typography component="span"
+                sx={{ background: "#E3F2FD", diplay: "inline-flex", width: "100%", textAlign: "center", color: "#305FAC", borderRadius: "4px", marginBottom: "16px", height: "40px", lineHeight: "40px"}}
+              >Filtros</Typography>
+              
+                <FormGroup>
+                  <FormControl sx={{marginLeft: "8px"}}>
+                    <FormControlLabel
+                      sx={{ margin: "5px 0px" }}
+                      control={<CheckBox color="primary" name="all" checked={false} />}
+                      label="Todos"
+                    />
+
+                    <FormControlLabel
+                      sx={{ margin: "5px 0px" }}
+                      control={<CheckBox color="primary" name="paid" />}
+                      label="Remunerados"
+                    />
+
+                    <FormControlLabel
+                      sx={{ margin: "5px 0px" }}
+                      control={<CheckBox color="primary" name="unpaid" />}
+                      label="Não Remunerados"
+                    />
+
+                    <FormControlLabel
+                      sx={{ margin: "5px 0px" }}
+                      control={<CheckBox color="primary" name="others" />}
+                      label="Outros Cursos"
+                    />
+                  </FormControl>
+                </FormGroup>
+            </Paper>
         </Grid>
 
         <Grid item xs={8}>
@@ -30,7 +66,19 @@ export function StudentHome () {
         </Grid>
 
         <Grid item xs={2}>
-          <div style={{ height: "200px", width: "150px", background: "red" }}></div>
+          <Paper
+            elevation={5}
+            sx={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "24px", padding: "8px", position: "fixed", width: "12%" }}
+          >
+            <Avatar />
+
+            <Typography>Nome e sobrenome</Typography>
+            <Typography>RA</Typography>
+            <Typography>Curso</Typography>
+            <Button
+              variant="contained"
+            >Editar Perfil</Button>
+          </Paper>
         </Grid>
       </Grid>
     </>
