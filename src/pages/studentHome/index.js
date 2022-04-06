@@ -1,49 +1,39 @@
-import { AppBar, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import React from "react";
+import { InformationsCard } from "../../components";
+import {
+AppBar,
+Grid,
+Typography,
+} from "@mui/material";
 
 export function StudentHome () {
   return (
     <>
-      <AppBar sx={{ height: "100px" }}>
+      <AppBar sx={{ height: "80px" }}>
         oskdodke
       </AppBar>
 
-      <Grid container sx={{ marginTop: "100px" }}>
+      <Grid container sx={{ marginTop: "80px" }}>
+
         <Grid item xs={2}>
           <div style={{ height: "200px", width: "150px", background: "red" }}></div>
         </Grid>
 
+
         <Grid item xs={8}>
-          <Paper elevation={5}>
-            <Grid container spacing={3}>
-              <Grid item xs={2}>
-                <div style={{ height: "200px", width: "150px", background: "blue" }}></div>
-              </Grid>
+          <div style={{ textAlign: "center", margin: "16px" }}>
+            <Typography
+              variant="h1"
+              sx={{ fontSize: "36px" }}
+            >
+              DESTAQUES
+            </Typography>
+          </div>
 
-              <Grid item xs={10}>
-              <Typography>TÍTULO DA VAGA</Typography>
-              <Typography>DESCRIÇÃO</Typography>
-
-              <TextField multiline minRows={2} />
-
-              <div style={{ display: "flex" }}>
-                <div>
-                  <Typography>CARGA HORÁRIA</Typography>
-                  <TextField size="small" />
-                </div>
-
-                <div>
-                  <Typography>RESPONSÁVEL</Typography>
-                  <TextField size="small" />
-                  <Button variant="contained">visualizar vaga</Button>
-                </div>
-
-
-              </div>
-
-              </Grid>
-            </Grid>
-          </Paper>
+          {[1, 2, 3].map((infos) => (
+            <InformationsCard key={infos} />
+          ))}
+          
         </Grid>
 
         <Grid item xs={2}>
