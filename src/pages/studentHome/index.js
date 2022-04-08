@@ -17,35 +17,36 @@ export function StudentHome () {
             >
               <Typography component="span"
                 sx={{ background: "#E3F2FD", diplay: "inline-flex", width: "100%", textAlign: "center", color: "#305FAC", borderRadius: "4px", marginBottom: "16px", height: "40px", lineHeight: "40px"}}
-              >Filtros</Typography>
-              
+              >
+                Filtros
+              </Typography>
+              <FormControl sx={{marginLeft: "8px"}}>
                 <FormGroup>
-                  <FormControl sx={{marginLeft: "8px"}}>
-                    <FormControlLabel
-                      sx={{ margin: "5px 0px" }}
-                      control={<CheckBox color="primary" name="all" checked={false} />}
-                      label="Todos"
-                    />
+                  <FormControlLabel
+                    sx={{ margin: "5px 0px" }}
+                    control={<CheckBox color="primary" name="all" />}
+                    label="Todos"
+                  />
 
-                    <FormControlLabel
-                      sx={{ margin: "5px 0px" }}
-                      control={<CheckBox color="primary" name="paid" />}
-                      label="Remunerados"
-                    />
+                  <FormControlLabel
+                    sx={{ margin: "5px 0px" }}
+                    control={<CheckBox color="primary" name="paid" />}
+                    label="Remunerados"
+                  />
 
-                    <FormControlLabel
-                      sx={{ margin: "5px 0px" }}
-                      control={<CheckBox color="primary" name="unpaid" />}
-                      label="Não Remunerados"
-                    />
+                  <FormControlLabel
+                    sx={{ margin: "5px 0px" }}
+                    control={<CheckBox color="primary" name="unpaid" />}
+                    label="Não Remunerados"
+                  />
 
-                    <FormControlLabel
-                      sx={{ margin: "5px 0px" }}
-                      control={<CheckBox color="primary" name="others" />}
-                      label="Outros Cursos"
-                    />
-                  </FormControl>
+                  <FormControlLabel
+                    sx={{ margin: "5px 0px" }}
+                    control={<CheckBox color="primary" name="others" />}
+                    label="Outros Cursos"
+                  />
                 </FormGroup>
+              </FormControl>
             </Paper>
         </Grid>
 
