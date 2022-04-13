@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
@@ -19,13 +19,23 @@ TextField,
 
 
 const LabelWrapper = ({ user }) => (
-  <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", }}>
-    {user === "Aluno" ? <GraduationCap size="120px" /> : <ChalkboardUser size="120px" />}
+  <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", border: "1px solid black" }}>
+    {user === "Aluno" ? <GraduationCap size="100px" /> : <ChalkboardUser size="100px" />}
     <span style={{ fontSize: "24px" }}>{user}</span>
   </Container>
 );
 
 export function SignIn () {
+  const [radioStudent, setRadioStudent] = useState(true);
+  const [radioTeacher, setRadioTeacher] = useState(false);
+
+  const handleChange = (event) => {
+    setRadioStudent(event.target.checked);
+    setRadioTeacher(event.target.checked);
+    console.log("student", radioStudent);
+    console.log("teacher", radioTeacher);
+  };
+
   return (
     <Container sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
       <Paper sx={{width: "450px"}} elevation={5}>
@@ -34,19 +44,19 @@ export function SignIn () {
               <CardMedia component="img" image={Logo} />
             </Card>
         </Box>
-
+        {/* TIRAR O RADIO GROUP */}
         <Box sx={{ justifyContent: "center", display: "flex", paddingBottom: "24px" }}>
           <form>
               <FormControl sx={{ padding: "16px", width: "350px" }}>
-                  <RadioGroup sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap" }}>
+                  <RadioGroup onChange={handleChange} sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}>
                       <FormControlLabel
-                        control={<Radio sx={{ display: "none" }} />}
+                        control={<Radio id="first" /*sx={{ display: "none" }}*/ />}
                         label={<LabelWrapper user="Aluno" />}
                         value="student"
                       />
 
                       <FormControlLabel
-                        control={<Radio sx={{ display: "none" }} />}
+                        control={<Radio /*sx={{ display: "none" }}*/ />}
                         label={<LabelWrapper user="Professor" />}
                         value="teacher"
                       />
