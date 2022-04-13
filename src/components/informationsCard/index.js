@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import PerfilImage from "../../images/perfil-image.png"
+import { ModalProject } from "../";
 import {
 Box,
 Button,
@@ -12,6 +13,10 @@ Typography,
 } from "@mui/material";
 
 export function InformationsCard () {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
       <Grid container spacing={2}>
@@ -54,10 +59,16 @@ export function InformationsCard () {
 
             <Button
               variant="contained"
+              onClick={handleOpen}
               sx={{ width: "25%" }}
             >
               visualizar vaga
             </Button>
+
+            <ModalProject
+              open={open}
+              onClose={handleClose}
+            />
           </Box>
         </Grid>
       </Grid>
