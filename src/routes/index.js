@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Projects, Register, SignIn, StudentHome, TeacherHome } from "../pages";
-import { LOGIN, PROJECTS, REGISTER, STUDENT_HOME, TEACHER_HOME } from "./routes";
+import { Admin, Projects, Register, SignIn, StudentHome, TeacherHome } from "../pages";
+import { ADMIN, LOGIN, PROJECTS, REGISTER, STUDENT_HOME, TEACHER_HOME } from "./routes";
 
 export function AppRoutes () {
   const location = useLocation();
@@ -11,6 +11,7 @@ export function AppRoutes () {
   return (
     <Routes>
       {/* <Route exact path={HOME} element={<Home />} /> */}
+      <Route path={ADMIN} element={<Admin />} />
       <Route path={LOGIN} element={<SignIn />} />
       <Route path={REGISTER} element={<Register />} />
       <Route path={STUDENT_HOME} element={<StudentHome />} />
