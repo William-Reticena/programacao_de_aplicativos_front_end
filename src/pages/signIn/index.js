@@ -18,22 +18,38 @@ TextField,
 } from "@mui/material";
 
 
-const LabelWrapper = ({ user }) => (
-  <Container sx={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "20px", border: "1px solid black" }}>
+const LabelWrapper = ({ isSelected, user }) => (
+  <Container sx={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "20px",
+    background: isSelected ? "#90caf9" : "inherit",
+    borderRadius: "4px"
+  }}>
     {user === "Aluno" ? <GraduationCap size="100px" /> : <ChalkboardUser size="100px" />}
     <span style={{ fontSize: "24px" }}>{user}</span>
   </Container>
 );
 
 export function SignIn () {
+  const [selectedValue, setSelectedValue] = useState("student");
   const [radioStudent, setRadioStudent] = useState(true);
   const [radioTeacher, setRadioTeacher] = useState(false);
 
+  // SOMENTE PARA TESTES
+  // useEffect(() => {
+  //   setSelectedValue("student");
+  //   console.log("effec", selectedValue);
+  //   console.log("aluno:", radioStudent);
+  //   console.log("professor:", radioTeacher);
+  // }, [selectedValue, radioTeacher, radioStudent]);
+
   const handleChange = (event) => {
-    setRadioStudent(event.target.checked);
-    setRadioTeacher(event.target.checked);
-    console.log("student", radioStudent);
-    console.log("teacher", radioTeacher);
+    setSelectedValue(event.target.value);
+
+    setRadioStudent((prevState) => (!prevState));
+    setRadioTeacher((prevState) => (!prevState));
   };
 
   return (
@@ -44,20 +60,34 @@ export function SignIn () {
               <CardMedia component="img" image={Logo} />
             </Card>
         </Box>
-        {/* TIRAR O RADIO GROUP */}
+
         <Box sx={{ justifyContent: "center", display: "flex", paddingBottom: "24px" }}>
           <form>
               <FormControl sx={{ padding: "16px", width: "350px" }}>
-                  <RadioGroup onChange={handleChange} sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}>
+                  <RadioGroup sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}>
                       <FormControlLabel
-                        control={<Radio id="first" /*sx={{ display: "none" }}*/ />}
-                        label={<LabelWrapper user="Aluno" />}
+                        control={
+                          <Radio
+                            checked={selectedValue === "student"}
+                            onChange={handleChange}
+                            value="student"
+                            sx={{ display: "none" }}
+                          />
+                        }
+                        label={<LabelWrapper user="Aluno" isSelected={radioStudent} />}
                         value="student"
                       />
 
                       <FormControlLabel
-                        control={<Radio /*sx={{ display: "none" }}*/ />}
-                        label={<LabelWrapper user="Professor" />}
+                        control={
+                          <Radio
+                            checked={selectedValue === "teacher"}
+                            onChange={handleChange}
+                            value="teacher"
+                            sx={{ display: "none" }}
+                          />
+                        }
+                        label={<LabelWrapper user="Professor" isSelected={radioTeacher} />}
                         value="teacher"
                       />
                   </RadioGroup>
@@ -67,6 +97,7 @@ export function SignIn () {
                   name="RA"
                   sx={{ margin: "8px" }}
                 />
+
                 <TextField
                   label="SENHA"
                   name="password"
