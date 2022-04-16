@@ -1,5 +1,22 @@
 import React from "react";
+import { ProfileCard } from "../../components";
+import { Header } from "../../components";
+import { Grid } from "@mui/material";
 
 export function Register () {
-  return <h1>Você está em Cadastrar-se!</h1>
+  return (
+    <>
+      <Header title="CADASTRO" />
+
+      <Grid container sx={{ marginTop: "96px" }}>
+        <Grid item xs={1} />
+
+        <Grid item xs={10} sx={{ display: "flex", justifyContent: "center"}}>
+          <ProfileCard />
+        </Grid>
+
+        <Grid item xs={1} />
+      </Grid>
+    </>
+  );
 };

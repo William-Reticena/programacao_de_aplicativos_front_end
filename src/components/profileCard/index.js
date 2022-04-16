@@ -6,23 +6,16 @@ import {
   Card,
   CardMedia,
   Grid,
-  Modal,
   Paper,
   TextField
 } from "@mui/material";
 
-export function ModalProfile ({ onClose, open }) {
+export function ProfileCard ({ onClose }) {
   return (
-    <Modal
-      open={open}
-      onClose={onClose}
-      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
-    >
-      
-      {/* <Paper sx={{ /*display: "flex", flexDirection: "column", width: "80%", padding: "16px" }}>
+    <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
         <Grid container>
           <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "180px" }}>
+            <Card elevation={0} sx={{ maxWidth: "180px" }}>
               <CardMedia component="img" image={PerfilImage} />
             </Card>
           </Grid>
@@ -95,8 +88,8 @@ export function ModalProfile ({ onClose, open }) {
         />
 
         <Box sx={{ width: "100%", display: "inline-flex", justifyContent: "center" }} >
-          // {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
-            {/* <Button
+          {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
+            <Button
               variant="contained"
               color="error"
               onClick={onClose}
@@ -111,8 +104,7 @@ export function ModalProfile ({ onClose, open }) {
               Concluir
             </Button>
           {/* </Box> */}
-        {/* </Box> */}
-      {/* </Paper> */}
-    </Modal>
+        </Box>
+      </Paper>
   );
 };

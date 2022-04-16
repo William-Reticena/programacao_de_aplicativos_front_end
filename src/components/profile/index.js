@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { ModalProfile } from "../";
+import { ProfileCard } from "../";
 import {
   Avatar,
   Button,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
@@ -29,10 +30,13 @@ export function Profile () {
         Editar Perfil
       </Button>
 
-      <ModalProfile
+      <Modal
         open={open}
         onClose={handleClose}
-      />
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <ProfileCard onClose={handleClose} />
+      </Modal>
     </Paper>
   );
 };
