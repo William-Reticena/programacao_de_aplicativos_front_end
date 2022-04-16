@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { ModalProfile } from "../";
 import {
   Avatar,
   Button,
@@ -7,6 +8,10 @@ import {
 } from "@mui/material";
 
 export function Profile () {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Paper
       elevation={5}
@@ -19,9 +24,15 @@ export function Profile () {
       <Typography>Curso</Typography>
       <Button
         variant="contained"
+        onClick={handleOpen}
       >
         Editar Perfil
       </Button>
+
+      <ModalProfile
+        open={open}
+        onClose={handleClose}
+      />
     </Paper>
   );
 };
