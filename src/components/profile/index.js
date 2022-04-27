@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ProfileCard } from "../";
+import { Modal, Paper } from "./style";
 import {
   Avatar,
   Button,
-  Modal,
-  Paper,
+  // Modal,
+  // Paper,
   Typography,
 } from "@mui/material";
 
@@ -16,7 +17,7 @@ export function Profile () {
   return (
     <Paper
       elevation={5}
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "24px", padding: "8px", position: "fixed", width: "12%" }}
+      // sx={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "24px", padding: "8px", position: "fixed", width: "12%" }}
     >
       <Avatar />
 
@@ -33,7 +34,7 @@ export function Profile () {
       <Modal
         open={open}
         onClose={handleClose}
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        sx={{ /*display: "flex" , alignItems: "center",*/ justifyContent: "center" }}
       >
         <ProfileCard onClose={handleClose} />
       </Modal>

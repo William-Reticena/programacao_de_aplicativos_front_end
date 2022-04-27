@@ -10,7 +10,8 @@ import {
   IconButton,
   Modal,
   Paper,
-  TextField
+  TextField,
+  Typography
 } from "@mui/material";
 
 export function ModalProject ({ onClose, open }) {
@@ -21,6 +22,8 @@ export function ModalProject ({ onClose, open }) {
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
     >
       <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
+        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>VIZUALIZAÇÃO DA VAGA</Typography>
+        
         <Grid container>
           <Grid item xs={2}>
             <Card elevation={0} sx={{ width: "180px" }}>
