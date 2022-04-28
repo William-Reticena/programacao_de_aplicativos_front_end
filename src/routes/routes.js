@@ -5,3 +5,4 @@ export const REGISTER = "/register";
 export const STUDENT_HOME = "/student-home";
 export const TEACHER_HOME = "/teacher-home";
 export const PROJECTS = "/projects";
+export const APPLICANT = "/applicant";

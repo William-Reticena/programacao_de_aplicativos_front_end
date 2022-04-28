@@ -2,6 +2,8 @@ export { Filter } from "./filter";
 export { Header } from "./header";
 export { InformationsCard } from "./informationsCard";
 export { InformationsCardAdm } from "./informationsCardAdm";
+export { InformationsCardApplicant } from "./informationsCardApplicant";
+export { InformationsCardProjects } from "./informationsCardProjects";
 export { ModalProfile } from "./modalProfile";
 export { ModalProject } from "./modalProject";
 export { Profile } from "./profile";

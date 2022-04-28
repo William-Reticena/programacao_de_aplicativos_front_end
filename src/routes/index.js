@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Admin, Projects, Register, SignIn, StudentHome, TeacherHome } from "../pages";
-import { ADMIN, LOGIN, PROJECTS, REGISTER, STUDENT_HOME, TEACHER_HOME } from "./routes";
+import { Admin, Projects, Register, SignIn, StudentHome, TeacherHome, Applicant } from "../pages";
+import { ADMIN, LOGIN, PROJECTS, REGISTER, STUDENT_HOME, TEACHER_HOME, APPLICANT } from "./routes";
 
 export function AppRoutes () {
   const location = useLocation();
@@ -17,6 +17,7 @@ export function AppRoutes () {
       <Route path={STUDENT_HOME} element={<StudentHome />} />
       <Route path={TEACHER_HOME} element={<TeacherHome />} />
       <Route path={PROJECTS} element={<Projects />} />
+      <Route path={APPLICANT} element={<Applicant />} />
     </Routes>
   );
 };
