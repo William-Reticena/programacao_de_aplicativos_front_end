@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
@@ -48,6 +49,17 @@ export function SignIn () {
   const [radioStudent, setRadioStudent] = useState(true);
   const [radioTeacher, setRadioTeacher] = useState(false);
 
+  const formik = useFormik({
+    initialValues: {
+      type: "student",
+      ra: "",
+      password: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
+
   // SOMENTE PARA TESTES
   // useEffect(() => {
   //   setSelectedValue("student");
@@ -73,12 +85,17 @@ export function SignIn () {
         </Box>
 
         <Box sx={{ /*justifyContent: "center", display: "flex",*/ paddin: "0 0 24px 0" }}>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
               <FormControl /*sx={{ padding: "16px", width: "350px" }}*/>
-                  <RadioGroup /*sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}*/>
+                  <RadioGroup
+                    /*sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}*/
+                    // value={formik.values.type}
+                    onChange={formik.handleChange}
+                  >
                       <FormControlLabel
                         control={
                           <Radio
+                            name="type"
                             checked={selectedValue === "student"}
                             onChange={handleChange}
                             value="student"
@@ -86,12 +103,13 @@ export function SignIn () {
                           />
                         }
                         label={<LabelWrapper user="Aluno" isSelected={radioStudent} />}
-                        value="student"
+                        // value="student"
                       />
 
                       <FormControlLabel
                         control={
                           <Radio
+                            name="type"
                             checked={selectedValue === "teacher"}
                             onChange={handleChange}
                             value="teacher"
@@ -99,13 +117,15 @@ export function SignIn () {
                           />
                         }
                         label={<LabelWrapper user="Professor" isSelected={radioTeacher} />}
-                        value="teacher"
+                        // value="teacher"
                       />
                   </RadioGroup>
 
                 <TextField
                   label="RA"
-                  name="RA"
+                  name="ra"
+                  value={formik.values.ra}
+                  onChange={formik.handleChange}
                   // sx={{ margin: "8px" }}
                 />
 
@@ -113,18 +133,21 @@ export function SignIn () {
                   label="SENHA"
                   name="password"
                   type="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
                   // sx={{ margin: "8px" }}
                 />
 
-                <NavigationButton to={STUDENT_HOME}>
+                {/* <NavigationButton to={STUDENT_HOME}> */}
                   <Button
+                    type="submit"
                     size="large"
                     variant="contained"
                     // sx={{ margin: "8px", width: "calc(100% - 15px)" }}
                   >
                     Login
                   </Button>
-                </NavigationButton>
+                {/* </NavigationButton> */}
 
                 <NavigationButton to={REGISTER}>
                   <Button

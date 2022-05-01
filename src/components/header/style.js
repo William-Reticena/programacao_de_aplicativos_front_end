@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {
   AppBar as MUIAppBar,
   Card as MUICard,
-  Typography as MUITypography
+  // Typography as MUITypography
 } from "@mui/material";
 
 export const AppBar = styled(MUIAppBar)`

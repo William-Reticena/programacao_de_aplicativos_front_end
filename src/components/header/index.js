@@ -67,7 +67,7 @@ export function Header ({ title }) {
 
                 <Typography
                   component="span"
-                  sx={{ /*fontSize: "12px",*/ display: "block" }}
+                  sx={{ fontSize: "12px", display: "block" }}
                 >
                   FAVORITOS
                 </Typography>
@@ -87,7 +87,7 @@ export function Header ({ title }) {
 
             <Typography
               component="span"
-              // sx={{ fontSize: "12px" }}
+              sx={{ fontSize: "12px" }}
             >
               SAIR
             </Typography>
