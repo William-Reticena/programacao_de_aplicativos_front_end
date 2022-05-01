@@ -16,6 +16,7 @@ export const Container = styled(MUIContainer)`
     border-radius: 4px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 20px;
   }
 `;
@@ -31,9 +32,11 @@ export const Paper = styled(MUIPaper)`
 `;
 
 export const Box = styled(MUIBox)`
-  display: flex;
-  justify-content: center;
-  padding: 24px;
+  && {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+  }
 `;
 
 export const Card = styled(MUICard)`
@@ -43,8 +46,10 @@ export const Card = styled(MUICard)`
 `;
 
 export const FormControl = styled(MUIFormControl)`
-  padding: 16px;
-  width: 350px;
+  && {
+    // padding: 16px;
+    width: 350px;
+  }
 `;
 
 export const RadioGroup = styled(MUIRadioGroup)`
@@ -52,7 +57,7 @@ export const RadioGroup = styled(MUIRadioGroup)`
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    left: 32px;
+    left: 40px;
     position: relative;
   }
 `;

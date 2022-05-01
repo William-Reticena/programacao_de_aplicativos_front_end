@@ -1,4 +1,5 @@
 import React from "react";
+import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png"
 import {
   Box,
@@ -11,7 +12,24 @@ import {
   Typography
 } from "@mui/material";
 
-export function ProfileCard ({ onClose }) {
+export function ProfileCard ({ userData, onClose }) {
+  const formik = useFormik({
+    initialValues: {
+      fullName: "Paula",
+      course: "BCC",
+      collegePeriod: 6,
+      ra: "4568703",
+      shift: "integral (T/N)",
+      city: "Campo Mourão",
+      cellphone: "(00) 00000-0000",
+      email: "paula123@gmail.com",
+      description: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
+
   return (
     <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
       <Typography sx={{ textAlign: "center", fontSize: "2em"}}>PERFIL</Typography>
@@ -24,8 +42,9 @@ export function ProfileCard ({ onClose }) {
         </Grid>
 
         <Grid item xs={10}>
-          <form>
+          <form onSubmit={formik.handleSubmit}>
             <TextField
+              name={formik.values.fullName}
               size="small"
               label="NOME COMPLETO"
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
@@ -93,18 +112,19 @@ export function ProfileCard ({ onClose }) {
       <Box sx={{ width: "100%", display: "inline-flex", justifyContent: "center" }} >
         {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
           <Button
+            type="submit"
             variant="contained"
-            color="error"
-            onClick={onClose}
             sx={{ marginRight: "16px" }}
           >
-            Cancelar
+            Concluir
           </Button>
 
           <Button
+            color="error"
             variant="contained"
+            onClick={onClose}
           >
-            Concluir
+            Cancelar
           </Button>
         {/* </Box> */}
       </Box>

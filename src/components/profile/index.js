@@ -9,10 +9,14 @@ import {
   Typography,
 } from "@mui/material";
 
-export function Profile () {
+export function Profile ({ userData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // useEffect(() => {
+    // getUserInfos();
+  // });
 
   return (
     <Paper
@@ -21,9 +25,9 @@ export function Profile () {
     >
       <Avatar />
 
-      <Typography>Nome e sobrenome</Typography>
-      <Typography>RA</Typography>
-      <Typography>Curso</Typography>
+      <Typography>{userData.fullName}</Typography>
+      <Typography>{userData.ra}</Typography>
+      <Typography>{userData.course}</Typography>
       <Button
         variant="contained"
         onClick={handleOpen}
@@ -36,7 +40,10 @@ export function Profile () {
         onClose={handleClose}
         sx={{ /*display: "flex" , alignItems: "center",*/ justifyContent: "center" }}
       >
-        <ProfileCard onClose={handleClose} />
+        <ProfileCard
+          userData={userData}
+          onClose={handleClose}
+        />
       </Modal>
     </Paper>
   );

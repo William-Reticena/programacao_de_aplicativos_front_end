@@ -84,7 +84,7 @@ export function SignIn () {
             </Card>
         </Box>
 
-        <Box sx={{ /*justifyContent: "center", display: "flex",*/ paddin: "0 0 24px 0" }}>
+        <Box sx={{ /*justifyContent: "center", display: "flex",*/ padding: "0 0 24px 0" }}>
           <form onSubmit={formik.handleSubmit}>
               <FormControl /*sx={{ padding: "16px", width: "350px" }}*/>
                   <RadioGroup
