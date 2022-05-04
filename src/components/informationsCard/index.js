@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import PerfilImage from "../../images/perfil-image.png"
+import { TextField } from "./style";
+import PerfilImage from "../../images/perfil-image.png";
 import { ModalProject } from "../";
 import {
 Box,
@@ -8,7 +9,6 @@ Card,
 CardMedia,
 Grid,
 Paper,
-TextField,
 Typography,
 } from "@mui/material";
 

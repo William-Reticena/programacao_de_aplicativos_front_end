@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
 import { TextField } from "./style";
@@ -13,7 +13,8 @@ import {
   Typography
 } from "@mui/material";
 
-export function ProfileCard ({ userData, onClose }) {
+export function ProfileCard ({ register, userData, onClose }) {
+  // const [formik, setFormik] = useState();
   const formik = useFormik({
     initialValues: {
       fullName: "Paula",
@@ -31,13 +32,27 @@ export function ProfileCard ({ userData, onClose }) {
     }
   });
 
+  if (register) {
+    formik.values = {
+      fullName: "",
+      course: "",
+      collegePeriod: "",
+      ra: "",
+      shift: "",
+      city: "",
+      cellphone: "",
+      email: "",
+      description: "",
+    };
+  };
+
   return (
     <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
       <Typography sx={{ textAlign: "center", fontSize: "2em"}}>PERFIL</Typography>
 
       <Grid container>
         <Grid item xs={2}>
-          <Card elevation={0} sx={{ maxWidth: "180px", margin: "25% 0 0 6%" }}>
+          <Card elevation={0} sx={{ maxWidth: "180px", marginTop: "25%" }}>
             <CardMedia component="img" image={PerfilImage} />
           </Card>
         </Grid>
@@ -45,7 +60,7 @@ export function ProfileCard ({ userData, onClose }) {
         <Grid item xs={10}>
           <form onSubmit={formik.handleSubmit}>
             <TextField
-              disabled
+              disabled={register ? false : true}
               name="fullName"
               size="small"
               label="NOME COMPLETO"
@@ -56,7 +71,7 @@ export function ProfileCard ({ userData, onClose }) {
 
             <Grid container item>
               <TextField
-                disabled
+                disabled={register ? false : true}
                 name="course"
                 size="small"
                 label="CURSO"
@@ -66,7 +81,7 @@ export function ProfileCard ({ userData, onClose }) {
               />
 
               <TextField
-                disabled
+                disabled={register ? false : true}
                 name="collegePeriod"
                 size="small"
                 label="PERÍODO"
@@ -78,7 +93,7 @@ export function ProfileCard ({ userData, onClose }) {
 
             <Grid container item>
               <TextField
-                disabled
+                disabled={register ? false : true}
                 name="ra"
                 size="small"
                 label="RA"
@@ -88,7 +103,7 @@ export function ProfileCard ({ userData, onClose }) {
               />
 
               <TextField
-                disabled
+                disabled={register ? false : true}
                 name="shift"
                 size="small"
                 label="TURNO"

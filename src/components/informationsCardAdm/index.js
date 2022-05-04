@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import PerfilImage from "../../images/perfil-image.png"
+import PerfilImage from "../../images/perfil-image.png";
+import { TextField } from "./style";
 import { ModalProject } from "../";
 import {
 Box,
@@ -8,7 +9,7 @@ Card,
 CardMedia,
 Grid,
 Paper,
-TextField,
+// TextField,
 Typography,
 } from "@mui/material";
 
@@ -72,17 +73,17 @@ export function InformationsCardAdm () {
               variant="contained"
               onClick={handleOpen}
               sx={{ width: "25%" }}
-              color="error"
             >
-              Excluir
+              Aprovar
             </Button>
 
             <Button
               variant="contained"
               onClick={handleOpen}
               sx={{ width: "25%" }}
+              color="error"
             >
-              Aprovar
+              Excluir
             </Button>
 
           </Box>

@@ -15,7 +15,7 @@ export function Register () {
           item xs={10}
           sx={{ display: "flex", justifyContent: "center"}}
         >
-          <ProfileCard />
+          <ProfileCard register />
         </Grid>
 
         <Grid item xs={1} />

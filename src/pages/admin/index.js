@@ -12,7 +12,7 @@ export function Admin () {
       <Header title="Controle de Acesso" />
       <GridContainer>
         <Grid item xs={2} />
-        <Grid item xs={"8"}>
+        <Grid item xs={8}>
           <BoxTypo style={{ textAlign: "center", margin: "16px" }}>
             <Typography
               variant="h1"
