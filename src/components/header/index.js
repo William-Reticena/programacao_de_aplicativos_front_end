@@ -3,12 +3,25 @@ import { LOGIN } from "../../routes/routes";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components"
 import { Favorite, Logout, Search } from "@mui/icons-material";
-import { AppBar, Box, Card, CardMedia, IconButton, TextField, Typography } from "@mui/material";
+import {
+  AppBar,
+  Card,
+  // Typography,
+} from "./style";
+import {
+  // AppBar,
+  Box,
+  // Card,
+  CardMedia,
+  IconButton,
+  TextField,
+  Typography
+} from "@mui/material";
 
 export function Header ({ title }) {
   return (
-    <AppBar sx={{ height: "80px", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}>
-      <Card sx={{ width: "100px", background: "inherit" }} elevation={0}>
+    <AppBar /*sx={{ height: "80px", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}*/>
+      <Card /*sx={{ width: "100px", background: "inherit" }}*/ elevation={0}>
         <CardMedia component="img" image={Logo} />
       </Card>
 
@@ -28,7 +41,7 @@ export function Header ({ title }) {
               size="small"
               variant="standard"
               placeholder="Pesquisar"
-              sx={{ width: "calc(100% - 40px)",  }}
+              sx={{ width: "calc(100% - 40px)", }}
               InputProps={{
                 disableUnderline: true,
               }}

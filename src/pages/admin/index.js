@@ -1,5 +1,6 @@
 import React from "react";
 import { Header, InformationsCardAdm } from "../../components";
+import { BoxTypo, GridContainer } from "./style";
 import {
   Grid,
   Typography,
@@ -9,24 +10,24 @@ export function Admin () {
   return (
     <>
       <Header title="Controle de Acesso" />
-      <Grid container sx={{ marginTop: "80px" }}>
-        <Grid item xs={2}></Grid>
+      <GridContainer>
+        <Grid item xs={2} />
         <Grid item xs={"8"}>
-          <div style={{ textAlign: "center", margin: "16px" }}>
+          <BoxTypo style={{ textAlign: "center", margin: "16px" }}>
             <Typography
               variant="h1"
               sx={{ fontSize: "36px" }}
             >
               PROFESSORES
             </Typography>
-          </div>
+          </BoxTypo>
 
           {[0, 1, 2, 3, 4, 5].map((infos) => (
             <InformationsCardAdm key={infos} />
           ))}
         </Grid>
-        <Grid item xs={2}></Grid>
-      </Grid>
+        <Grid item xs={2} />
+      </GridContainer>
     </>
   );
 };

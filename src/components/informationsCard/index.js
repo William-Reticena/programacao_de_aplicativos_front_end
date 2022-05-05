@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PerfilImage from "../../images/perfil-image.png"
 import { ModalProject } from "../";
 import {
@@ -12,10 +12,14 @@ TextField,
 Typography,
 } from "@mui/material";
 
-export function InformationsCard () {
+export function InformationsCard ({ data }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    console.log(data);
+  });
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
@@ -28,7 +32,12 @@ export function InformationsCard () {
 
         <Grid item xs={10}>
           <Box sx={{ marginBottom: "16px" }}>
-            <Typography variant="h2" sx={{ fontSize: "24px" }}>TÍTULO DA VAGA</Typography>
+            <Typography
+              variant="h2"
+              sx={{ fontSize: "24px" }}
+            >
+              {data.projectName}
+            </Typography>
           </Box>
 
             <TextField
@@ -36,7 +45,7 @@ export function InformationsCard () {
               multiline
               minRows={3}
               label="DESCRIÇÃO"
-              value="Uma vaga muito boa"
+              value={data.description}
               sx={{ width: "100%" }}
             />
 
@@ -45,7 +54,7 @@ export function InformationsCard () {
               disabled
               size="small"
               label="CARGA HORÁRIA"
-              value="30 horas"
+              value={data.amountHours + " horas"}
               sx={{ width: "35%" }}
             />
 
@@ -53,7 +62,7 @@ export function InformationsCard () {
               disabled
               size="small"
               label="RESPONSÁVEL"
-              value="Anônimo"
+              value={data.teacherName}
               sx={{ width: "35%" }}
             />
 
@@ -68,6 +77,7 @@ export function InformationsCard () {
             <ModalProject
               open={open}
               onClose={handleClose}
+              data={data}
             />
           </Box>
         </Grid>

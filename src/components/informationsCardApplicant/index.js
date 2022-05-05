@@ -40,7 +40,7 @@ export function InformationsCardApplicant () {
             /> 
         </Grid>
         <Grid item xs={2}>
-          <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>
+          <Box sx={{ display: "flex", marginTop: "47px", justifyContent: "space-between" }}>
             <TextField
               disabled
               size="small"

@@ -17,7 +17,7 @@ export function InformationsCardProjects () {
   const handleClose = () => setOpen(false);
 
   return (
-    <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
+    <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px", marginTop: "16px" }}>
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Card elevation={0}>

@@ -11,7 +11,10 @@ export function Register () {
       <Grid container sx={{ marginTop: "96px" }}>
         <Grid item xs={1} />
 
-        <Grid item xs={10} sx={{ display: "flex", justifyContent: "center"}}>
+        <Grid
+          item xs={10}
+          sx={{ display: "flex", justifyContent: "center"}}
+        >
           <ProfileCard />
         </Grid>
 
