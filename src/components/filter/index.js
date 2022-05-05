@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FormControl, FormControlLabel, Paper, Typography } from "./style";
 import {
-  Checkbox,
+  // Checkbox,
   // FormControl,
   // FormControlLabel,
-  FormGroup,
+  // FormGroup,
+  RadioGroup,
+  Radio,
   // Paper,
   // Typography,
 } from "@mui/material";
 
 export function Filter () {
+  const [radioValue, setRadioValue] = useState();
+
+  useEffect(() => {
+    alert(radioValue);
+  }, [radioValue]);
+
+  const handleChange = (event) => {
+    setRadioValue(event.target.value);
+  };
+
   return (
     <Paper
     elevation={5}
@@ -22,33 +34,42 @@ export function Filter () {
     >
       Filtros
     </Typography>
-    <FormControl /*sx={{ marginLeft: "8px" }}*/>
-      <FormGroup>
-        <FormControlLabel
-          // sx={{ margin: "5px 0px" }}
-          control={<Checkbox name="all" />}
-          label="Todos"
-        />
 
-        <FormControlLabel
-          // sx={{ margin: "5px 0px" }}
-          control={<Checkbox name="paid" />}
-          label="Remunerados"
-        />
+    <form>
+      <FormControl /*sx={{ marginLeft: "8px" }}*/>
+        <RadioGroup
+          onChange={handleChange}
+        >
+          <FormControlLabel
+            // sx={{ margin: "5px 0px" }}
+            control={<Radio name="all" />}
+            value="all"
+            label="Todos"
+          />
 
-        <FormControlLabel
-          // sx={{ margin: "5px 0px" }}
-          control={<Checkbox name="unpaid" />}
-          label="Não Remunerados"
-        />
+          <FormControlLabel
+            // sx={{ margin: "5px 0px" }}
+            control={<Radio name="paid" />}
+            value="paid"
+            label="Remunerados"
+          />
 
-        <FormControlLabel
-          // sx={{ margin: "5px 0px" }}
-          control={<Checkbox name="others" />}
-          label="Outros Cursos"
-        />
-      </FormGroup>
-    </FormControl>
+          <FormControlLabel
+            // sx={{ margin: "5px 0px" }}
+            control={<Radio name="unpaid" />}
+            value="unpaid"
+            label="Não Remunerados"
+          />
+
+          {/* <FormControlLabel
+            // sx={{ margin: "5px 0px" }}
+            control={<Radio name="others" />}
+            value="others"
+            label="Outros Cursos"
+          /> */}
+        </RadioGroup>
+      </FormControl>
+    </form>
   </Paper>
   );
 };

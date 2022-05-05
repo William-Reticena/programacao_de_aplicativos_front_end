@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Favorite, Share } from "@mui/icons-material";
+import { TextField } from "./style";
 import PerfilImage from "../../images/perfil-image.png"
 import {
   Box,
@@ -11,7 +12,7 @@ import {
   IconButton,
   Modal,
   Paper,
-  TextField,
+  // TextField,
   Typography
 } from "@mui/material";
 

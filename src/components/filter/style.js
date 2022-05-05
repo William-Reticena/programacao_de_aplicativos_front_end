@@ -7,13 +7,15 @@ import {
 } from "@mui/material";
 
 export const Paper = styled(MUIPaper)`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  margin: 24px;
-  padding: 8px;
-  position: fixed;
-  width: 12.5%;
+  && {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 24px;
+    padding: 8px;
+    position: fixed;
+    width: 12.5%;
+  }
 `;
 
 export const Typography = styled(MUITypography)`
@@ -34,5 +36,9 @@ export const FormControl = styled(MUIFormControl)`
 `;
 
 export const FormControlLabel = styled(MUIFormControlLabel)`
-  margin: 5px 0;
+  && {
+    .MuiFormControlLabel-label {
+      font-size: 0.9em;
+    }
+  }
 `;
