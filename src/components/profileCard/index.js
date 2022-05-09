@@ -7,65 +7,108 @@ import {
   Button,
   Card,
   CardMedia,
+  FormControlLabel,
   Grid,
   Paper,
   // TextField,
-  Typography
+  Radio,
+  RadioGroup,
+  Typography,
 } from "@mui/material";
 
 export function ProfileCard ({ register, userData, onClose }) {
-  // const [formik, setFormik] = useState();
+  const [radioValue, setRadioValue] = useState("student");
+
+  const handleChange = (event) => {
+    setRadioValue(event.target.value);
+  };
+
   const formik = useFormik({
     initialValues: {
-      fullName: "Paula",
-      course: "BCC",
-      collegePeriod: 6,
-      ra: "4568703",
-      shift: "integral (T/N)",
-      city: "Campo Mourão",
-      cellphone: "(00) 00000-0000",
-      email: "paula123@gmail.com",
-      description: "",
+      type: "student",
+      fullName: register ? "" : "Paula",
+      course: register ? "" : "BCC",
+      collegePeriod: register ? "" : 6,
+      ra: register ? "" : "4568703",
+      shift: register ? "" : "integral (T/N)",
+      city: register ? "" : "Campo Mourão",
+      cellphone: register ? "" : "(00) 00000-0000",
+      email: register ? "" : "paula123@gmail.com",
+      description: register ? "" : "",
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
     }
   });
 
-  if (register) {
-    formik.values = {
-      fullName: "",
-      course: "",
-      collegePeriod: "",
-      ra: "",
-      shift: "",
-      city: "",
-      cellphone: "",
-      email: "",
-      description: "",
-    };
-  };
+  // instancaiar o formik duas vzs e decidir qual usar (um vazio)
+  // if (register) {
+
+    // formik.initialValues = {
+    //   type: "student",
+    //   fullName: "",
+    //   course: "",
+    //   collegePeriod: "",
+    //   ra: "",
+    //   shift: "",
+    //   city: "",
+    //   cellphone: "",
+    //   email: "",
+    //   description: "",
+    // };
+  // };
 
   return (
     <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-      <Typography sx={{ textAlign: "center", fontSize: "2em"}}>PERFIL</Typography>
+      <Typography sx={{ textAlign: "center", fontSize: "2em", marginBottom: "16px"}}>PERFIL</Typography>
 
       <Grid container>
         <Grid item xs={2}>
-          <Card elevation={0} sx={{ maxWidth: "180px", marginTop: "25%" }}>
+          <Card elevation={0} sx={{ maxWidth: "180px", marginTop: "30%" }}>
             <CardMedia component="img" image={PerfilImage} />
           </Card>
         </Grid>
 
         <Grid item xs={10}>
-          <form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik?.handleSubmit}>
+            {register && 
+              <RadioGroup 
+                onChange={formik?.handleChange}
+                sx={{flexDirection: "row", marginLeft: "1%"}}
+              >
+                <FormControlLabel 
+                  control={
+                    <Radio 
+                      name="type"
+                      checked={radioValue === "student"}
+                      value="student"
+                      onChange={handleChange}
+                    />
+                  }
+                  label="Aluno"
+                />
+
+                <FormControlLabel 
+                  control={
+                    <Radio
+                      name="type"
+                      checked={radioValue === "teacher"}
+                      value="teacher"
+                      onChange={handleChange}
+                    />
+                  }
+                  label="Professor"
+                />
+              </RadioGroup>
+            }
+            
             <TextField
               disabled={register ? false : true}
               name="fullName"
               size="small"
               label="NOME COMPLETO"
-              value={formik.values.fullName}
-              onChange={formik.handleChange}
+              value={formik?.values.fullName}
+              onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -75,20 +118,22 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="course"
                 size="small"
                 label="CURSO"
-                value={formik.values.course}
-                onChange={formik.handleChange}
-                sx={{ width: "55%", margin: "8px" }}
+                value={formik?.values.course}
+                onChange={formik?.handleChange}
+                sx={{ width: radioValue === "student" ? "55%" : "100%", margin: "8px" }}
               />
 
-              <TextField
-                disabled={register ? false : true}
-                name="collegePeriod"
-                size="small"
-                label="PERÍODO"
-                value={formik.values.collegePeriod}
-                onChange={formik.handleChange}
-                sx={{ width: "calc(45% - 32px)", margin: "8px" }}
-              />
+              {radioValue === "student" && 
+                <TextField
+                  disabled={register ? false : true}
+                  name="collegePeriod"
+                  size="small"
+                  label="PERÍODO"
+                  value={formik?.values.collegePeriod}
+                  onChange={formik?.handleChange}
+                  sx={{ width: "calc(45% - 32px)", margin: "8px" }}
+                />
+              }
             </Grid>
 
             <Grid container item>
@@ -96,9 +141,9 @@ export function ProfileCard ({ register, userData, onClose }) {
                 disabled={register ? false : true}
                 name="ra"
                 size="small"
-                label="RA"
-                value={formik.values.ra}
-                onChange={formik.handleChange}
+                label={radioValue === "student" ? "RA" : "ID" }
+                value={formik?.values.ra}
+                onChange={formik?.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
 
@@ -107,8 +152,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="shift"
                 size="small"
                 label="TURNO"
-                value={formik.values.shift}
-                onChange={formik.handleChange}
+                value={formik?.values.shift}
+                onChange={formik?.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
             </Grid>
@@ -118,8 +163,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="city"
                 size="small"
                 label="CIDADE"
-                value={formik.values.city}
-                onChange={formik.handleChange}
+                value={formik?.values.city}
+                onChange={formik?.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
 
@@ -127,8 +172,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="cellphone"
                 size="small"
                 label="CELULAR"
-                value={formik.values.cellphone}
-                onChange={formik.handleChange}
+                value={formik?.values.cellphone}
+                onChange={formik?.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
             </Grid>
@@ -137,8 +182,8 @@ export function ProfileCard ({ register, userData, onClose }) {
               name="email"
               size="small"
               label="E-MAIL"
-              value={formik.values.email}
-              onChange={formik.handleChange}
+              value={formik?.values.email}
+              onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -148,8 +193,8 @@ export function ProfileCard ({ register, userData, onClose }) {
               multiline
               minRows={3}
               label="DESCRIÇÃO"
-              value={formik.values.description}
-              onChange={formik.handleChange}
+              value={formik?.values.description}
+              onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -178,4 +223,4 @@ export function ProfileCard ({ register, userData, onClose }) {
 
     </Paper>
   );
-};
+  };
