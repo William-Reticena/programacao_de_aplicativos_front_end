@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
 import { TextField } from "./style";
@@ -9,6 +9,7 @@ import {
   CardMedia,
   FormControlLabel,
   Grid,
+  Input,
   Paper,
   // TextField,
   Radio,
@@ -18,6 +19,13 @@ import {
 
 export function ProfileCard ({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
+  const [refFileInput, setRefFileInput] = useState(null);
+  const [refCardMedia, setRefCardMedia] = useState(null);
+
+  useEffect(() => {
+    setRefFileInput(document.getElementById("fileInput"));
+    setRefCardMedia(document.getElementById("cardMedia"));
+  }, [setRefFileInput, setRefCardMedia]);
 
   const handleChange = (event) => {
     setRadioValue(event.target.value);
@@ -26,6 +34,7 @@ export function ProfileCard ({ register, userData, onClose }) {
   const formik = useFormik({
     initialValues: {
       type: "student",
+      image: "",
       fullName: register ? "" : "Paula",
       course: register ? "" : "BCC",
       collegePeriod: register ? "" : 6,
@@ -41,22 +50,21 @@ export function ProfileCard ({ register, userData, onClose }) {
     }
   });
 
-  // instancaiar o formik duas vzs e decidir qual usar (um vazio)
-  // if (register) {
+  const handleClick = (event) => {
+    refFileInput.click();
 
-    // formik.initialValues = {
-    //   type: "student",
-    //   fullName: "",
-    //   course: "",
-    //   collegePeriod: "",
-    //   ra: "",
-    //   shift: "",
-    //   city: "",
-    //   cellphone: "",
-    //   email: "",
-    //   description: "",
-    // };
-  // };
+    refFileInput.addEventListener("change", (event) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        refCardMedia.src = reader.result;
+      }
+
+      reader.readAsDataURL(refFileInput.files[0]);
+    });
+
+    console.log(refFileInput);
+  };
 
   return (
     <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
@@ -64,17 +72,32 @@ export function ProfileCard ({ register, userData, onClose }) {
 
       <Grid container>
         <Grid item xs={2}>
-          <Card elevation={0} sx={{ maxWidth: "180px", marginTop: "30%" }}>
-            <CardMedia component="img" image={PerfilImage} />
+          <Card
+            elevation={0}
+            sx={{ maxWidth: "180px", marginTop: "30%", cursor: "pointer", pointerEvents: register ? "auto" : "none" }}
+            onClick={handleClick}
+          >
+            <CardMedia component="img" image={PerfilImage} id="cardMedia" />
           </Card>
         </Grid>
 
         <Grid item xs={10}>
           <form onSubmit={formik?.handleSubmit}>
+            <Input
+              type="file"
+              id="fileInput"
+              name="image"
+              inputProps={{
+                accept: "image/*",
+              }}
+              onChange={formik.handleChange}
+              sx={{ display: "none" }}
+            />
+
             {register && 
               <RadioGroup 
                 onChange={formik?.handleChange}
-                sx={{flexDirection: "row", marginLeft: "1%"}}
+                sx={{ flexDirection: "row", marginLeft: "1%" }}
               >
                 <FormControlLabel 
                   control={

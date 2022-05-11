@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 export function Filter () {
-  const [radioValue, setRadioValue] = useState();
+  const [radioValue, setRadioValue] = useState("all");
 
   useEffect(() => {
     alert(radioValue);
