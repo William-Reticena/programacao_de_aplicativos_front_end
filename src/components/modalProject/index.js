@@ -47,7 +47,7 @@ export function ModalProject ({ data, onClose, open }) {
         
         <Grid container>
           <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "180px" }}>
+            <Card elevation={0} sx={{ width: "180px", position: "relative", left: "10px" }}>
               <CardMedia component="img" image={PerfilImage} />
             </Card>
           </Grid>
