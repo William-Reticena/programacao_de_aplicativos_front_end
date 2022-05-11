@@ -243,7 +243,6 @@ export function ProfileCard ({ register, userData, onClose }) {
           </form>
         </Grid>
       </Grid>
-
     </Paper>
   );
   };
