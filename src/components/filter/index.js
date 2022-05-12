@@ -15,7 +15,7 @@ export function Filter () {
   const [radioValue, setRadioValue] = useState();
 
   useEffect(() => {
-    alert(radioValue);
+    //alert(radioValue);
   }, [radioValue]);
 
   const handleChange = (event) => {
@@ -34,7 +34,6 @@ export function Filter () {
     >
       Filtros
     </Typography>
-
     <form>
       <FormControl /*sx={{ marginLeft: "8px" }}*/>
         <RadioGroup

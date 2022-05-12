@@ -25,9 +25,12 @@ export function Profile ({ userData }) {
     >
       <Avatar />
 
-      <Typography>{userData.fullName}</Typography>
+      {/* <Typography>{userData.fullName}</Typography>
       <Typography>{userData.ra}</Typography>
-      <Typography>{userData.course}</Typography>
+      <Typography>{userData.course}</Typography> */}
+      <Typography>nsjd</Typography>
+      <Typography>sjdd</Typography>
+      <Typography>sdkdjfk</Typography>
       <Button
         variant="contained"
         onClick={handleOpen}
