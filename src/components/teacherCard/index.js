@@ -68,7 +68,7 @@ export function TeacherCard () {
               variant="contained"
               sx={{ width: "110%", height:"50px"}}
             >
-              Vizualizar Candidatos
+              Visualizar Candidatos
             </Button>
           </NavigationButton>
 
