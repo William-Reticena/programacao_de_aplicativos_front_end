@@ -43,6 +43,7 @@ export function StudentHome () {
     // RECEBER A REQUISIÇÃO AQUI, TEM Q SER UM ARRAY DE OBJETOS
     const fakeData = [
       {
+        id: 1,
         teacherName: "Maria Tereza",
         projectName: "Projeto 1",
         course: "BCC",
@@ -56,6 +57,7 @@ export function StudentHome () {
         requirements: "Não necessário",
       },
       {
+        id: 2,
         teacherName: "João Henrique",
         projectName: "Projeto 2",
         course: "Engenharia Química",
@@ -95,7 +97,7 @@ export function StudentHome () {
 
           {infosCards.map((infos) => (
             <InformationsCard
-              key={infos}
+              key={infos.id}
               data={infos}
             />
           ))}

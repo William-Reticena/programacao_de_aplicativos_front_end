@@ -43,10 +43,12 @@ export function Profile ({ userData }) {
         onClose={handleClose}
         sx={{ /*display: "flex" , alignItems: "center",*/ justifyContent: "center" }}
       >
-        <ProfileCard
-          userData={userData}
-          onClose={handleClose}
-        />
+        <>
+          <ProfileCard
+            userData={userData}
+            onClose={handleClose}
+          />
+        </>
       </Modal>
     </Paper>
   );
