@@ -12,11 +12,11 @@ import {
 } from "@mui/material";
 
 export function Filter () {
-  const [radioValue, setRadioValue] = useState();
+  const [radioValue, setRadioValue] = useState("all");
 
-  useEffect(() => {
-    alert(radioValue);
-  }, [radioValue]);
+  // useEffect(() => {
+  //   alert(radioValue);
+  // }, [radioValue]);
 
   const handleChange = (event) => {
     setRadioValue(event.target.value);
@@ -34,7 +34,6 @@ export function Filter () {
     >
       Filtros
     </Typography>
-
     <form>
       <FormControl /*sx={{ marginLeft: "8px" }}*/>
         <RadioGroup

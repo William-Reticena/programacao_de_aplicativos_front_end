@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { LOGIN, STUDENT_HOME } from "../../routes/routes";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components"
-import { Favorite, Logout, Search } from "@mui/icons-material";
+import { Favorite, Logout, Search, AddCircle } from "@mui/icons-material";
 import {
   AppBar,
   Card,
@@ -19,7 +19,7 @@ import {
   Typography
 } from "@mui/material";
 
-export function Header ({ title }) {
+export function Header ({ title, add }) {
   const formik = useFormik({
     initialValues: {
       searchField: "",
@@ -80,7 +80,7 @@ export function Header ({ title }) {
               <>
                 <Box>
                   <IconButton>
-                    <Favorite />
+                    {add ? <AddCircle/> : <Favorite/>}
                   </IconButton>
                 </Box>
 
@@ -88,7 +88,7 @@ export function Header ({ title }) {
                   component="span"
                   sx={{ fontSize: "12px", display: "block" }}
                 >
-                  FAVORITOS
+                  {add ? "PROJETOS" : "FAVORITOS"}
                 </Typography>
               </>
             )}

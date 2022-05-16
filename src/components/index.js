@@ -10,4 +10,6 @@ export { ModalProject } from "./modalProject";
 export { NavigationButton } from "./navigationButton";
 export { Profile } from "./profile";
 export { ProfileCard } from "./profileCard";
+export { TeacherCard } from "./teacherCard";
+export { ModalTeacher } from "./modalTeacher";
 // export { ProfilePaper } from "./profilePaper/prof";

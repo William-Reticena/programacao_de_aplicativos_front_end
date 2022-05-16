@@ -16,20 +16,20 @@ import {
   Typography
 } from "@mui/material";
 
-export function ModalProject ({ data, onClose, open }) {
+export function ModalTeacher ({ register, onClose, open }) {
   const formik = useFormik({
     initialValues: {
-      teacherName: data.teacherName,
-      projectName: data.projectName,
-      course: data.course,
-      collegePeriod: data.collegePeriod,
-      amountHours: data.amountHours,
-      shift: data.shift,
-      schedules: data.schedules,
-      numberVacant: data.numberVacant,
-      email: data.email,
-      description: data.description,
-      requirements: data.requirements,
+      teacherName: "Vô",
+      projectName: "MIPS",
+      course: "BCC",
+      collegePeriod: "6",
+      amountHours: "2h",
+      shift: "sim",
+      schedules: "sim",
+      numberVacant: "7",
+      email: "iwadjawidjwai@gmail.com",
+      description: "Vaga muito boa",
+      requirements: "nenhum",
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
@@ -43,23 +43,23 @@ export function ModalProject ({ data, onClose, open }) {
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
     >
       <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>VIZUALIZAÇÃO DA VAGA</Typography>
+        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>EDITAR VAGA</Typography>
         
         <Grid container>
           <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "180px", position: "relative", left: "10px" }}>
+            <Card elevation={0} sx={{ width: "180px" }}>
               <CardMedia component="img" image={PerfilImage} />
             </Card>
           </Grid>
 
           <Grid item xs={10}>
-            <form /*onSubmit={formik.handleSubmit}*/>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 name="projectName"
                 value={formik.values.projectName}
+                onChange={formik.handleChange}
                 size="small"
                 label="NOME DO PROJETO"
-                disabled
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
 
@@ -67,18 +67,18 @@ export function ModalProject ({ data, onClose, open }) {
                 <TextField
                   name="course"
                   value={formik.values.course}
+                  onChange={formik.handleChange}
                   size="small"
                   label="CURSO"
-                  disabled
                   sx={{ width: "55%", margin: "8px" }}
                 />
 
                 <TextField
-                  name="period"
+                  name="collegePeriod"
                   value={formik.values.collegePeriod}
+                  onChange={formik.handleChange}
                   size="small"
                   label="PERÍODO IDEAL"
-                  disabled
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -87,18 +87,18 @@ export function ModalProject ({ data, onClose, open }) {
                 <TextField
                   name="amountHours"
                   value={formik.values.amountHours}
+                  onChange={formik.handleChange}
                   size="small"
                   label="CARGA HORÁRIA SEMANAL"
-                  disabled
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
                 <TextField
                   name="shift"
                   value={formik.values.shift}
+                  onChange={formik.handleChange}
                   size="small"
                   label="TURNO"
-                  disabled
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -107,18 +107,18 @@ export function ModalProject ({ data, onClose, open }) {
                 <TextField
                   name="schedules"
                   value={formik.values.schedules}
+                  onChange={formik.handleChange}
                   size="small"
                   label="HORÁRIOS"
-                  disabled
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
                 <TextField
                   name="numberVacant"
                   value={formik.values.numberVacant}
+                  onChange={formik.handleChange}
                   size="small"
                   label="QUANTIDADE DE VAGAS"
-                  disabled
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -126,58 +126,55 @@ export function ModalProject ({ data, onClose, open }) {
               <TextField
                 name="email"
                 value={formik.values.email}
+                onChange={formik.handleChange}
                 size="small"
                 label="E-MAIL"
-                disabled
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
+              <TextField
+                name="description"
+                value={formik.values.description}
+                onChange={formik.handleChange}
+                size="small"
+                multiline
+                minRows={3}
+                label="DESCRIÇÃO"
+                sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+              />
+              <TextField
+                name="requirements"
+                value={formik.values.requirements}
+                onChange={formik.handleChange}
+                size="small"
+                multiline
+                minRows={3}
+                label="REQUISITOS"
+                sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+              />
+              <Box>
+                <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "center" }}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    sx={{ justifySelf: "center", marginLeft:"40%" }}
+                  >
+                    INSCREVER-SE
+                  </Button>
+                </Box>
+
+                <Box sx={{ width: "calc(40% - 8px)", display: "inline-flex", justifyContent: "right" }}>
+                  <IconButton>
+                    <Favorite /*color="primary"*/ />
+                  </IconButton>
+
+                  <IconButton>
+                    <Share /*color="primary"*/ />
+                  </IconButton>
+                </Box>
+              </Box>
             </form>
           </Grid>
         </Grid>
-
-        <TextField
-          name="description"
-          value={formik.values.description}
-          size="small"
-          multiline
-          minRows={3}
-          label="DESCRIÇÃO"
-          disabled
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-        <TextField
-          name="requirements"
-          value={formik.values.requirements}
-          size="small"
-          multiline
-          minRows={3}
-          label="REQUISITOS"
-          disabled
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-
-        <Box>
-          <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right" }}>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ justifySelf: "center" }}
-            >
-              INSCREVER-SE
-            </Button>
-          </Box>
-
-          <Box sx={{ width: "calc(40% - 8px)", display: "inline-flex", justifyContent: "right" }}>
-            <IconButton>
-              <Favorite /*color="primary"*/ />
-            </IconButton>
-
-            <IconButton>
-              <Share /*color="primary"*/ />
-            </IconButton>
-          </Box>
-
-        </Box>
       </Paper>
     </Modal>
   );

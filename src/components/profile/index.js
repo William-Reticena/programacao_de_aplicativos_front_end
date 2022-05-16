@@ -25,9 +25,12 @@ export function Profile ({ userData }) {
     >
       <Avatar />
 
-      <Typography>{userData.fullName}</Typography>
+      {/* <Typography>{userData.fullName}</Typography>
       <Typography>{userData.ra}</Typography>
-      <Typography>{userData.course}</Typography>
+      <Typography>{userData.course}</Typography> */}
+      <Typography>nsjd</Typography>
+      <Typography>sjdd</Typography>
+      <Typography>sdkdjfk</Typography>
       <Button
         variant="contained"
         onClick={handleOpen}
@@ -40,10 +43,12 @@ export function Profile ({ userData }) {
         onClose={handleClose}
         sx={{ /*display: "flex" , alignItems: "center",*/ justifyContent: "center" }}
       >
-        <ProfileCard
-          userData={userData}
-          onClose={handleClose}
-        />
+        <>
+          <ProfileCard
+            userData={userData}
+            onClose={handleClose}
+          />
+        </>
       </Modal>
     </Paper>
   );
