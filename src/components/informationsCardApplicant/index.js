@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png"
 import {
 Box,
@@ -16,6 +17,19 @@ export function InformationsCardApplicant () {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const formik = useFormik({
+    initialValues: {
+      nome: "",
+      descricao: "",
+      periodo: "",
+      curso: "",
+      email: "",
+      celular: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  })
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
       <Grid container spacing={3}>
@@ -27,7 +41,9 @@ export function InformationsCardApplicant () {
 
         <Grid item xs={8}>
           <Box sx={{ marginBottom: "16px" }}>
-            <Typography variant="h2" sx={{ fontSize: "24px" }}>TÍTULO DA VAGA</Typography>
+            <Typography variant="h2" sx={{ fontSize: "24px" }}>
+              {formik.values.nome}
+            </Typography>
           </Box>
 
             <TextField
@@ -35,7 +51,8 @@ export function InformationsCardApplicant () {
               multiline
               minRows={3}
               label="DESCRIÇÃO"
-              value="Uma vaga muito boa"
+              value={formik.values.descricao}
+              onChange={formik.handleChange}
               sx={{ width: "100%" }}
             /> 
         </Grid>
@@ -45,7 +62,8 @@ export function InformationsCardApplicant () {
               disabled
               size="small"
               label="PERÍODO"
-              value="Nº Período"
+              value={formik.values.periodo}
+              onChange={formik.handleChange}
               sx={{ width: "100%" }}
             />
           </Box>
@@ -54,7 +72,8 @@ export function InformationsCardApplicant () {
               disabled
               size="small"
               label="CURSO"
-              value="Curso"
+              value={formik.values.curso}
+              onChange={formik.handleChange}
               sx={{ width: "100%" }}
             />
           </Box>           
@@ -65,14 +84,16 @@ export function InformationsCardApplicant () {
               disabled
               size="small"
               label="E-MAIL"
-              value="exemple@alunos.utfpr.edu.br"
+              value={formik.values.email}
+              onChange={formik.handleChange}
               sx={{ width: "45%" }}
             />
             <TextField
               disabled
               size="small"
               label="CONTATO"
-              value="(99) 99999-9999"
+              value={formik.values.celular}
+              onChange={formik.handleChange}
               sx={{ width: "30%" }}
             />
             <Button

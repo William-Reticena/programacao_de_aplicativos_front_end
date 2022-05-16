@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png"
 import {
 Box,
@@ -15,6 +16,20 @@ export function InformationsCardProjects () {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
+  const formik = useFormik({
+    initialValues: {
+      vaga: "",
+      descricao: "",
+      cargaSemanal: "",
+      periodo: "",
+      valor: "",
+      requisitos: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px", marginTop: "16px" }}>
@@ -27,7 +42,9 @@ export function InformationsCardProjects () {
 
         <Grid item xs={10}>
           <Box sx={{ marginBottom: "16px" }}>
-            <Typography variant="h2" sx={{ fontSize: "24px" }}>TÍTULO DA VAGA</Typography>
+            <Typography variant="h2" sx={{ fontSize: "24px" }}>
+              {formik.values.vaga}
+            </Typography>
           </Box>
 
             <TextField
@@ -35,7 +52,8 @@ export function InformationsCardProjects () {
               multiline
               minRows={3}
               label="DESCRIÇÃO"
-              value="Uma vaga muito boa"
+              value={formik.values.descricao}
+              onChange={formik.handleChange}
               sx={{ width: "100%" }}
             />
 
@@ -44,7 +62,8 @@ export function InformationsCardProjects () {
               disabled
               size="small"
               label="CARGA HORÁRIA SEMANAL"
-              value="30 horas"
+              value={formik.values.cargaSemanal}
+              onChange={formik.handleChange}
               sx={{ width: "31%" }}
             />
 
@@ -52,7 +71,8 @@ export function InformationsCardProjects () {
               disabled
               size="small"
               label="PERÍODO"
-              value="* Período"
+              value={formik.values.periodo}
+              onChange={formik.handleChange}
               sx={{ width: "31%" }}
             />
 
@@ -60,7 +80,8 @@ export function InformationsCardProjects () {
               disabled
               size="small"
               label="Valorda Bolsa"
-              value="R$ 1.000,00"
+              value={formik.values.valor}
+              onChange={formik.handleChange}
               sx={{ width: "31%" }}
             />
 
@@ -74,7 +95,8 @@ export function InformationsCardProjects () {
                 multiline
                 minRows={3}
                 label="REQUISITOS"
-                value="Requisitos"
+                value={formik.values.requisitos}
+                onChange={formik.handleChange}
                 sx={{ width: "100%" }}
               />
           </Box>
