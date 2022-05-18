@@ -74,7 +74,7 @@ export function ProfileCard ({ register, userData, onClose }) {
         <Grid item xs={2}>
           <Card
             elevation={0}
-            sx={{ maxWidth: "180px", marginTop: "30%", cursor: "pointer", pointerEvents: register ? "auto" : "none" }}
+            sx={{ background: "pink", backgroundSize: "contain", display: "flex", alignItems: "center", maxHeight: "200px",  maxWidth: "180px", marginTop: "60%", cursor: "pointer", pointerEvents: register ? "auto" : "none" }}
             onClick={handleClick}
           >
             <CardMedia component="img" image={PerfilImage} id="cardMedia" />
