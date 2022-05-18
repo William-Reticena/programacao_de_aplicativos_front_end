@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
+import { NavigationButton } from "../../components"
+import { LOGIN } from "../../routes/routes";
 import { TextField } from "./style";
 import {
   Box,
@@ -31,10 +34,42 @@ export function ProfileCard ({ register, userData, onClose }) {
     setRadioValue(event.target.value);
   };
 
+  const scheme = Yup.object().shape({
+    fullName: Yup
+      .string()
+      .required("Insira seu nome completo!"),
+    course: Yup
+      .string()
+      .required("Insira seu curso de graduação!"),
+    collegePeriod: Yup
+      .number()
+      .positive("Deve ser um número positivo!")
+      .integer("Deve ser um número inteiro!")
+      .required("Insira o período em que você se encontra!"),
+    ra: Yup
+      .string()
+      .required("Insira seu RA!"),
+    shift: Yup
+      .string()
+      .required("Insira em qual turno você se encontra!"),
+    city: Yup
+      .string()
+      .required("Insira o nome da sua cidade!"),
+    cellphone: Yup
+      .string()
+      .required("Insira seu número de celular!"),
+    email: Yup
+      .string()
+      .email("Insira um email válido!")
+      .required("Insira o seu e-mail!")
+  });
+
   const formik = useFormik({
+    validationSchema: scheme,
     initialValues: {
       type: "student",
       image: "",
+      imageURL: "",
       fullName: register ? "" : "Paula",
       course: register ? "" : "BCC",
       collegePeriod: register ? "" : 6,
@@ -50,6 +85,10 @@ export function ProfileCard ({ register, userData, onClose }) {
     }
   });
 
+  // const handleBackLogin = () => (
+  //   <NavigationButton to={LOGIN} />
+  // );
+
   const handleClick = (event) => {
     refFileInput.click();
 
@@ -61,6 +100,8 @@ export function ProfileCard ({ register, userData, onClose }) {
       }
 
       reader.readAsDataURL(refFileInput.files[0]);
+
+      formik.setFieldValue("imageURL", URL.createObjectURL(refFileInput.files[0]));
     });
 
     console.log(refFileInput);
@@ -74,10 +115,23 @@ export function ProfileCard ({ register, userData, onClose }) {
         <Grid item xs={2}>
           <Card
             elevation={0}
-            sx={{ background: "pink", backgroundSize: "contain", display: "flex", alignItems: "center", maxHeight: "200px",  maxWidth: "180px", marginTop: "60%", cursor: "pointer", pointerEvents: register ? "auto" : "none" }}
+            sx={
+              {
+                backgroundSize: "contain",
+                display: "flex",
+                alignItems: "center",
+                maxHeight: "200px",
+                minHeight: "200px", 
+                maxWidth: "180px",
+                marginTop: "60%",
+                cursor: "pointer",
+              }
+            }
             onClick={handleClick}
           >
-            <CardMedia component="img" image={PerfilImage} id="cardMedia" />
+            <CardMedia component="img" image={PerfilImage} id="cardMedia" 
+              sx={{backgroundSize: "contain",}}
+            />
           </Card>
         </Grid>
 
@@ -130,6 +184,8 @@ export function ProfileCard ({ register, userData, onClose }) {
               name="fullName"
               size="small"
               label="NOME COMPLETO"
+              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+              helperText={formik.touched.fullName && formik.errors.fullName}
               value={formik?.values.fullName}
               onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
@@ -141,6 +197,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="course"
                 size="small"
                 label="CURSO"
+                error={formik.touched.course && Boolean(formik.errors.course)}
+                helperText={formik.touched.course && formik.errors.course}
                 value={formik?.values.course}
                 onChange={formik?.handleChange}
                 sx={{ width: radioValue === "student" ? "55%" : "100%", margin: "8px" }}
@@ -148,10 +206,13 @@ export function ProfileCard ({ register, userData, onClose }) {
 
               {radioValue === "student" && 
                 <TextField
+                  type="number"
                   disabled={register ? false : true}
                   name="collegePeriod"
                   size="small"
                   label="PERÍODO"
+                  error={formik.touched.collegePeriod && Boolean(formik.errors.collegePeriod)}
+                  helperText={formik.touched.collegePeriod && formik.errors.collegePeriod}
                   value={formik?.values.collegePeriod}
                   onChange={formik?.handleChange}
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
@@ -165,6 +226,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="ra"
                 size="small"
                 label={radioValue === "student" ? "RA" : "ID" }
+                error={formik.touched.ra && Boolean(formik.errors.ra)}
+                helperText={formik.touched.ra && formik.errors.ra}
                 value={formik?.values.ra}
                 onChange={formik?.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
@@ -175,6 +238,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="shift"
                 size="small"
                 label="TURNO"
+                error={formik.touched.shift && Boolean(formik.errors.shift)}
+                helperText={formik.touched.shift && formik.errors.shift}
                 value={formik?.values.shift}
                 onChange={formik?.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
@@ -186,6 +251,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="city"
                 size="small"
                 label="CIDADE"
+                error={formik.touched.city && Boolean(formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
                 value={formik?.values.city}
                 onChange={formik?.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
@@ -195,6 +262,8 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="cellphone"
                 size="small"
                 label="CELULAR"
+                error={formik.touched.cellphone && Boolean(formik.errors.cellphone)}
+                helperText={formik.touched.cellphone && formik.errors.cellphone}
                 value={formik?.values.cellphone}
                 onChange={formik?.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
@@ -205,6 +274,8 @@ export function ProfileCard ({ register, userData, onClose }) {
               name="email"
               size="small"
               label="E-MAIL"
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
               value={formik?.values.email}
               onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
@@ -231,13 +302,22 @@ export function ProfileCard ({ register, userData, onClose }) {
                   Concluir
                 </Button>
 
-                <Button
-                  color="error"
-                  variant="contained"
-                  onClick={onClose}
-                >
-                  Cancelar
-                </Button>
+                {register && <NavigationButton to={LOGIN}>
+                  <Button
+                    color="error"
+                    variant="contained"
+                  >
+                    Cancelar
+                  </Button>
+                </NavigationButton>}
+
+                {!register && <Button
+                    color="error"
+                    variant="contained"
+                    onClick={onClose}
+                  >
+                    Cancelar
+                  </Button>}
               {/* </Box> */}
             </Box>
           </form>
