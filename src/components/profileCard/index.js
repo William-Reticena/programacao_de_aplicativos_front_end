@@ -213,7 +213,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               disabled
               name="fullName"
               size="small"
-              label="NOME COMPLETO"
+              label="Nome Completo"
               error={formik.touched.fullName && Boolean(formik.errors.fullName)}
               helperText={formik.touched.fullName && formik.errors.fullName}
               value={formik?.values.fullName}
@@ -226,7 +226,7 @@ export function ProfileCard ({ register, userData, onClose }) {
                 disabled
                 name="course"
                 size="small"
-                label="CURSO"
+                label="Curso"
                 error={formik.touched.course && Boolean(formik.errors.course)}
                 helperText={formik.touched.course && formik.errors.course}
                 value={formik?.values.course}
@@ -240,7 +240,7 @@ export function ProfileCard ({ register, userData, onClose }) {
                   disabled
                   name="collegePeriod"
                   size="small"
-                  label="PERÍODO"
+                  label="Período"
                   error={formik.touched.collegePeriod && Boolean(formik.errors.collegePeriod)}
                   helperText={formik.touched.collegePeriod && formik.errors.collegePeriod}
                   value={formik?.values.collegePeriod}
@@ -267,7 +267,7 @@ export function ProfileCard ({ register, userData, onClose }) {
                 disabled
                 name="shift"
                 size="small"
-                label="TURNO"
+                label="Turno"
                 error={formik.touched.shift && Boolean(formik.errors.shift)}
                 helperText={formik.touched.shift && formik.errors.shift}
                 value={formik?.values.shift}
@@ -280,7 +280,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               <TextField
                 name="city"
                 size="small"
-                label="CIDADE"
+                label="Cidade"
                 error={formik.touched.city && Boolean(formik.errors.city)}
                 helperText={formik.touched.city && formik.errors.city}
                 value={formik?.values.city}
@@ -291,7 +291,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               <TextField
                 name="cellphone"
                 size="small"
-                label="CELULAR"
+                label="Celular"
                 error={formik.touched.cellphone && Boolean(formik.errors.cellphone)}
                 helperText={formik.touched.cellphone && formik.errors.cellphone}
                 value={formik?.values.cellphone}
@@ -303,7 +303,7 @@ export function ProfileCard ({ register, userData, onClose }) {
             <TextField
               name="email"
               size="small"
-              label="E-MAIL"
+              label="E-mail"
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
               value={formik?.values.email}
@@ -316,7 +316,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               size="small"
               multiline
               minRows={3}
-              label="DESCRIÇÃO"
+              label="Descrição"
               value={formik?.values.description}
               onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}

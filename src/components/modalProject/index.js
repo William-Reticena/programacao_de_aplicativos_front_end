@@ -58,7 +58,7 @@ export function ModalProject ({ data, onClose, open }) {
                 name="projectName"
                 value={formik.values.projectName}
                 size="small"
-                label="NOME DO PROJETO"
+                label="Nome do Projeto"
                 disabled
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
@@ -68,7 +68,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="course"
                   value={formik.values.course}
                   size="small"
-                  label="CURSO"
+                  label="Curso"
                   disabled
                   sx={{ width: "55%", margin: "8px" }}
                 />
@@ -77,7 +77,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="period"
                   value={formik.values.collegePeriod}
                   size="small"
-                  label="PERÍODO IDEAL"
+                  label="Período Ideal"
                   disabled
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
@@ -88,7 +88,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="amountHours"
                   value={formik.values.amountHours}
                   size="small"
-                  label="CARGA HORÁRIA SEMANAL"
+                  label="Carga Horária Semanal"
                   disabled
                   sx={{ width: "45%", margin: "8px" }}
                 />
@@ -97,7 +97,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="shift"
                   value={formik.values.shift}
                   size="small"
-                  label="TURNO"
+                  label="Turno"
                   disabled
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
@@ -108,7 +108,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="schedules"
                   value={formik.values.schedules}
                   size="small"
-                  label="HORÁRIOS"
+                  label="Horários"
                   disabled
                   sx={{ width: "45%", margin: "8px" }}
                 />
@@ -117,7 +117,7 @@ export function ModalProject ({ data, onClose, open }) {
                   name="numberVacant"
                   value={formik.values.numberVacant}
                   size="small"
-                  label="QUANTIDADE DE VAGAS"
+                  label="Quantidade de Vagas"
                   disabled
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
@@ -127,7 +127,7 @@ export function ModalProject ({ data, onClose, open }) {
                 name="email"
                 value={formik.values.email}
                 size="small"
-                label="E-MAIL"
+                label="E-mail"
                 disabled
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
@@ -141,7 +141,7 @@ export function ModalProject ({ data, onClose, open }) {
           size="small"
           multiline
           minRows={3}
-          label="DESCRIÇÃO"
+          label="Descrição"
           disabled
           sx={{ width: "calc(100% - 16px)", margin: "8px" }}
         />
@@ -151,7 +151,7 @@ export function ModalProject ({ data, onClose, open }) {
           size="small"
           multiline
           minRows={3}
-          label="REQUISITOS"
+          label="Requisitos"
           disabled
           sx={{ width: "calc(100% - 16px)", margin: "8px" }}
         />

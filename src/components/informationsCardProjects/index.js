@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
+import { ModalTeacher } from "../";
 import PerfilImage from "../../images/perfil-image.png"
 import {
 Box,
@@ -16,7 +17,7 @@ export function InformationsCardProjects () {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   const formik = useFormik({
     initialValues: {
       vaga: "",
@@ -51,7 +52,7 @@ export function InformationsCardProjects () {
               disabled
               multiline
               minRows={3}
-              label="DESCRIÇÃO"
+              label="Descrição"
               value={formik.values.descricao}
               onChange={formik.handleChange}
               sx={{ width: "100%" }}
@@ -61,7 +62,7 @@ export function InformationsCardProjects () {
             <TextField
               disabled
               size="small"
-              label="CARGA HORÁRIA SEMANAL"
+              label="Carga Horária Semanal"
               value={formik.values.cargaSemanal}
               onChange={formik.handleChange}
               sx={{ width: "31%" }}
@@ -70,7 +71,7 @@ export function InformationsCardProjects () {
             <TextField
               disabled
               size="small"
-              label="PERÍODO"
+              label="Período"
               value={formik.values.periodo}
               onChange={formik.handleChange}
               sx={{ width: "31%" }}
@@ -79,7 +80,7 @@ export function InformationsCardProjects () {
             <TextField
               disabled
               size="small"
-              label="Valorda Bolsa"
+              label="Valor da Bolsa"
               value={formik.values.valor}
               onChange={formik.handleChange}
               sx={{ width: "31%" }}
@@ -94,7 +95,7 @@ export function InformationsCardProjects () {
                 size="small"
                 multiline
                 minRows={3}
-                label="REQUISITOS"
+                label="Requisitos"
                 value={formik.values.requisitos}
                 onChange={formik.handleChange}
                 sx={{ width: "100%" }}
@@ -109,6 +110,12 @@ export function InformationsCardProjects () {
             >
               Editar vaga
             </Button>
+
+            <ModalTeacher
+              open={open}
+              onClose={handleClose}
+            />
+
           </Box>
     </Paper>
   );

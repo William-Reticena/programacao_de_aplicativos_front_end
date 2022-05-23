@@ -34,7 +34,7 @@ export function InformationsCardInscricao () {
               disabled
               multiline
               minRows={3}
-              label="DESCRIÇÃO"
+              label="Descrição"
               value="Uma vaga muito boa"
               sx={{ width: "100%" }}
             /> 

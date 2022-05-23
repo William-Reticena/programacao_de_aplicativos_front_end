@@ -50,7 +50,7 @@ export function InformationsCardApplicant () {
               disabled
               multiline
               minRows={3}
-              label="DESCRIÇÃO"
+              label="Descrição"
               value={formik.values.descricao}
               onChange={formik.handleChange}
               sx={{ width: "100%" }}
@@ -61,7 +61,7 @@ export function InformationsCardApplicant () {
             <TextField
               disabled
               size="small"
-              label="PERÍODO"
+              label="Período"
               value={formik.values.periodo}
               onChange={formik.handleChange}
               sx={{ width: "100%" }}
@@ -71,7 +71,7 @@ export function InformationsCardApplicant () {
             <TextField
               disabled
               size="small"
-              label="CURSO"
+              label="Curso"
               value={formik.values.curso}
               onChange={formik.handleChange}
               sx={{ width: "100%" }}
@@ -83,7 +83,7 @@ export function InformationsCardApplicant () {
             <TextField
               disabled
               size="small"
-              label="E-MAIL"
+              label="E-mail"
               value={formik.values.email}
               onChange={formik.handleChange}
               sx={{ width: "45%" }}
@@ -91,7 +91,7 @@ export function InformationsCardApplicant () {
             <TextField
               disabled
               size="small"
-              label="CONTATO"
+              label="Celular"
               value={formik.values.celular}
               onChange={formik.handleChange}
               sx={{ width: "30%" }}

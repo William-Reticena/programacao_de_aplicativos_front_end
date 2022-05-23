@@ -59,7 +59,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                 value={formik.values.projectName}
                 onChange={formik.handleChange}
                 size="small"
-                label="NOME DO PROJETO"
+                label="Nome do Projeto"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
 
@@ -69,7 +69,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.course}
                   onChange={formik.handleChange}
                   size="small"
-                  label="CURSO"
+                  label="Curso"
                   sx={{ width: "55%", margin: "8px" }}
                 />
 
@@ -78,7 +78,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.collegePeriod}
                   onChange={formik.handleChange}
                   size="small"
-                  label="PERÍODO IDEAL"
+                  label="Período IdealL"
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -89,7 +89,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.amountHours}
                   onChange={formik.handleChange}
                   size="small"
-                  label="CARGA HORÁRIA SEMANAL"
+                  label="Carga Horária Semanal"
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -98,7 +98,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.shift}
                   onChange={formik.handleChange}
                   size="small"
-                  label="TURNO"
+                  label="Turno"
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -109,7 +109,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.schedules}
                   onChange={formik.handleChange}
                   size="small"
-                  label="HORÁRIOS"
+                  label="Horários"
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -118,7 +118,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                   value={formik.values.numberVacant}
                   onChange={formik.handleChange}
                   size="small"
-                  label="QUANTIDADE DE VAGAS"
+                  label="Quantidade de VagaS"
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -128,7 +128,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 size="small"
-                label="E-MAIL"
+                label="E-mail"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <TextField
@@ -138,7 +138,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                 size="small"
                 multiline
                 minRows={3}
-                label="DESCRIÇÃO"
+                label="Descrição"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <TextField
@@ -148,7 +148,7 @@ export function ModalTeacher ({ register, onClose, open }) {
                 size="small"
                 multiline
                 minRows={3}
-                label="REQUISITOS"
+                label="Requisitos"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <Box>

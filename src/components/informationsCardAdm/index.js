@@ -61,7 +61,7 @@ export function InformationsCardAdm () {
               <TextField
                 disabled
                 size="small"
-                label="CURSO"
+                label="Curso"
                 value={formik.values.curso}
                 onChange={formik.handleChange}
                 sx={{ width: "75%" }}
@@ -72,7 +72,7 @@ export function InformationsCardAdm () {
               <TextField
                 disabled
                 size="small"
-                label="E-MAIL"
+                label="E-mail"
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 sx={{ width: "100%" }}
@@ -83,7 +83,7 @@ export function InformationsCardAdm () {
               <TextField
                 disabled
                 size="small"
-                label="CELULAR"
+                label="Celular"
                 value={formik.values.celular}
                 onChange={formik.handleChange}
                 sx={{ width: "40%" }}
