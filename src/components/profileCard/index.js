@@ -5,6 +5,7 @@ import PerfilImage from "../../images/perfil-image.png";
 import { NavigationButton } from "../../components"
 import { LOGIN } from "../../routes/routes";
 import { TextField } from "./style";
+import api from "../../services/api";
 import {
   Box,
   Button,
@@ -14,7 +15,6 @@ import {
   Grid,
   Input,
   Paper,
-  // TextField,
   Radio,
   RadioGroup,
   Typography,
@@ -22,6 +22,7 @@ import {
 
 export function ProfileCard ({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
+  const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
 
@@ -29,6 +30,35 @@ export function ProfileCard ({ register, userData, onClose }) {
     setRefFileInput(document.getElementById("fileInput"));
     setRefCardMedia(document.getElementById("cardMedia"));
   }, [setRefFileInput, setRefCardMedia]);
+
+  // useEffect(() => {
+  //   if (radioValue === "teacher") {
+  //     setFunctionPost();
+  //   } else {
+  //     setFunctionPost(userStudent);
+  //   }
+  // }, [radioValue]);
+
+  // const userStudent = async (values) => {
+  //   // console.log("vlaore", values);
+  //   try {
+  //     await api.post("/StudentStore", {
+  //       username_student: values?.fullName,
+  //       password_student: "1256",
+  //       course_student: values?.course,
+  //       email_student: values?.email,
+  //       contact_student: values?.cellphone,
+  //       city_student: values?.city,
+  //       description_student: values?.description,
+  //       image_student: values?.imageURL,
+  //       ra_student: values?.ra,
+  //       period_student: values?.collegePeriod
+  //     });
+  //   } catch (error) {
+  //     console.log("teste", error);
+  //   }
+  // }
+  // const [functionPost, setFunctionPost] = useState(userStudent);
 
   const handleChange = (event) => {
     setRadioValue(event.target.value);
@@ -80,7 +110,7 @@ export function ProfileCard ({ register, userData, onClose }) {
       email: register ? "" : "paula123@gmail.com",
       description: register ? "" : "",
     },
-    onSubmit: values => {
+    onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
     }
   });
@@ -148,7 +178,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               sx={{ display: "none" }}
             />
 
-            {register && 
+            {/* {register && 
               <RadioGroup 
                 onChange={formik?.handleChange}
                 sx={{ flexDirection: "row", marginLeft: "1%" }}
@@ -177,10 +207,10 @@ export function ProfileCard ({ register, userData, onClose }) {
                   label="Professor"
                 />
               </RadioGroup>
-            }
+            } */}
             
             <TextField
-              disabled={register ? false : true}
+              disabled
               name="fullName"
               size="small"
               label="NOME COMPLETO"
@@ -193,7 +223,7 @@ export function ProfileCard ({ register, userData, onClose }) {
 
             <Grid container item>
               <TextField
-                disabled={register ? false : true}
+                disabled
                 name="course"
                 size="small"
                 label="CURSO"
@@ -207,7 +237,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               {radioValue === "student" && 
                 <TextField
                   type="number"
-                  disabled={register ? false : true}
+                  disabled
                   name="collegePeriod"
                   size="small"
                   label="PERÍODO"
@@ -222,7 +252,7 @@ export function ProfileCard ({ register, userData, onClose }) {
 
             <Grid container item>
               <TextField
-                disabled={register ? false : true}
+                disabled
                 name="ra"
                 size="small"
                 label={radioValue === "student" ? "RA" : "ID" }
@@ -234,7 +264,7 @@ export function ProfileCard ({ register, userData, onClose }) {
               />
 
               <TextField
-                disabled={register ? false : true}
+                disabled
                 name="shift"
                 size="small"
                 label="TURNO"
@@ -293,7 +323,6 @@ export function ProfileCard ({ register, userData, onClose }) {
             />
 
             <Box sx={{ width: "100%", display: "inline-flex", justifyContent: "center" }} >
-              {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
                 <Button
                   type="submit"
                   variant="contained"
@@ -318,7 +347,6 @@ export function ProfileCard ({ register, userData, onClose }) {
                   >
                     Cancelar
                   </Button>}
-              {/* </Box> */}
             </Box>
           </form>
         </Grid>

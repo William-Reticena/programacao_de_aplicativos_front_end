@@ -1,9 +1,16 @@
-import React from "react";
-import { ProfileCard } from "../../components";
-import { Header } from "../../components";
+import React, { useState }from "react";
 import { Grid } from "@mui/material";
+import { Header, ProfileCard } from "../../components";
+import { StudentForm } from "./studentForm";
+import { TeacherForm } from "./teacherForm";
 
 export function Register () {
+  const [radioValue, setRadioValue] = useState("student");
+
+  const handleChange = (event) => {
+    setRadioValue(event.target.value);
+  };
+
   return (
     <>
       <Header title="CADASTRO" />
@@ -15,7 +22,11 @@ export function Register () {
           item xs={10}
           sx={{ display: "flex", justifyContent: "center"}}
         >
-          <ProfileCard register />
+          {radioValue === "teacher"
+            ? <TeacherForm radioValue={radioValue} handleChange={handleChange} />
+            : <StudentForm radioValue={radioValue} handleChange={handleChange} />}
+          
+          {/* // <TeacherForm radioValue={radioValue} handleChange={handleChange} /> */}
         </Grid>
 
         <Grid item xs={1} />

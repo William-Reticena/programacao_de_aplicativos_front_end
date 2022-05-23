@@ -16,28 +16,15 @@ import {
   TextField,
 } from "./style";
 import {
-// Box,
-// Button,
-// Card,
 CardMedia,
-// Container,
-// FormControl,
 FormControlLabel,
-// Paper,
 Radio,
-// RadioGroup,
-// TextField,
 } from "@mui/material";
 
 
 const LabelWrapper = ({ isSelected, user }) => (
   <Container sx={{
-    // display: "flex",
-    // flexDirection: "column",
-    // alignItems: "center",
-    // padding: "20px",
     background: isSelected ? "#90caf9" : "inherit",
-    // borderRadius: "4px"
   }}>
     {user === "Aluno" ? <GraduationCap size="100px" /> : <ChalkboardUser size="100px" />}
     <Span>{user}</Span>

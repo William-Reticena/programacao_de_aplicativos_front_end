@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import PerfilImage from "../../images/perfil-image.png";
 import { ProfileCard } from "../";
 import { Modal, Paper } from "./style";
 import {
   Avatar,
   Button,
-  // Modal,
-  // Paper,
   Typography,
 } from "@mui/material";
 
@@ -19,18 +18,13 @@ export function Profile ({ userData }) {
   // });
 
   return (
-    <Paper
-      elevation={5}
-      // sx={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "24px", padding: "8px", position: "fixed", width: "12%" }}
-    >
-      <Avatar />
+    <Paper elevation={5}>
+      <Avatar src={PerfilImage} />
 
-      {/* <Typography>{userData.fullName}</Typography>
-      <Typography>{userData.ra}</Typography>
-      <Typography>{userData.course}</Typography> */}
-      <Typography>nsjd</Typography>
-      <Typography>sjdd</Typography>
-      <Typography>sdkdjfk</Typography>
+      <Typography>{userData?.username_student}</Typography>
+      <Typography>{userData?.ra_student}</Typography>
+      <Typography>{userData?.course_student}</Typography>
+
       <Button
         variant="contained"
         onClick={handleOpen}
@@ -41,7 +35,7 @@ export function Profile ({ userData }) {
       <Modal
         open={open}
         onClose={handleClose}
-        sx={{ /*display: "flex" , alignItems: "center",*/ justifyContent: "center" }}
+        sx={{ justifyContent: "center" }}
       >
         <>
           <ProfileCard
