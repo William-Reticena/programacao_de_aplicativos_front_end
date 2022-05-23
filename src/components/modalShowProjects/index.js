@@ -16,7 +16,7 @@ import {
   Typography
 } from "@mui/material";
 
-export function ModalTeacher ({ register, onClose, open }) {
+export function ModalShowProjects ({ register, onClose, open }) {
   const formik = useFormik({
     initialValues: {
       teacherName: "Vô",

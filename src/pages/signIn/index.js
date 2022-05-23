@@ -39,7 +39,7 @@ export function SignIn () {
   const formik = useFormik({
     initialValues: {
       type: "student",
-      ra: "",
+      email: "",
       password: "",
     },
     onSubmit: values => {
@@ -109,15 +109,15 @@ export function SignIn () {
                   </RadioGroup>
 
                 <TextField
-                  label="ID"
-                  name="iD"
+                  label="E-mail"
+                  name="email"
                   value={formik.values.ra}
                   onChange={formik.handleChange}
                   // sx={{ margin: "8px" }}
                 />
 
                 <TextField
-                  label="SENHA"
+                  label="Senha"
                   name="password"
                   type="password"
                   value={formik.values.password}

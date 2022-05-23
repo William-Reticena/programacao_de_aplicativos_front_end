@@ -14,23 +14,6 @@ export function StudentHome () {
   const { userData, setUserdata } = useUserInfo();
 
   useEffect(() => {
-    const fakeData = {
-      fullName: "Paula",
-      course: "BCC",
-      collegePeriod: 6,
-      ra: "4568703",
-      shift: "integral (T/N)",
-      city: "Campo Mourão",
-      cellphone: "(00) 00000-0000",
-      email: "paula123@gmail.com",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    }
-
-    setUserdata(fakeData);
-    // console.log(userData);
-  }, [setUserdata]);
-
-  useEffect(() => {
     const fetch = async () => {
       const { data } = await api.get('/StudentIndex');
       console.log(data);

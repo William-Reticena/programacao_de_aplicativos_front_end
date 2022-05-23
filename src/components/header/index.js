@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import { LOGIN, STUDENT_HOME, INSCRICAO } from "../../routes/routes";
 import { Logo } from "../../images";
-import { NavigationButton } from "../../components"
+import { NavigationButton, ModalShowProjects } from "../../components"
 import { Favorite, Logout, Search, AddCircle } from "@mui/icons-material";
 import {
   AppBar,
@@ -20,6 +20,10 @@ import {
 } from "@mui/material";
 
 export function Header ({ title, add }) {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const formik = useFormik({
     initialValues: {
       searchField: "",
@@ -77,20 +81,61 @@ export function Header ({ title, add }) {
           <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
             {!title && (
               <>
-                <Box>
+                {/* <Box>
                   <NavigationButton to={INSCRICAO} style={{ textDecoration: "none" }}>
                   <IconButton>
                     {add ? <AddCircle/> : <Favorite/>}
                   </IconButton>
                   </NavigationButton>
-                </Box>
+                </Box> */}
 
-                <Typography
+                {!add && (
+                  <>
+                    <NavigationButton to={INSCRICAO}>
+                      <Box>
+                        <IconButton>
+                          <Favorite />
+                        </IconButton>
+                      </Box>
+                    </NavigationButton>
+
+                    <Typography
+                      component="span"
+                      sx={{ fontSize: "12px", display: "block" }}
+                    >
+                      INCRIÇÕES
+                    </Typography>
+                  </>
+                )}
+
+                {add && (
+                  <>
+                    <Box>
+                      <IconButton onClick={handleOpen}>
+                        <AddCircle />
+                      </IconButton>
+                    </Box>
+
+                    <Typography
+                      component="span"
+                      sx={{ fontSize: "12px", display: "block" }}
+                    >
+                      PROJETOS
+                    </Typography>
+
+                    <ModalShowProjects
+                      open={open}
+                      onClose={handleClose}
+                    />
+                  </>
+                )}
+
+                {/* <Typography
                   component="span"
                   sx={{ fontSize: "12px", display: "block" }}
                 >
                   {add ? "PROJETOS" : "INSCRIÇÕES"}
-                </Typography>
+                </Typography> */}
               </>
             )}
 
