@@ -45,15 +45,15 @@ export function ModalProject ({ data, onClose, open }) {
       <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
         <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>VIZUALIZAÇÃO DA VAGA</Typography>
         
+      <form /*onSubmit={formik.handleSubmit}*/>
         <Grid container>
           <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "180px", position: "relative", left: "10px" }}>
+            <Card elevation={0} sx={{ width: "180px", position: "relative", left: "100px" }}>
               <CardMedia component="img" image={PerfilImage} />
             </Card>
           </Grid>
 
           <Grid item xs={10}>
-            <form /*onSubmit={formik.handleSubmit}*/>
               <TextField
                 name="projectName"
                 value={formik.values.projectName}
@@ -131,7 +131,6 @@ export function ModalProject ({ data, onClose, open }) {
                 disabled
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
-            </form>
           </Grid>
         </Grid>
 
@@ -144,7 +143,7 @@ export function ModalProject ({ data, onClose, open }) {
           label="Descrição"
           disabled
           sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
+          />
         <TextField
           name="requirements"
           value={formik.values.requirements}
@@ -154,7 +153,7 @@ export function ModalProject ({ data, onClose, open }) {
           label="Requisitos"
           disabled
           sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
+          />
 
         <Box>
           <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right" }}>
@@ -162,7 +161,7 @@ export function ModalProject ({ data, onClose, open }) {
               type="submit"
               variant="contained"
               sx={{ justifySelf: "center" }}
-            >
+              >
               INSCREVER-SE
             </Button>
           </Box>
@@ -178,6 +177,7 @@ export function ModalProject ({ data, onClose, open }) {
           </Box>
 
         </Box>
+        </form>
       </Paper>
     </Modal>
   );

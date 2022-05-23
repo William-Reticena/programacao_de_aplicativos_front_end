@@ -72,25 +72,25 @@ export function TeacherForm({ handleChange, radioValue }) {
       password: "",
       description: "",
     },
-    // onSubmit: async (values) => {
-    //   try {
-    //     await api.post("/ProfessorStore", {
-    //       username_professor: values?.fullName,
-    //       password_professor: values?.password,
-    //       course_professor: values?.course,
-    //       email_professor: values?.email,
-    //       contact_professor: values?.cellphone,
-    //       city_professor: values?.city,
-    //       description_professor: values?.description,
-    //       status_professor: "tttt"
-    //     });
-    //   } catch (error) {
-    //     console.log("teste", error);
-    //   }
-    // }
     onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
+      try {
+        await api.post("/ProfessorStore", {
+          username_professor: values?.fullName,
+          password_professor: values?.password,
+          course_professor: values?.course,
+          email_professor: values?.email,
+          contact_professor: values?.cellphone,
+          city_professor: values?.city,
+          description_professor: values?.description,
+          status_professor: "tttt"
+        });
+      } catch (error) {
+        console.log("teste", error);
+      }
     }
+    // onSubmit: async (values) => {
+    //   alert(JSON.stringify(values, null, 2));
+    // }
   });
 
   const handleClick = (event) => {
