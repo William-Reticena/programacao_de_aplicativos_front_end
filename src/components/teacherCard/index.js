@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PerfilImage from "../../images/perfil-image.png";
 import { Favorite } from "@mui/icons-material";
-import { INSCRICAO } from "../../routes/routes";
+import { APPLICANT } from "../../routes/routes";
 import { NavigationButton } from "../../components"
 import ShareIcon from '@mui/icons-material/Share';
 import { ModalTeacher } from "../";
@@ -63,7 +63,7 @@ export function TeacherCard () {
               Editar
             </Button>
 
-          <NavigationButton to={INSCRICAO}>
+          <NavigationButton to={APPLICANT}>
             <Button
               variant="contained"
               sx={{ width: "110%", height:"50px"}}

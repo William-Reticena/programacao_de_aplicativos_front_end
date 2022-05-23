@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import { LOGIN, STUDENT_HOME } from "../../routes/routes";
+import { LOGIN, STUDENT_HOME, INSCRICAO } from "../../routes/routes";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components"
 import { Favorite, Logout, Search, AddCircle } from "@mui/icons-material";
@@ -74,27 +74,27 @@ export function Header ({ title, add }) {
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <NavigationButton to="#" style={{ textDecoration: "none" }}>
           <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
             {!title && (
               <>
                 <Box>
+                  <NavigationButton to={INSCRICAO} style={{ textDecoration: "none" }}>
                   <IconButton>
                     {add ? <AddCircle/> : <Favorite/>}
                   </IconButton>
+                  </NavigationButton>
                 </Box>
 
                 <Typography
                   component="span"
                   sx={{ fontSize: "12px", display: "block" }}
                 >
-                  {add ? "PROJETOS" : "FAVORITOS"}
+                  {add ? "PROJETOS" : "INSCRIÇÕES"}
                 </Typography>
               </>
             )}
 
           </Box>
-        </NavigationButton>
 
         <NavigationButton to={LOGIN}>
           <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
