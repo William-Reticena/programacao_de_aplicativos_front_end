@@ -76,7 +76,7 @@ export function InformationsCardApplicant () {
               onChange={formik.handleChange}
               sx={{ width: "100%" }}
             />
-          </Box>           
+          </Box>
         </Grid>
       </Grid>
         <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>

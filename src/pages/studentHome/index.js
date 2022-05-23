@@ -3,6 +3,7 @@ import { useUserInfo } from "../../context/userContext";
 import { Filter, Header, InformationsCard, Profile } from "../../components";
 import { BoxTypo, GridContainer } from "./style";
 import { UserProvider } from "../../context/userContext";
+import api from "../../services/api";
 import {
   Grid,
   Typography,
@@ -29,15 +30,14 @@ export function StudentHome () {
     // console.log(userData);
   }, [setUserdata]);
 
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const { data } = await api.get('/programIndex');
-
-  //     setProgrammes(data);
-  //     setLoadingState(false);
-  //   };
-  //   fetch();
-  // }, []);
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await api.get('/StudentIndex');
+      console.log(data);
+      setUserdata(data[2]);
+    };
+    fetch();
+  }, [setUserdata]);
 
   useEffect(() => {
     // RECEBER A REQUISIÇÃO AQUI, TEM Q SER UM ARRAY DE OBJETOS
