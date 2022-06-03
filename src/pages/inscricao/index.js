@@ -1,14 +1,12 @@
 import React from "react";
 import { Header, InformationsCardInscricao } from "../../components";
-import {
-  Grid,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 
-export function Inscricao () {
+export function Inscricao() {
   return (
     <>
-      <Header title="Minhas Inscrições"/>
-      
+      <Header title="Minhas Inscrições" />
+
       <Grid container sx={{ marginTop: "80px" }}>
         <Grid item xs={2}></Grid>
 
@@ -19,7 +17,7 @@ export function Inscricao () {
         </Grid>
 
         <Grid item xs={2}></Grid>
-      </Grid> 
+      </Grid>
     </>
   );
-};
+}

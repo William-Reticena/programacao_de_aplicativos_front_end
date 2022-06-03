@@ -1,5 +1,5 @@
 import React from "react";
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppRoutes } from "./routes";
 
@@ -14,7 +14,7 @@ function App() {
       </BrowserRouter>
     </>
   );
-};
+}
 
 const GlobalStyle = createGlobalStyle`
   * {

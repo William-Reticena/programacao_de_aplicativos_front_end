@@ -1,10 +1,28 @@
 import React from "react";
 import { UserProvider } from "../context/userContext";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { Admin, Projects, Register, SignIn, StudentHome, TeacherHome, Applicant, Inscricao } from "../pages";
-import { ADMIN, LOGIN, PROJECTS, REGISTER, STUDENT_HOME, TEACHER_HOME, APPLICANT, INSCRICAO } from "./routes";
+import {
+  Admin,
+  Projects,
+  Register,
+  SignIn,
+  StudentHome,
+  TeacherHome,
+  Applicant,
+  Inscricao,
+} from "../pages";
+import {
+  ADMIN,
+  LOGIN,
+  PROJECTS,
+  REGISTER,
+  STUDENT_HOME,
+  TEACHER_HOME,
+  APPLICANT,
+  INSCRICAO,
+} from "./routes";
 
-export function AppRoutes () {
+export function AppRoutes() {
   const location = useLocation();
 
   if (location.pathname === "/") return <Navigate to={LOGIN} />;
@@ -24,4 +42,4 @@ export function AppRoutes () {
       </Routes>
     </UserProvider>
   );
-};
+}

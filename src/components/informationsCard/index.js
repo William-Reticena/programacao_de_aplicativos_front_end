@@ -17,9 +17,9 @@ export function InformationsCard ({ data }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    console.log("log", data);
-  });
+  // useEffect(() => {
+  //   console.log("log", data);
+  // });
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>

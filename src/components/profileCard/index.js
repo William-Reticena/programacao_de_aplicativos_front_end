@@ -83,22 +83,39 @@ export function ProfileCard({ register, userData, onClose }) {
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      type: "student",
-      image: "",
-      imageURL: "",
-      fullName: register ? "" : "Paula",
-      course: register ? "" : "BCC",
-      collegePeriod: register ? "" : 6,
+      type: "student", //não tem
+      image: "", //não tem
+      imageURL: "", //não tem
+      fullName: register ? "" : "Paula", //ok
+      course: register ? "" : "BCC", //ok
+      collegePeriod: register ? "" : 6, 
       ra: register ? "" : "4568703",
       shift: register ? "" : "integral (T/N)",
       city: register ? "" : "Campo Mourão",
       cellphone: register ? "" : "(00) 00000-0000",
-      email: register ? "" : "paula123@gmail.com",
+      email: register ? "" : "pa23@gmail.com",
       description: register ? "" : "",
     },
     onSubmit: async (values) => {
-      alert(JSON.stringify(values, null, 2));
+      try {
+        await api.post("/StudentUpdate", { //tá errado o back
+          id: "",
+          username_professor: values?.fullName,
+          password_professor: values?.password,
+          course_professor: values?.course,
+          email_professor: values?.email,
+          contact_professor: values?.cellphone,
+          city_professor: values?.city,
+          description_professor: values?.description,
+          status_professor: 0,
+        });
+      } catch (error) {
+        // console.log("teste", error);
+      }
     },
+    // onSubmit: async (values) => {
+    //   alert(JSON.stringify(values, null, 2));
+    // },
   });
 
   // const handleBackLogin = () => (
@@ -123,7 +140,7 @@ export function ProfileCard({ register, userData, onClose }) {
       );
     });
 
-    console.log(refFileInput);
+    // console.log(refFileInput);
   };
 
   return (

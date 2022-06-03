@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Favorite, Share } from "@mui/icons-material";
+import api from "../../services/api";
 import { TextField } from "./style";
 import PerfilImage from "../../images/perfil-image.png";
 import {
@@ -19,21 +20,41 @@ import {
 export function ModalShowProjects({ register, onClose, open }) {
   const formik = useFormik({
     initialValues: {
-      teacherName: "Vô",
-      projectName: "MIPS",
-      course: "BCC",
-      collegePeriod: "6",
-      amountHours: "2h",
-      shift: "sim",
-      schedules: "sim",
-      numberVacant: "7",
-      email: "iwadjawidjwai@gmail.com",
-      description: "Vaga muito boa",
-      requirements: "nenhum",
+      teacherName: "Vô", //ok
+      projectName: "MIPS", //ok
+      course: "BCC", //ok
+      collegePeriod: "6", //ok
+      amountHours: "2h", //ok
+      shift: "sim", //não tem
+      schedules: "sim", //ok
+      numberVacant: "7", //ok
+      email: "iwadjawidjwai@gmail.com", //ok
+      description: "Vaga muito boa", //ok
+      requirements: "nenhum", //ok
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      try {
+        await api.post("/InternshipStore", {
+          name_internship: values?.projectName,
+          ideal_period_internship: values?.collegePeriod,
+          couser_internship: values?.course,
+          weekly_period_internship: values?.amountHours,
+          email_internship: values?.email,
+          schedules_internship: values?.schedules,
+          number_vacancies_internship: values?.numberVacant,
+          description_internship: values?.description,
+          requirements_internship: values?.requirements,
+          // remuneration_internship: "",
+          // remuneration_value_internship: "",
+          professor_responsable_internship: values?.teacherName,
+        });
+      } catch (error) {
+        // console.log("teste", error);
+      }
     },
+    // onSubmit: (values) => {
+    //   alert(JSON.stringify(values, null, 2));
+    // },
   });
 
   return (
