@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
-import { NavigationButton } from "../../components"
+import { NavigationButton } from "../../components";
 import { LOGIN } from "../../routes/routes";
 import { TextField } from "./style";
 import api from "../../services/api";
@@ -20,7 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export function ProfileCard ({ register, userData, onClose }) {
+export function ProfileCard({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
@@ -65,33 +65,19 @@ export function ProfileCard ({ register, userData, onClose }) {
   };
 
   const scheme = Yup.object().shape({
-    fullName: Yup
-      .string()
-      .required("Insira seu nome completo!"),
-    course: Yup
-      .string()
-      .required("Insira seu curso de graduação!"),
-    collegePeriod: Yup
-      .number()
+    fullName: Yup.string().required("Insira seu nome completo!"),
+    course: Yup.string().required("Insira seu curso de graduação!"),
+    collegePeriod: Yup.number()
       .positive("Deve ser um número positivo!")
       .integer("Deve ser um número inteiro!")
       .required("Insira o período em que você se encontra!"),
-    ra: Yup
-      .string()
-      .required("Insira seu RA!"),
-    shift: Yup
-      .string()
-      .required("Insira em qual turno você se encontra!"),
-    city: Yup
-      .string()
-      .required("Insira o nome da sua cidade!"),
-    cellphone: Yup
-      .string()
-      .required("Insira seu número de celular!"),
-    email: Yup
-      .string()
+    ra: Yup.string().required("Insira seu RA!"),
+    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    city: Yup.string().required("Insira o nome da sua cidade!"),
+    cellphone: Yup.string().required("Insira seu número de celular!"),
+    email: Yup.string()
       .email("Insira um email válido!")
-      .required("Insira o seu e-mail!")
+      .required("Insira o seu e-mail!"),
   });
 
   const formik = useFormik({
@@ -112,7 +98,7 @@ export function ProfileCard ({ register, userData, onClose }) {
     },
     onSubmit: async (values) => {
       alert(JSON.stringify(values, null, 2));
-    }
+    },
   });
 
   // const handleBackLogin = () => (
@@ -127,40 +113,53 @@ export function ProfileCard ({ register, userData, onClose }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
-      }
+      };
 
       reader.readAsDataURL(refFileInput.files[0]);
 
-      formik.setFieldValue("imageURL", URL.createObjectURL(refFileInput.files[0]));
+      formik.setFieldValue(
+        "imageURL",
+        URL.createObjectURL(refFileInput.files[0])
+      );
     });
 
     console.log(refFileInput);
   };
 
   return (
-    <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-      <Typography sx={{ textAlign: "center", fontSize: "2em", marginBottom: "16px"}}>PERFIL</Typography>
+    <Paper
+      sx={{
+        /*display: "flex", flexDirection: "column",*/ width: "80%",
+        padding: "16px",
+      }}
+    >
+      <Typography
+        sx={{ textAlign: "center", fontSize: "2em", marginBottom: "16px" }}
+      >
+        PERFIL
+      </Typography>
 
       <Grid container>
         <Grid item xs={2}>
           <Card
             elevation={0}
-            sx={
-              {
-                backgroundSize: "contain",
-                display: "flex",
-                alignItems: "center",
-                maxHeight: "200px",
-                minHeight: "200px", 
-                maxWidth: "180px",
-                marginTop: "60%",
-                cursor: "pointer",
-              }
-            }
+            sx={{
+              backgroundSize: "contain",
+              display: "flex",
+              alignItems: "center",
+              maxHeight: "200px",
+              minHeight: "200px",
+              maxWidth: "180px",
+              marginTop: "40%",
+              cursor: "pointer",
+            }}
             onClick={handleClick}
           >
-            <CardMedia component="img" image={PerfilImage} id="cardMedia" 
-              sx={{backgroundSize: "contain",}}
+            <CardMedia
+              component="img"
+              image={PerfilImage}
+              id="cardMedia"
+              sx={{ backgroundSize: "contain" }}
             />
           </Card>
         </Grid>
@@ -208,7 +207,7 @@ export function ProfileCard ({ register, userData, onClose }) {
                 />
               </RadioGroup>
             } */}
-            
+
             <TextField
               disabled
               name="fullName"
@@ -231,23 +230,31 @@ export function ProfileCard ({ register, userData, onClose }) {
                 helperText={formik.touched.course && formik.errors.course}
                 value={formik?.values.course}
                 onChange={formik?.handleChange}
-                sx={{ width: radioValue === "student" ? "55%" : "100%", margin: "8px" }}
+                sx={{
+                  width: radioValue === "student" ? "55%" : "100%",
+                  margin: "8px",
+                }}
               />
 
-              {radioValue === "student" && 
+              {radioValue === "student" && (
                 <TextField
                   type="number"
                   disabled
                   name="collegePeriod"
                   size="small"
                   label="Período"
-                  error={formik.touched.collegePeriod && Boolean(formik.errors.collegePeriod)}
-                  helperText={formik.touched.collegePeriod && formik.errors.collegePeriod}
+                  error={
+                    formik.touched.collegePeriod &&
+                    Boolean(formik.errors.collegePeriod)
+                  }
+                  helperText={
+                    formik.touched.collegePeriod && formik.errors.collegePeriod
+                  }
                   value={formik?.values.collegePeriod}
                   onChange={formik?.handleChange}
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
-              }
+              )}
             </Grid>
 
             <Grid container item>
@@ -255,7 +262,7 @@ export function ProfileCard ({ register, userData, onClose }) {
                 disabled
                 name="ra"
                 size="small"
-                label={radioValue === "student" ? "RA" : "ID" }
+                label={radioValue === "student" ? "RA" : "ID"}
                 error={formik.touched.ra && Boolean(formik.errors.ra)}
                 helperText={formik.touched.ra && formik.errors.ra}
                 value={formik?.values.ra}
@@ -292,7 +299,9 @@ export function ProfileCard ({ register, userData, onClose }) {
                 name="cellphone"
                 size="small"
                 label="Celular"
-                error={formik.touched.cellphone && Boolean(formik.errors.cellphone)}
+                error={
+                  formik.touched.cellphone && Boolean(formik.errors.cellphone)
+                }
                 helperText={formik.touched.cellphone && formik.errors.cellphone}
                 value={formik?.values.cellphone}
                 onChange={formik?.handleChange}
@@ -322,35 +331,38 @@ export function ProfileCard ({ register, userData, onClose }) {
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
-            <Box sx={{ width: "100%", display: "inline-flex", justifyContent: "center" }} >
-                <Button
-                  type="submit"
-                  variant="contained"
-                  sx={{ marginRight: "16px" }}
-                >
-                  Concluir
-                </Button>
+            <Box
+              sx={{
+                width: "100%",
+                display: "inline-flex",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ marginRight: "16px" }}
+              >
+                Concluir
+              </Button>
 
-                {register && <NavigationButton to={LOGIN}>
-                  <Button
-                    color="error"
-                    variant="contained"
-                  >
+              {register && (
+                <NavigationButton to={LOGIN}>
+                  <Button color="error" variant="contained">
                     Cancelar
                   </Button>
-                </NavigationButton>}
+                </NavigationButton>
+              )}
 
-                {!register && <Button
-                    color="error"
-                    variant="contained"
-                    onClick={onClose}
-                  >
-                    Cancelar
-                  </Button>}
+              {!register && (
+                <Button color="error" variant="contained" onClick={onClose}>
+                  Cancelar
+                </Button>
+              )}
             </Box>
           </form>
         </Grid>
       </Grid>
     </Paper>
   );
-  };
+}

@@ -45,15 +45,15 @@ export function ModalProject ({ data, onClose, open }) {
       <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
         <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>VIZUALIZAÇÃO DA VAGA</Typography>
         
-      <form /*onSubmit={formik.handleSubmit}*/>
+      <form onSubmit={formik.handleSubmit}>
         <Grid container>
           <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "180px", position: "relative", left: "100px" }}>
+            <Card elevation={0} sx={{ width: "100%", position: "relative", padding: "8px"}}>
               <CardMedia component="img" image={PerfilImage} />
             </Card>
           </Grid>
 
-          <Grid item xs={10}>
+          <Grid item xs={10} sx={{paddingLeft: "8px"}}>
               <TextField
                 name="projectName"
                 value={formik.values.projectName}

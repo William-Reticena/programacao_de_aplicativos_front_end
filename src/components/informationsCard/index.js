@@ -18,7 +18,7 @@ export function InformationsCard ({ data }) {
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    console.log(data);
+    console.log("log", data);
   });
 
   return (
