@@ -2,101 +2,67 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import api from "../../services/api";
-import { Favorite, Share } from "@mui/icons-material";
 import { TextField } from "./style";
-import PerfilImage from "../../images/perfil-image.png";
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Grid,
-  IconButton,
-  Modal,
-  Paper,
-  // TextField,
-  Typography,
-} from "@mui/material";
-import api from "../../services/api";
+import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 
-export function ModalTeacher ({ register, onClose, open }) {
-
+export function ModalTeacher({ infos, register, onClose, open }) {
   const scheme = Yup.object().shape({
-    projectName: Yup
-      .string()
-      .required("Insira seu nome do projeto!"),
-    course: Yup
-      .string()
-      .required("Insira seu curso de graduação!"),
-    collegePeriod: Yup
-      .string()
-      .required("Insira um período do curso!"),
-    amountHours: Yup
-      .string()
-      .required("Informe a quantidade horas semanais!"),
-    shift: Yup
-      .string()
-      .required("Insira em qual turno você se encontra!"),
-    city: Yup
-      .string()
-      .required("Insira o nome da sua cidade!"),
-    schedules: Yup
-      .string()
-      .required("Insira os horários!"),
-    numberVacant: Yup
-      .string()
-      .required("Insira a quantidade de vagas!"),
-    email: Yup
-      .string()
+    projectName: Yup.string().required("Insira seu nome do projeto!"),
+    course: Yup.string().required("Insira seu curso de graduação!"),
+    collegePeriod: Yup.string().required("Insira um período do curso!"),
+    amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
+    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    schedules: Yup.string().required("Insira os horários!"),
+    numberVacant: Yup.string().required("Insira a quantidade de vagas!"),
+    email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    remuneration: Yup
-      .string()
-      .required("Insira o valor da bolsa!"),
-    description: Yup
-      .string()
-      .required("Insira uma descrição!"),
-    requirements: Yup
-      .string()
-      .required("Insira os requisitos da vaga!"),
+    remuneration: Yup.string().required("Insira o valor da bolsa!"),
+    description: Yup.string().required("Insira uma descrição!"),
+    requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
 
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      teacherName: "",
-      projectName: "",
-      course: "",
-      collegePeriod: "",
-      amountHours: "",
+      id: infos.id,
+      teacherName: infos.professor_responsable_project,
+      projectName: infos.name_project,
+      course: infos.course_project,
+      collegePeriod: infos.ideal_period_project,
+      amountHours: infos.weekly_workload_project,
       shift: "",
-      schedules: "",
-      numberVacant: "",
-      email: "",
-      remuneration: "",
-      description: "",
-      requirements: "",
+      schedules: infos.schedules_project,
+      numberVacant: infos.number_vacancies_project,
+      email: infos.email_project,
+      remuneration: infos.remuneration_value_project,
+      description: infos.description_project,
+      requirements: infos.requirements_project,
     },
     onSubmit: async (values) => {
+      console.log(values);
       try {
         await api.post("/ProjectUpdate", {
-          name_project: values?.projectName,
-          course_project: values?.course,
-          ideal_period_project: values?.collegePeriod,
-          weekly_workload_project: values?.amountHours,
-          schedules_project: values?.schedules,
-          number_vacancies_project: values?.numberVacant,
-          email_project: values?.email,
-          remuneration_value_project: values?.remuneration,
+          id: values.id,
+          name_project: values.projectName,
+          course_project: values.course,
+          ideal_period_project: values.collegePeriod,
+          weekly_workload_project: values.amountHours,
+          schedules_project: values.schedules,
+          number_vacancies_project: values.numberVacant,
+          email_project: values.email,
+          remuneration_value_project: values.remuneration,
           description_project: values?.description,
           requirements_project: values?.requirements,
         });
       } catch (error) {
         console.log("teste", error);
       }
-    }
+      // onSubmit: (values) => {
+      //   alert(JSON.stringify(values, null, 2));
+      // },
+    },
   });
-
   return (
     <Modal
       open={open}
@@ -105,32 +71,28 @@ export function ModalTeacher ({ register, onClose, open }) {
     >
       <Paper
         sx={{
-          /*display: "flex", flexDirection: "column",*/ width: "80%",
+          width: "80%",
           padding: "16px",
         }}
       >
         <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em" }}>
-          EDITAR VAGA
+          Editar Vaga
         </Typography>
 
-        <form onSubmit={formik.handleSubmit}>
-          <Grid container>
-            <Grid item xs={2}>
-              <Card
-                elevation={0}
-                sx={{ width: "100%", position: "relative", top: "80px" }}
-              >
-                <CardMedia component="img" image={PerfilImage} />
-              </Card>
-            </Grid>
-
-            <Grid item xs={10}>
+        <Grid container>
+          <Grid item xs={12}>
+            <form onSubmit={formik.handleSubmit}>
               <TextField
                 name="projectName"
                 size="small"
                 label="Nome do Projeto"
-                error={formik.touched.projectName && Boolean(formik.errors.projectName)}
-                helperText={formik.touched.projectName && formik.errors.projectName}
+                error={
+                  formik.touched.projectName &&
+                  Boolean(formik.errors.projectName)
+                }
+                helperText={
+                  formik.touched.projectName && formik.errors.projectName
+                }
                 value={formik.values.projectName}
                 onChange={formik.handleChange}
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
@@ -143,19 +105,24 @@ export function ModalTeacher ({ register, onClose, open }) {
                   label="Curso"
                   error={formik.touched.course && Boolean(formik.errors.course)}
                   helperText={formik.touched.course && formik.errors.course}
-                  value={formik?.values.course}
-                  onChange={formik?.handleChange}
+                  value={formik.values.course}
+                  onChange={formik.handleChange}
                   sx={{ width: "55%", margin: "8px" }}
                 />
 
                 <TextField
                   name="collegePeriod"
                   size="small"
-                  label="Período IdealL"
-                  error={formik.touched.collegePeriod && Boolean(formik.errors.collegePeriod)}
-                  helperText={formik.touched.collegePeriod && formik.errors.collegePeriod}
-                  value={formik?.values.collegePeriod}
-                  onChange={formik?.handleChange}
+                  label="Período Ideal"
+                  error={
+                    formik.touched.collegePeriod &&
+                    Boolean(formik.errors.collegePeriod)
+                  }
+                  helperText={
+                    formik.touched.collegePeriod && formik.errors.collegePeriod
+                  }
+                  value={formik.values.collegePeriod}
+                  onChange={formik.handleChange}
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -165,10 +132,15 @@ export function ModalTeacher ({ register, onClose, open }) {
                   name="amountHours"
                   size="small"
                   label="Carga Horária Semanal"
-                  error={formik.touched.amountHours && Boolean(formik.errors.amountHours)}
-                  helperText={formik.touched.amountHours && formik.errors.amountHours}
-                  value={formik?.values.amountHours}
-                  onChange={formik?.handleChange}
+                  error={
+                    formik.touched.amountHours &&
+                    Boolean(formik.errors.amountHours)
+                  }
+                  helperText={
+                    formik.touched.amountHours && formik.errors.amountHours
+                  }
+                  value={formik.values.amountHours}
+                  onChange={formik.handleChange}
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -178,8 +150,8 @@ export function ModalTeacher ({ register, onClose, open }) {
                   label="Turno"
                   error={formik.touched.shift && Boolean(formik.errors.shift)}
                   helperText={formik.touched.shift && formik.errors.shift}
-                  value={formik?.values.shift}
-                  onChange={formik?.handleChange}
+                  value={formik.values.shift}
+                  onChange={formik.handleChange}
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -189,10 +161,14 @@ export function ModalTeacher ({ register, onClose, open }) {
                   name="schedules"
                   size="small"
                   label="Horários"
-                  error={formik.touched.schedules && Boolean(formik.errors.schedules)}
-                  helperText={formik.touched.schedules && formik.errors.schedules}
-                  value={formik?.values.schedules}
-                  onChange={formik?.handleChange}
+                  error={
+                    formik.touched.schedules && Boolean(formik.errors.schedules)
+                  }
+                  helperText={
+                    formik.touched.schedules && formik.errors.schedules
+                  }
+                  value={formik.values.schedules}
+                  onChange={formik.handleChange}
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -200,10 +176,15 @@ export function ModalTeacher ({ register, onClose, open }) {
                   name="numberVacant"
                   size="small"
                   label="Quantidade de Vagas"
-                  error={formik.touched.numberVacant && Boolean(formik.errors.numberVacant)}
-                  helperText={formik.touched.numberVacant && formik.errors.numberVacant}
-                  value={formik?.values.numberVacant}
-                  onChange={formik?.handleChange}
+                  error={
+                    formik.touched.numberVacant &&
+                    Boolean(formik.errors.numberVacant)
+                  }
+                  helperText={
+                    formik.touched.numberVacant && formik.errors.numberVacant
+                  }
+                  value={formik.values.numberVacant}
+                  onChange={formik.handleChange}
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -214,18 +195,23 @@ export function ModalTeacher ({ register, onClose, open }) {
                 label="E-mail"
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
-                value={formik?.values.email}
-                onChange={formik?.handleChange}
+                value={formik.values.email}
+                onChange={formik.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
               <TextField
-                name="Valor da bolsa"
+                name="remuneration"
                 size="small"
                 label="Valor da bolsa"
-                error={formik.touched.remuneration && Boolean(formik.errors.remuneration)}
-                helperText={formik.touched.remuneration && formik.errors.remuneration}
-                value={formik?.values.remuneration}
-                onChange={formik?.handleChange}
+                error={
+                  formik.touched.remuneration &&
+                  Boolean(formik.errors.remuneration)
+                }
+                helperText={
+                  formik.touched.remuneration && formik.errors.remuneration
+                }
+                value={formik.values.remuneration}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
               <TextField
@@ -234,10 +220,15 @@ export function ModalTeacher ({ register, onClose, open }) {
                 multiline
                 minRows={3}
                 label="Descrição"
-                error={formik.touched.description && Boolean(formik.errors.description)}
-                helperText={formik.touched.description && formik.errors.description}
-                value={formik?.values.description}
-                onChange={formik?.handleChange}
+                error={
+                  formik.touched.description &&
+                  Boolean(formik.errors.description)
+                }
+                helperText={
+                  formik.touched.description && formik.errors.description
+                }
+                value={formik.values.description}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <TextField
@@ -246,48 +237,32 @@ export function ModalTeacher ({ register, onClose, open }) {
                 multiline
                 minRows={3}
                 label="Requisitos"
-                error={formik.touched.requirements && Boolean(formik.errors.requirements)}
-                helperText={formik.touched.requirements && formik.errors.requirements}
-                value={formik?.values.requirements}
-                onChange={formik?.handleChange}
+                error={
+                  formik.touched.requirements &&
+                  Boolean(formik.errors.requirements)
+                }
+                helperText={
+                  formik.touched.requirements && formik.errors.requirements
+                }
+                value={formik.values.requirements}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <Box>
-                <Box
+                <Button
+                  type="submit"
+                  variant="contained"
                   sx={{
-                    width: "60%",
-                    display: "inline-flex",
-                    justifyContent: "center",
+                    margin: "0 auto",
+                    display: "block",
                   }}
                 >
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ justifySelf: "center", marginLeft: "40%" }}
-                  >
-                    Concluir
-                  </Button>
-                </Box>
-
-                <Box
-                  sx={{
-                    width: "calc(40% - 8px)",
-                    display: "inline-flex",
-                    justifyContent: "right",
-                  }}
-                >
-                  <IconButton>
-                    <Favorite /*color="primary"*/ />
-                  </IconButton>
-
-                  <IconButton>
-                    <Share /*color="primary"*/ />
-                  </IconButton>
-                </Box>
+                  Concluir
+                </Button>
               </Box>
-            </Grid>
+            </form>
           </Grid>
-        </form>
+        </Grid>
       </Paper>
     </Modal>
   );

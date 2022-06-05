@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FormControl, FormControlLabel, Paper, Typography } from "./style";
 import {
-  // Checkbox,
-  // FormControl,
-  // FormControlLabel,
-  // FormGroup,
   RadioGroup,
   Radio,
-  // Paper,
-  // Typography,
 } from "@mui/material";
 
 export function Filter() {

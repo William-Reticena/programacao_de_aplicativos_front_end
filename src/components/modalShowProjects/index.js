@@ -1,52 +1,47 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Favorite, Share } from "@mui/icons-material";
 import api from "../../services/api";
 import { TextField } from "./style";
-import PerfilImage from "../../images/perfil-image.png";
 import {
   Box,
   Button,
-  Card,
-  CardMedia,
   Grid,
-  IconButton,
   Modal,
   Paper,
-  // TextField,
   Typography,
 } from "@mui/material";
 
 export function ModalShowProjects({ register, onClose, open }) {
   const formik = useFormik({
     initialValues: {
-      teacherName: "Vô", //ok
-      projectName: "MIPS", //ok
-      course: "BCC", //ok
-      collegePeriod: "6", //ok
-      amountHours: "2h", //ok
-      shift: "sim", //não tem
-      schedules: "sim", //ok
-      numberVacant: "7", //ok
-      email: "iwadjawidjwai@gmail.com", //ok
-      description: "Vaga muito boa", //ok
-      requirements: "nenhum", //ok
+      teacherName: "", //ok
+      projectName: "", //ok
+      course: "", //ok
+      collegePeriod: "", //ok
+      amountHours: "", //ok
+      shift: "", //não tem
+      schedules: "", //ok
+      numberVacant: "", //ok
+      email: "", //ok
+      description: "", //ok
+      requirements: "", //ok
+      remunerationValue: "",
     },
     onSubmit: async (values) => {
       try {
-        await api.post("/InternshipStore", {
-          name_internship: values?.projectName,
-          ideal_period_internship: values?.collegePeriod,
-          couser_internship: values?.course,
-          weekly_period_internship: values?.amountHours,
-          email_internship: values?.email,
-          schedules_internship: values?.schedules,
-          number_vacancies_internship: values?.numberVacant,
-          description_internship: values?.description,
-          requirements_internship: values?.requirements,
+        await api.post("/ProjectStore", {
+          name_project: values.projectName,
+          ideal_period_project: values.collegePeriod,
+          course_project: values.course,
+          weekly_workload_project: values.amountHours,
+          email_project: values.email,
+          schedules_project: values.schedules,
+          number_vacancies_project: values.numberVacant,
+          description_project: values.description,
+          requirements_project: values.requirements,
           // remuneration_internship: "",
-          // remuneration_value_internship: "",
-          professor_responsable_internship: values?.teacherName,
+          remuneration_value_project: values.remunerationValue,
+          professor_responsable_project: "WILLIAM",
         });
       } catch (error) {
         // console.log("teste", error);
@@ -65,32 +60,23 @@ export function ModalShowProjects({ register, onClose, open }) {
     >
       <Paper
         sx={{
-          /*display: "flex", flexDirection: "column",*/ width: "80%",
+          width: "80%",
           padding: "16px",
         }}
       >
         <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em" }}>
-          CRIAR PROJETO
+          Criar Projeto
         </Typography>
 
         <form onSubmit={formik.handleSubmit}>
           <Grid container>
-            <Grid item xs={2}>
-              <Card
-                elevation={0}
-                sx={{ width: "100%", position: "relative", top: "80px" }}
-              >
-                <CardMedia component="img" image={PerfilImage} />
-              </Card>
-            </Grid>
-
-            <Grid item xs={10}>
+            <Grid item xs={12}>
               <TextField
                 name="projectName"
                 value={formik.values.projectName}
                 onChange={formik.handleChange}
                 size="small"
-                label="NOME DO PROJETO"
+                label="Nome do Projeto"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
 
@@ -100,7 +86,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.course}
                   onChange={formik.handleChange}
                   size="small"
-                  label="CURSO"
+                  label="Curso"
                   sx={{ width: "55%", margin: "8px" }}
                 />
 
@@ -109,7 +95,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.collegePeriod}
                   onChange={formik.handleChange}
                   size="small"
-                  label="PERÍODO IDEAL"
+                  label="Perído ideal"
                   sx={{ width: "calc(45% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -120,7 +106,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.amountHours}
                   onChange={formik.handleChange}
                   size="small"
-                  label="CARGA HORÁRIA SEMANAL"
+                  label="Carga horária semanal"
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -129,7 +115,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.shift}
                   onChange={formik.handleChange}
                   size="small"
-                  label="TURNO"
+                  label="Turno"
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -140,7 +126,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.schedules}
                   onChange={formik.handleChange}
                   size="small"
-                  label="HORÁRIOS"
+                  label="Horários"
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
@@ -149,7 +135,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                   value={formik.values.numberVacant}
                   onChange={formik.handleChange}
                   size="small"
-                  label="QUANTIDADE DE VAGAS"
+                  label="Quantidade de vagas"
                   sx={{ width: "calc(55% - 32px)", margin: "8px" }}
                 />
               </Grid>
@@ -159,8 +145,16 @@ export function ModalShowProjects({ register, onClose, open }) {
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 size="small"
-                label="E-MAIL"
-                sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+                label="E-mail"
+                sx={{ width: "45%", margin: "8px" }}
+              />
+              <TextField
+                name="remunerationValue"
+                value={formik.values.remunerationValue}
+                onChange={formik.handleChange}
+                size="small"
+                label="Valor da bolsa"
+                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
               <TextField
                 name="description"
@@ -169,7 +163,7 @@ export function ModalShowProjects({ register, onClose, open }) {
                 size="small"
                 multiline
                 minRows={3}
-                label="DESCRIÇÃO"
+                label="Descrição"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <TextField
@@ -179,41 +173,21 @@ export function ModalShowProjects({ register, onClose, open }) {
                 size="small"
                 multiline
                 minRows={3}
-                label="REQUISITOS"
+                label="Requisitos"
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <Box>
-                <Box
+                <Button
+                  type="submit"
+                  variant="contained"
                   sx={{
-                    width: "60%",
-                    display: "inline-flex",
-                    justifyContent: "center",
+                    margin: "0 auto",
+                    display: "block",
                   }}
                 >
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ justifySelf: "center", marginLeft: "40%" }}
-                  >
-                    INSCREVER-SE
-                  </Button>
-                </Box>
-
-                <Box
-                  sx={{
-                    width: "calc(40% - 8px)",
-                    display: "inline-flex",
-                    justifyContent: "right",
-                  }}
-                >
-                  <IconButton>
-                    <Favorite /*color="primary"*/ />
-                  </IconButton>
-
-                  <IconButton>
-                    <Share /*color="primary"*/ />
-                  </IconButton>
-                </Box>
+                  Criar
+                </Button>
+                {/* </Box> */}
               </Box>
             </Grid>
           </Grid>

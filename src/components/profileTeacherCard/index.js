@@ -11,12 +11,9 @@ import {
   Button,
   Card,
   CardMedia,
-  FormControlLabel,
   Grid,
   Input,
   Paper,
-  Radio,
-  RadioGroup,
   Typography,
 } from "@mui/material";
 
@@ -30,35 +27,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     setRefFileInput(document.getElementById("fileInput"));
     setRefCardMedia(document.getElementById("cardMedia"));
   }, [setRefFileInput, setRefCardMedia]);
-
-  // useEffect(() => {
-  //   if (radioValue === "teacher") {
-  //     setFunctionPost();
-  //   } else {
-  //     setFunctionPost(userStudent);
-  //   }
-  // }, [radioValue]);
-
-  // const userStudent = async (values) => {
-  //   // console.log("vlaore", values);
-  //   try {
-  //     await api.post("/StudentStore", {
-  //       username_student: values?.fullName,
-  //       password_student: "1256",
-  //       course_student: values?.course,
-  //       email_student: values?.email,
-  //       contact_student: values?.cellphone,
-  //       city_student: values?.city,
-  //       description_student: values?.description,
-  //       image_student: values?.imageURL,
-  //       ra_student: values?.ra,
-  //       period_student: values?.collegePeriod
-  //     });
-  //   } catch (error) {
-  //     console.log("teste", error);
-  //   }
-  // }
-  // const [functionPost, setFunctionPost] = useState(userStudent);
 
   const handleChange = (event) => {
     setRadioValue(event.target.value);
@@ -110,7 +78,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
           status_professor: 0,
         });
       } catch (error) {
-        // console.log("teste", error);
+        console.log("teste", error);
       }
     },
     // onSubmit: async (values) => {
@@ -146,7 +114,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
   return (
     <Paper
       sx={{
-        /*display: "flex", flexDirection: "column",*/ width: "80%",
+        width: "80%",
         padding: "16px",
       }}
     >
@@ -193,37 +161,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
               onChange={formik.handleChange}
               sx={{ display: "none" }}
             />
-
-            {/* {register && 
-              <RadioGroup 
-                onChange={formik?.handleChange}
-                sx={{ flexDirection: "row", marginLeft: "1%" }}
-              >
-                <FormControlLabel 
-                  control={
-                    <Radio 
-                      name="type"
-                      checked={radioValue === "student"}
-                      value="student"
-                      onChange={handleChange}
-                    />
-                  }
-                  label="Aluno"
-                />
-
-                <FormControlLabel 
-                  control={
-                    <Radio
-                      name="type"
-                      checked={radioValue === "teacher"}
-                      value="teacher"
-                      onChange={handleChange}
-                    />
-                  }
-                  label="Professor"
-                />
-              </RadioGroup>
-            } */}
 
             <TextField
               disabled

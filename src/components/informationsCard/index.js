@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "./style";
-import PerfilImage from "../../images/perfil-image.png";
 import { ModalProject } from "../";
 import {
 Box,
 Button,
-Card,
-CardMedia,
 Grid,
 Paper,
 Typography,
@@ -23,20 +20,13 @@ export function InformationsCard ({ data }) {
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
-      <Grid container spacing={2}>
-        <Grid item xs={2}>
-          <Card elevation={0}>
-            <CardMedia component="img" image={PerfilImage} sx={{ maxHeight: "216px" }} />
-          </Card>
-        </Grid>
-
-        <Grid item xs={10}>
+        <Grid>
           <Box sx={{ marginBottom: "16px" }}>
             <Typography
               variant="h2"
               sx={{ fontSize: "24px" }}
             >
-              {data.projectName}
+              {data.name_project}
             </Typography>
           </Box>
 
@@ -45,7 +35,7 @@ export function InformationsCard ({ data }) {
               multiline
               minRows={3}
               label="DESCRIÇÃO"
-              value={data.description}
+              value={data.description_project}
               sx={{ width: "100%" }}
             />
 
@@ -54,7 +44,7 @@ export function InformationsCard ({ data }) {
               disabled
               size="small"
               label="CARGA HORÁRIA"
-              value={data.amountHours + " horas"}
+              value={data.weekly_workload_project + " horas"}
               sx={{ width: "35%" }}
             />
 
@@ -62,7 +52,7 @@ export function InformationsCard ({ data }) {
               disabled
               size="small"
               label="RESPONSÁVEL"
-              value={data.teacherName}
+              value={data.professor_responsable_project}
               sx={{ width: "35%" }}
             />
 
@@ -80,7 +70,6 @@ export function InformationsCard ({ data }) {
               data={data}
             />
           </Box>
-        </Grid>
       </Grid>
     </Paper>
   );
