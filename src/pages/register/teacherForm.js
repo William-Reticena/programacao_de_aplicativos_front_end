@@ -32,6 +32,28 @@ export function TeacherForm({ handleChange, radioValue }) {
   }, [setRefFileInput, setRefCardMedia]);
 
   const scheme = Yup.object().shape({
+<<<<<<< HEAD
+    fullName: Yup
+      .string()
+      .required("Insira seu nome completo!"),
+    course: Yup
+      .string()
+      .required("Insira seu curso de graduação!"),
+    id: Yup
+      .string()
+      .required("Insira seu ID!"),
+    shift: Yup
+      .string()
+      .required("Insira em qual turno você se encontra!"),
+    city: Yup
+      .string()
+      .required("Insira o nome da sua cidade!"),
+    cellphone: Yup
+      .string()
+      .required("Insira seu número de celular!"),
+    email: Yup
+      .string()
+=======
     fullName: Yup.string().required("Insira seu nome completo!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
     id: Yup.string().required("Insira seu RA!"),
@@ -39,6 +61,7 @@ export function TeacherForm({ handleChange, radioValue }) {
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
+>>>>>>> 00e4cf6e40f04a08150029cda62d63503b687c48
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
     password: Yup.string().required("Insira uma senha!"),

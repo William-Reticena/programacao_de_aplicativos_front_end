@@ -103,7 +103,7 @@ export function Header ({ title, add }) {
                       component="span"
                       sx={{ fontSize: "12px", display: "block" }}
                     >
-                      INCRIÇÕES
+                      INSCRIÇÕES
                     </Typography>
                   </>
                 )}
