@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -18,8 +19,10 @@ import {
 import { TextField } from "./style";
 import api from "../../services/api";
 import PerfilImage from "../../images/perfil-image.png";
+import { LOGIN } from "../../routes/routes";
 
 export function TeacherForm({ handleChange, radioValue }) {
+  const navigate = useNavigate();
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
 
@@ -60,15 +63,17 @@ export function TeacherForm({ handleChange, radioValue }) {
     onSubmit: async (values) => {
       try {
         await api.post("/ProfessorStore", {
-          username_professor: values?.fullName,
-          password_professor: values?.password,
-          course_professor: values?.course,
-          email_professor: values?.email,
-          contact_professor: values?.cellphone,
-          city_professor: values?.city,
+          username_professor: values.fullName,
+          password_professor: values.password,
+          course_professor: values.course,
+          email_professor: values.email,
+          contact_professor: values.cellphone,
+          city_professor: values.city,
           description_professor: values?.description,
           status_professor: 1,
         });
+
+        navigate(LOGIN)
       } catch (error) {
         console.log("teste", error);
       }

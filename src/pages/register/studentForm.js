@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom"
 import {
   Box,
   Button,
@@ -18,8 +19,10 @@ import {
 import { TextField } from "./style";
 import api from "../../services/api";
 import PerfilImage from "../../images/perfil-image.png";
+import { LOGIN } from "../../routes/routes";
 
 export function StudentForm({ handleChange, radioValue }) {
+  const navigate = useNavigate();
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
 
@@ -74,17 +77,19 @@ export function StudentForm({ handleChange, radioValue }) {
 
       try {
         await api.post("/StudentStore", {
-          username_student: values?.fullName,
-          password_student: values?.password,
-          course_student: values?.course,
-          email_student: values?.email,
-          contact_student: values?.cellphone,
-          city_student: values?.city,
-          description_student: values?.description,
-          image_student: values?.imageURL,
-          ra_student: values?.ra,
-          period_student: values?.collegePeriod,
+          username_student: values.fullName,
+          password_student: values.password,
+          course_student: values.course,
+          email_student: values.email,
+          contact_student: values.cellphone,
+          city_student: values.city,
+          description_student: values.description,
+          image_student: values.imageURL,
+          ra_student: values.ra,
+          period_student: values.collegePeriod,
         });
+
+        navigate(LOGIN)
       } catch (error) {
         console.log("teste", error);
       }
@@ -154,7 +159,7 @@ export function StudentForm({ handleChange, radioValue }) {
         </Grid>
 
         <Grid item xs={10}>
-          <form onSubmit={formik?.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <Input
               type="file"
               id="fileInput"
@@ -167,7 +172,7 @@ export function StudentForm({ handleChange, radioValue }) {
             />
 
             <RadioGroup
-              onChange={formik?.handleChange}
+              onChange={formik.handleChange}
               sx={{ flexDirection: "row", marginLeft: "1%" }}
             >
               <FormControlLabel
@@ -201,8 +206,8 @@ export function StudentForm({ handleChange, radioValue }) {
               label="Nome completo"
               error={formik.touched.fullName && Boolean(formik.errors.fullName)}
               helperText={formik.touched.fullName && formik.errors.fullName}
-              value={formik?.values.fullName}
-              onChange={formik?.handleChange}
+              value={formik.values.fullName}
+              onChange={formik.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -213,8 +218,8 @@ export function StudentForm({ handleChange, radioValue }) {
                 label="Curso"
                 error={formik.touched.course && Boolean(formik.errors.course)}
                 helperText={formik.touched.course && formik.errors.course}
-                value={formik?.values.course}
-                onChange={formik?.handleChange}
+                value={formik.values.course}
+                onChange={formik.handleChange}
                 sx={{ width: "55%", margin: "8px" }}
               />
 
@@ -230,8 +235,8 @@ export function StudentForm({ handleChange, radioValue }) {
                 helperText={
                   formik.touched.collegePeriod && formik.errors.collegePeriod
                 }
-                value={formik?.values.collegePeriod}
-                onChange={formik?.handleChange}
+                value={formik.values.collegePeriod}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(45% - 32px)", margin: "8px" }}
               />
             </Grid>
@@ -243,8 +248,8 @@ export function StudentForm({ handleChange, radioValue }) {
                 label="RA"
                 error={formik.touched.ra && Boolean(formik.errors.ra)}
                 helperText={formik.touched.ra && formik.errors.ra}
-                value={formik?.values.ra}
-                onChange={formik?.handleChange}
+                value={formik.values.ra}
+                onChange={formik.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
 
@@ -254,8 +259,8 @@ export function StudentForm({ handleChange, radioValue }) {
                 label="Turno"
                 error={formik.touched.shift && Boolean(formik.errors.shift)}
                 helperText={formik.touched.shift && formik.errors.shift}
-                value={formik?.values.shift}
-                onChange={formik?.handleChange}
+                value={formik.values.shift}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
             </Grid>
@@ -267,8 +272,8 @@ export function StudentForm({ handleChange, radioValue }) {
                 label="Cidade"
                 error={formik.touched.city && Boolean(formik.errors.city)}
                 helperText={formik.touched.city && formik.errors.city}
-                value={formik?.values.city}
-                onChange={formik?.handleChange}
+                value={formik.values.city}
+                onChange={formik.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
 
@@ -280,8 +285,8 @@ export function StudentForm({ handleChange, radioValue }) {
                   formik.touched.cellphone && Boolean(formik.errors.cellphone)
                 }
                 helperText={formik.touched.cellphone && formik.errors.cellphone}
-                value={formik?.values.cellphone}
-                onChange={formik?.handleChange}
+                value={formik.values.cellphone}
+                onChange={formik.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}
               />
             </Grid>
@@ -292,8 +297,8 @@ export function StudentForm({ handleChange, radioValue }) {
               label="E-mail"
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
-              value={formik?.values.email}
-              onChange={formik?.handleChange}
+              value={formik.values.email}
+              onChange={formik.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -304,8 +309,8 @@ export function StudentForm({ handleChange, radioValue }) {
               label="Senha"
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
-              value={formik?.values.password}
-              onChange={formik?.handleChange}
+              value={formik.values.password}
+              onChange={formik.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
@@ -315,8 +320,8 @@ export function StudentForm({ handleChange, radioValue }) {
               multiline
               minRows={3}
               label="Descrição"
-              value={formik?.values.description}
-              onChange={formik?.handleChange}
+              value={formik.values.description}
+              onChange={formik.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
