@@ -37,7 +37,7 @@ export function TeacherForm({ handleChange, radioValue }) {
       .required("Insira seu curso de graduação!"),
     id: Yup
       .string()
-      .required("Insira seu RA!"),
+      .required("Insira seu ID!"),
     shift: Yup
       .string()
       .required("Insira em qual turno você se encontra!"),

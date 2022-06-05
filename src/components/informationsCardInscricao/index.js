@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import PerfilImage from "../../images/perfil-image.png"
+import PerfilImage from "../../images/perfil-image.png";
+import { useFormik } from "formik";
 import {
 Box,
 Button,
@@ -16,6 +17,16 @@ export function InformationsCardInscricao () {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const formik = useFormik({
+    initialValues: {
+      vaga:"",
+      descricao: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
+
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>      
       <Grid container spacing={2}>
@@ -26,7 +37,7 @@ export function InformationsCardInscricao () {
         </Grid>
         <Grid item xs={10}>
           <Box sx={{ marginBottom: "16px" }}>
-            <Typography variant="h2" sx={{ fontSize: "24px" }}>Título da Vaga</Typography>
+            <Typography variant="h2" sx={{ fontSize: "24px" }}>{formik.values.vaga}</Typography>
           </Box >
           
           <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>
@@ -35,7 +46,8 @@ export function InformationsCardInscricao () {
               multiline
               minRows={3}
               label="Descrição"
-              value="Uma vaga muito boa"
+              value={formik.values.descricao}
+              onChange={formik.handleChange}
               sx={{ width: "100%" }}
             /> 
           </Box>
