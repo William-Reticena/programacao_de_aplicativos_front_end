@@ -1,9 +1,10 @@
 import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import api from "../../services/api";
 import { Favorite, Share } from "@mui/icons-material";
 import { TextField } from "./style";
-import PerfilImage from "../../images/perfil-image.png"
+import PerfilImage from "../../images/perfil-image.png";
 import {
   Box,
   Button,
@@ -14,7 +15,7 @@ import {
   Modal,
   Paper,
   // TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import api from "../../services/api";
 
@@ -102,18 +103,28 @@ export function ModalTeacher ({ register, onClose, open }) {
       onClose={onClose}
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
     >
-      <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>EDITAR VAGA</Typography>
-        
-            <form onSubmit={formik.handleSubmit}>
-        <Grid container>
-          <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "100%", position: "relative", top: "80px"}}>
-              <CardMedia component="img" image={PerfilImage} />
-            </Card>
-          </Grid>
+      <Paper
+        sx={{
+          /*display: "flex", flexDirection: "column",*/ width: "80%",
+          padding: "16px",
+        }}
+      >
+        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em" }}>
+          EDITAR VAGA
+        </Typography>
 
-          <Grid item xs={10}>
+        <form onSubmit={formik.handleSubmit}>
+          <Grid container>
+            <Grid item xs={2}>
+              <Card
+                elevation={0}
+                sx={{ width: "100%", position: "relative", top: "80px" }}
+              >
+                <CardMedia component="img" image={PerfilImage} />
+              </Card>
+            </Grid>
+
+            <Grid item xs={10}>
               <TextField
                 name="projectName"
                 size="small"
@@ -242,17 +253,29 @@ export function ModalTeacher ({ register, onClose, open }) {
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <Box>
-                <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "center" }}>
+                <Box
+                  sx={{
+                    width: "60%",
+                    display: "inline-flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <Button
                     type="submit"
                     variant="contained"
-                    sx={{ justifySelf: "center", marginLeft:"40%" }}
+                    sx={{ justifySelf: "center", marginLeft: "40%" }}
                   >
                     Concluir
                   </Button>
                 </Box>
 
-                <Box sx={{ width: "calc(40% - 8px)", display: "inline-flex", justifyContent: "right" }}>
+                <Box
+                  sx={{
+                    width: "calc(40% - 8px)",
+                    display: "inline-flex",
+                    justifyContent: "right",
+                  }}
+                >
                   <IconButton>
                     <Favorite /*color="primary"*/ />
                   </IconButton>
@@ -262,10 +285,10 @@ export function ModalTeacher ({ register, onClose, open }) {
                   </IconButton>
                 </Box>
               </Box>
+            </Grid>
           </Grid>
-        </Grid>
-            </form>
+        </form>
       </Paper>
     </Modal>
   );
-};
+}

@@ -1,8 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
 import { Favorite, Share } from "@mui/icons-material";
+import api from "../../services/api";
 import { TextField } from "./style";
-import PerfilImage from "../../images/perfil-image.png"
+import PerfilImage from "../../images/perfil-image.png";
 import {
   Box,
   Button,
@@ -13,27 +14,47 @@ import {
   Modal,
   Paper,
   // TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 
-export function ModalShowProjects ({ register, onClose, open }) {
+export function ModalShowProjects({ register, onClose, open }) {
   const formik = useFormik({
     initialValues: {
-      teacherName: "Vô",
-      projectName: "MIPS",
-      course: "BCC",
-      collegePeriod: "6",
-      amountHours: "2h",
-      shift: "sim",
-      schedules: "sim",
-      numberVacant: "7",
-      email: "iwadjawidjwai@gmail.com",
-      description: "Vaga muito boa",
-      requirements: "nenhum",
+      teacherName: "Vô", //ok
+      projectName: "MIPS", //ok
+      course: "BCC", //ok
+      collegePeriod: "6", //ok
+      amountHours: "2h", //ok
+      shift: "sim", //não tem
+      schedules: "sim", //ok
+      numberVacant: "7", //ok
+      email: "iwadjawidjwai@gmail.com", //ok
+      description: "Vaga muito boa", //ok
+      requirements: "nenhum", //ok
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    }
+    onSubmit: async (values) => {
+      try {
+        await api.post("/InternshipStore", {
+          name_internship: values?.projectName,
+          ideal_period_internship: values?.collegePeriod,
+          couser_internship: values?.course,
+          weekly_period_internship: values?.amountHours,
+          email_internship: values?.email,
+          schedules_internship: values?.schedules,
+          number_vacancies_internship: values?.numberVacant,
+          description_internship: values?.description,
+          requirements_internship: values?.requirements,
+          // remuneration_internship: "",
+          // remuneration_value_internship: "",
+          professor_responsable_internship: values?.teacherName,
+        });
+      } catch (error) {
+        // console.log("teste", error);
+      }
+    },
+    // onSubmit: (values) => {
+    //   alert(JSON.stringify(values, null, 2));
+    // },
   });
 
   return (
@@ -42,18 +63,28 @@ export function ModalShowProjects ({ register, onClose, open }) {
       onClose={onClose}
       sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
     >
-      <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em"}}>EDITAR VAGA</Typography>
-        
-            <form onSubmit={formik.handleSubmit}>
-        <Grid container>
-          <Grid item xs={2}>
-            <Card elevation={0} sx={{ width: "100%", position: "relative", top: "80px"}}>
-              <CardMedia component="img" image={PerfilImage} />
-            </Card>
-          </Grid>
+      <Paper
+        sx={{
+          /*display: "flex", flexDirection: "column",*/ width: "80%",
+          padding: "16px",
+        }}
+      >
+        <Typography variant="h1" sx={{ textAlign: "center", fontSize: "2em" }}>
+          CRIAR PROJETO
+        </Typography>
 
-          <Grid item xs={10}>
+        <form onSubmit={formik.handleSubmit}>
+          <Grid container>
+            <Grid item xs={2}>
+              <Card
+                elevation={0}
+                sx={{ width: "100%", position: "relative", top: "80px" }}
+              >
+                <CardMedia component="img" image={PerfilImage} />
+              </Card>
+            </Grid>
+
+            <Grid item xs={10}>
               <TextField
                 name="projectName"
                 value={formik.values.projectName}
@@ -152,17 +183,29 @@ export function ModalShowProjects ({ register, onClose, open }) {
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
               <Box>
-                <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "center" }}>
+                <Box
+                  sx={{
+                    width: "60%",
+                    display: "inline-flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <Button
                     type="submit"
                     variant="contained"
-                    sx={{ justifySelf: "center", marginLeft:"40%" }}
+                    sx={{ justifySelf: "center", marginLeft: "40%" }}
                   >
                     INSCREVER-SE
                   </Button>
                 </Box>
 
-                <Box sx={{ width: "calc(40% - 8px)", display: "inline-flex", justifyContent: "right" }}>
+                <Box
+                  sx={{
+                    width: "calc(40% - 8px)",
+                    display: "inline-flex",
+                    justifyContent: "right",
+                  }}
+                >
                   <IconButton>
                     <Favorite /*color="primary"*/ />
                   </IconButton>
@@ -172,10 +215,10 @@ export function ModalShowProjects ({ register, onClose, open }) {
                   </IconButton>
                 </Box>
               </Box>
+            </Grid>
           </Grid>
-        </Grid>
-            </form>
+        </form>
       </Paper>
     </Modal>
   );
-};
+}

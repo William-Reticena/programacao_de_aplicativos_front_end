@@ -4,25 +4,28 @@ import { Filter, Header, InformationsCard, Profile } from "../../components";
 import { BoxTypo, GridContainer } from "./style";
 import { UserProvider } from "../../context/userContext";
 import api from "../../services/api";
-import {
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
-export function StudentHome () {
+export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const { userData, setUserdata } = useUserInfo();
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.get('/StudentIndex');
-      console.log(data);
+      const { data } = await api.get("/StudentIndex");
+      // console.log(data);
       setUserdata(data[2]);
     };
     fetch();
   }, [setUserdata]);
 
   useEffect(() => {
+    // const fetch = async () => {
+    //   const { data } = await api.get("/ProjectIndex");
+    //   console.log(data);
+    //   setInfosCard(data);
+    // };
+    // fetch();
     // RECEBER A REQUISIÇÃO AQUI, TEM Q SER UM ARRAY DE OBJETOS
     const fakeData = [
       {
@@ -52,7 +55,7 @@ export function StudentHome () {
         email: "joaohenrique123@outlook.com",
         description: "Não tem",
         requirements: "Ser bom em química",
-      }
+      },
     ];
 
     setInfosCard(fakeData);
@@ -70,19 +73,13 @@ export function StudentHome () {
 
         <Grid item xs={8}>
           <BoxTypo>
-            <Typography
-              variant="h1"
-              sx={{ fontSize: "36px" }}
-            >
+            <Typography variant="h1" sx={{ fontSize: "36px" }}>
               DESTAQUES
             </Typography>
           </BoxTypo>
 
           {infosCards.map((infos) => (
-            <InformationsCard
-              key={infos.id}
-              data={infos}
-            />
+            <InformationsCard key={infos.id} data={infos} />
           ))}
         </Grid>
 
@@ -94,4 +91,4 @@ export function StudentHome () {
       </GridContainer>
     </>
   );
-};
+}

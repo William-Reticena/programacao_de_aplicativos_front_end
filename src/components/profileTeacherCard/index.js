@@ -20,7 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export function ProfileCard({ register, userData, onClose }) {
+export function ProfileTeacherCard({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
@@ -83,22 +83,22 @@ export function ProfileCard({ register, userData, onClose }) {
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      type: "student", //não tem
-      image: "", //não tem
-      imageURL: "", //não tem
+      type: "teacher",
+      image: "", // não tem
+      imageURL: "", // não tem
       fullName: register ? "" : "Paula", //ok
       course: register ? "" : "BCC", //ok
-      collegePeriod: register ? "" : 6, 
+      collegePeriod: register ? "" : 6, //não tem
       ra: register ? "" : "4568703",
       shift: register ? "" : "integral (T/N)",
       city: register ? "" : "Campo Mourão",
       cellphone: register ? "" : "(00) 00000-0000",
-      email: register ? "" : "pa23@gmail.com",
+      email: register ? "" : "pa23@gmfgffdggfghail.com",
       description: register ? "" : "",
     },
     onSubmit: async (values) => {
       try {
-        await api.post("/StudentUpdate", { //tá errado o back
+        await api.post("/ProfessorUpdate", {
           id: "",
           username_professor: values?.fullName,
           password_professor: values?.password,
@@ -140,7 +140,7 @@ export function ProfileCard({ register, userData, onClose }) {
       );
     });
 
-    // console.log(refFileInput);
+    console.log(refFileInput);
   };
 
   return (

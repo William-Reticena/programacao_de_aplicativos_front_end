@@ -29,6 +29,7 @@ export function TeacherForm({ handleChange, radioValue }) {
   }, [setRefFileInput, setRefCardMedia]);
 
   const scheme = Yup.object().shape({
+<<<<<<< HEAD
     fullName: Yup
       .string()
       .required("Insira seu nome completo!"),
@@ -49,28 +50,35 @@ export function TeacherForm({ handleChange, radioValue }) {
       .required("Insira seu número de celular!"),
     email: Yup
       .string()
+=======
+    fullName: Yup.string().required("Insira seu nome completo!"),
+    course: Yup.string().required("Insira seu curso de graduação!"),
+    id: Yup.string().required("Insira seu RA!"),
+    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    city: Yup.string().required("Insira o nome da sua cidade!"),
+    cellphone: Yup.string().required("Insira seu número de celular!"),
+    email: Yup.string()
+>>>>>>> 00e4cf6e40f04a08150029cda62d63503b687c48
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup
-      .string()
-      .required("Insira uma senha!"),
+    password: Yup.string().required("Insira uma senha!"),
   });
 
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      type: "teacher",
-      image: "",
-      imageURL: "",
-      fullName: "",
-      course: "",
-      id: "",
-      shift: "",
-      city: "",
-      cellphone: "",
-      email: "",
-      password: "",
-      description: "",
+      type: "teacher", //não tem
+      image: "", // não tem
+      imageURL: "", // não tem
+      fullName: "", //ok
+      course: "", //ok
+      id: "", // não tem
+      shift: "", //não tem
+      city: "", //ok
+      cellphone: "", //ok
+      email: "", //ok   
+      password: "", //ok
+      description: "", //ok
     },
     onSubmit: async (values) => {
       try {
@@ -82,12 +90,12 @@ export function TeacherForm({ handleChange, radioValue }) {
           contact_professor: values?.cellphone,
           city_professor: values?.city,
           description_professor: values?.description,
-          status_professor: "tttt"
+          status_professor: 1,
         });
       } catch (error) {
         console.log("teste", error);
       }
-    }
+    },
     // onSubmit: async (values) => {
     //   alert(JSON.stringify(values, null, 2));
     // }
@@ -101,203 +109,224 @@ export function TeacherForm({ handleChange, radioValue }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
-      }
+      };
 
       reader.readAsDataURL(refFileInput.files[0]);
 
-      formik.setFieldValue("imageURL", URL.createObjectURL(refFileInput.files[0]));
+      formik.setFieldValue(
+        "imageURL",
+        URL.createObjectURL(refFileInput.files[0])
+      );
     });
 
     console.log(refFileInput);
   };
 
   return (
-    <Paper sx={{ /*display: "flex", flexDirection: "column",*/ width: "80%", padding: "16px" }}>
-      <Typography sx={{ textAlign: "center", fontSize: "2em", marginBottom: "16px"}}>PERFIL</Typography>
+    <Paper
+      sx={{
+        /*display: "flex", flexDirection: "column",*/ width: "80%",
+        padding: "16px",
+      }}
+    >
+      <Typography
+        sx={{ textAlign: "center", fontSize: "2em", marginBottom: "16px" }}
+      >
+        PERFIL
+      </Typography>
 
       <Grid container>
         <Grid item xs={2}>
           <Card
             elevation={0}
-            sx={
-              {
-                backgroundSize: "contain",
-                display: "flex",
-                alignItems: "center",
-                maxHeight: "200px",
-                minHeight: "200px", 
-                maxWidth: "180px",
-                marginTop: "60%",
-                cursor: "pointer",
-              }
-            }
+            sx={{
+              backgroundSize: "contain",
+              display: "flex",
+              alignItems: "center",
+              maxHeight: "200px",
+              minHeight: "200px",
+              maxWidth: "180px",
+              marginTop: "60%",
+              cursor: "pointer",
+            }}
             onClick={handleClick}
           >
-            <CardMedia component="img" image={PerfilImage} id="cardMedia" 
-              sx={{backgroundSize: "contain",}}
+            <CardMedia
+              component="img"
+              image={PerfilImage}
+              id="cardMedia"
+              sx={{ backgroundSize: "contain" }}
             />
           </Card>
         </Grid>
 
         <Grid item xs={10}>
-      <form onSubmit={formik?.handleSubmit}>
-        <Input
-          type="file"
-          id="fileInput"
-          name="image"
-          inputProps={{
-            accept: "image/*",
-          }}
-          onChange={formik.handleChange}
-          sx={{ display: "none" }}
-        />
+          <form onSubmit={formik?.handleSubmit}>
+            <Input
+              type="file"
+              id="fileInput"
+              name="image"
+              inputProps={{
+                accept: "image/*",
+              }}
+              onChange={formik.handleChange}
+              sx={{ display: "none" }}
+            />
 
-        <RadioGroup 
-          onChange={formik?.handleChange}
-          sx={{ flexDirection: "row", marginLeft: "1%" }}
-        >
-          <FormControlLabel 
-            control={
-              <Radio 
-                name="type"
-                checked={radioValue === "student"}
-                value="student"
-                onChange={handleChange}
-              />
-            }
-            label="Aluno"
-          />
-
-          <FormControlLabel 
-            control={
-              <Radio
-                name="type"
-                checked={radioValue === "teacher"}
-                value="teacher"
-                onChange={handleChange}
-              />
-            }
-            label="Professor"
-          />
-        </RadioGroup>
-        
-        <TextField
-          name="fullName"
-          size="small"
-          label="Nome completo"
-          error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-          helperText={formik.touched.fullName && formik.errors.fullName}
-          value={formik?.values.fullName}
-          onChange={formik?.handleChange}
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-
-        <Grid container item>
-          <TextField
-            name="course"
-            size="small"
-            label="Curso"
-            error={formik.touched.course && Boolean(formik.errors.course)}
-            helperText={formik.touched.course && formik.errors.course}
-            value={formik?.values.course}
-            onChange={formik?.handleChange}
-            sx={{ width: "100%", margin: "8px" }}
-          />
-        </Grid>
-
-        <Grid container item>
-          <TextField
-            name="id"
-            size="small"
-            label="ID"
-            error={formik.touched.id && Boolean(formik.errors.id)}
-            helperText={formik.touched.id && formik.errors.id}
-            value={formik?.values.id}
-            onChange={formik?.handleChange}
-            sx={{ width: "45%", margin: "8px" }}
-          />
-
-          <TextField
-            name="shift"
-            size="small"
-            label="Turno"
-            error={formik.touched.shift && Boolean(formik.errors.shift)}
-            helperText={formik.touched.shift && formik.errors.shift}
-            value={formik?.values.shift}
-            onChange={formik?.handleChange}
-            sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-          />
-        </Grid>
-
-        <Grid container item>
-          <TextField
-            name="city"
-            size="small"
-            label="Cidade"
-            error={formik.touched.city && Boolean(formik.errors.city)}
-            helperText={formik.touched.city && formik.errors.city}
-            value={formik?.values.city}
-            onChange={formik?.handleChange}
-            sx={{ width: "45%", margin: "8px" }}
-          />
-
-          <TextField
-            name="cellphone"
-            size="small"
-            label="Celular"
-            error={formik.touched.cellphone && Boolean(formik.errors.cellphone)}
-            helperText={formik.touched.cellphone && formik.errors.cellphone}
-            value={formik?.values.cellphone}
-            onChange={formik?.handleChange}
-            sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-          />
-        </Grid>
-
-        <TextField
-          name="email"
-          size="small"
-          label="E-mail"
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-          value={formik?.values.email}
-          onChange={formik?.handleChange}
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-
-        <TextField
-          type="password"
-          name="password"
-          size="small"
-          label="Senha"
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          value={formik?.values.password}
-          onChange={formik?.handleChange}
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-
-        <TextField
-          name="description"
-          size="small"
-          multiline
-          minRows={3}
-          label="Descrição"
-          value={formik?.values.description}
-          onChange={formik?.handleChange}
-          sx={{ width: "calc(100% - 16px)", margin: "8px" }}
-        />
-
-        <Box sx={{ width: "100%", display: "inline-flex", justifyContent: "center" }} >
-          {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ marginRight: "16px" }}
+            <RadioGroup
+              onChange={formik?.handleChange}
+              sx={{ flexDirection: "row", marginLeft: "1%" }}
             >
-              Concluir
-            </Button>
+              <FormControlLabel
+                control={
+                  <Radio
+                    name="type"
+                    checked={radioValue === "student"}
+                    value="student"
+                    onChange={handleChange}
+                  />
+                }
+                label="Aluno"
+              />
 
-            {/* {register && <NavigationButton to={LOGIN}>
+              <FormControlLabel
+                control={
+                  <Radio
+                    name="type"
+                    checked={radioValue === "teacher"}
+                    value="teacher"
+                    onChange={handleChange}
+                  />
+                }
+                label="Professor"
+              />
+            </RadioGroup>
+
+            <TextField
+              name="fullName"
+              size="small"
+              label="Nome completo"
+              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+              helperText={formik.touched.fullName && formik.errors.fullName}
+              value={formik?.values.fullName}
+              onChange={formik?.handleChange}
+              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
+            <Grid container item>
+              <TextField
+                name="course"
+                size="small"
+                label="Curso"
+                error={formik.touched.course && Boolean(formik.errors.course)}
+                helperText={formik.touched.course && formik.errors.course}
+                value={formik?.values.course}
+                onChange={formik?.handleChange}
+                sx={{ width: "100%", margin: "8px" }}
+              />
+            </Grid>
+
+            <Grid container item>
+              <TextField
+                name="id"
+                size="small"
+                label="ID"
+                error={formik.touched.id && Boolean(formik.errors.id)}
+                helperText={formik.touched.id && formik.errors.id}
+                value={formik?.values.id}
+                onChange={formik?.handleChange}
+                sx={{ width: "45%", margin: "8px" }}
+              />
+
+              <TextField
+                name="shift"
+                size="small"
+                label="Turno"
+                error={formik.touched.shift && Boolean(formik.errors.shift)}
+                helperText={formik.touched.shift && formik.errors.shift}
+                value={formik?.values.shift}
+                onChange={formik?.handleChange}
+                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+              />
+            </Grid>
+
+            <Grid container item>
+              <TextField
+                name="city"
+                size="small"
+                label="Cidade"
+                error={formik.touched.city && Boolean(formik.errors.city)}
+                helperText={formik.touched.city && formik.errors.city}
+                value={formik?.values.city}
+                onChange={formik?.handleChange}
+                sx={{ width: "45%", margin: "8px" }}
+              />
+
+              <TextField
+                name="cellphone"
+                size="small"
+                label="Celular"
+                error={
+                  formik.touched.cellphone && Boolean(formik.errors.cellphone)
+                }
+                helperText={formik.touched.cellphone && formik.errors.cellphone}
+                value={formik?.values.cellphone}
+                onChange={formik?.handleChange}
+                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+              />
+            </Grid>
+
+            <TextField
+              name="email"
+              size="small"
+              label="E-mail"
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              value={formik?.values.email}
+              onChange={formik?.handleChange}
+              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
+            <TextField
+              type="password"
+              name="password"
+              size="small"
+              label="Senha"
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              value={formik?.values.password}
+              onChange={formik?.handleChange}
+              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
+            <TextField
+              name="description"
+              size="small"
+              multiline
+              minRows={3}
+              label="Descrição"
+              value={formik?.values.description}
+              onChange={formik?.handleChange}
+              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
+            <Box
+              sx={{
+                width: "100%",
+                display: "inline-flex",
+                justifyContent: "center",
+              }}
+            >
+              {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ marginRight: "16px" }}
+              >
+                Concluir
+              </Button>
+
+              {/* {register && <NavigationButton to={LOGIN}>
               <Button
                 color="error"
                 variant="contained"
@@ -306,18 +335,18 @@ export function TeacherForm({ handleChange, radioValue }) {
               </Button>
             </NavigationButton>} */}
 
-            {/* {!register && <Button
+              {/* {!register && <Button
                 color="error"
                 variant="contained"
                 onClick={onClose}
               >
                 Cancelar
               </Button>} */}
-          {/* </Box> */}
-        </Box>
-      </form>
-      </Grid>
+              {/* </Box> */}
+            </Box>
+          </form>
+        </Grid>
       </Grid>
     </Paper>
-  )
+  );
 }

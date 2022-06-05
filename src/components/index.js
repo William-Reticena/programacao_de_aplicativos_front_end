@@ -13,4 +13,5 @@ export { ProfileCard } from "./profileCard";
 export { TeacherCard } from "./teacherCard";
 export { ModalTeacher } from "./modalTeacher";
 export { ModalShowProjects } from "./modalShowProjects";
+export { ProfileTeacherCard } from "./profileTeacherCard";
 // export { ProfilePaper } from "./profilePaper/prof";
