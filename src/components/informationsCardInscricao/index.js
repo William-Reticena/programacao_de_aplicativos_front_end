@@ -10,8 +10,8 @@ export function InformationsCardInscricao({ data }) {
 
   const formik = useFormik({
     initialValues: {
-      vaga: "",
-      descricao: "",
+      vaga: data.name_project,
+      descricao: data.description_project,
     },
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));

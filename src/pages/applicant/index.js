@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Header,
   InformationsCardApplicant,
@@ -7,6 +7,7 @@ import {
 import { Box, Grid, Typography } from "@mui/material";
 
 export function Applicant() {
+
   return (
     <>
       <Header title=" " />
@@ -15,9 +16,9 @@ export function Applicant() {
         <Grid item xs={2}></Grid>
 
         <Grid item xs={8}>
-          {[0].map((infos) => (
-            <InformationsCardProjects key={infos} />
-          ))}
+          {/* {projectCards.map((infos) => ( */}
+            <InformationsCardProjects />
+          {/* ))} */}
 
           <Box
             sx={{

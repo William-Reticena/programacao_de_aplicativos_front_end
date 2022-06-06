@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { ModalTeacher } from "../";
 import PerfilImage from "../../images/perfil-image.png"
@@ -12,20 +12,33 @@ Paper,
 TextField,
 Typography,
 } from "@mui/material";
+import api from "../../services/api";
 
 export function InformationsCardProjects () {
+  const [projectCard, setProjectCard] = useState({});
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await api.post("/ProjectShow", {id: 1});
+      console.log(data); 
+      setProjectCard(data);
+    };
+    fetch();
+  }, [setProjectCard]);
+
+  // console.log("card", infos);
   const formik = useFormik({
     initialValues: {
-      vaga: "",
-      descricao: "",
-      cargaSemanal: "",
-      periodo: "",
-      valor: "",
-      requisitos: "",
+      vaga: projectCard.name_projects,
+      descricao: projectCard.description_project,
+      cargaSemanal: projectCard.weekly_workload_project,
+      periodo: projectCard.ideal_period_project,
+      valor: projectCard.remuneration_value_project,
+      requisitos: projectCard.requirements_project,
     },
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
@@ -114,6 +127,7 @@ export function InformationsCardProjects () {
             <ModalTeacher
               open={open}
               onClose={handleClose}
+              infos={projectCard}
             />
 
           </Box>
