@@ -2,14 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import api from "../../services/api";
 import { TextField } from "./style";
-import {
-  Box,
-  Button,
-  Grid,
-  Modal,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 
 export function ModalShowProjects({ register, onClose, open }) {
   const formik = useFormik({
@@ -43,6 +36,10 @@ export function ModalShowProjects({ register, onClose, open }) {
           remuneration_value_project: values.remunerationValue,
           professor_responsable_project: "WILLIAM",
         });
+
+        alert("Projeto criado com sucesso!");
+
+        document.location.reload();
       } catch (error) {
         // console.log("teste", error);
       }
