@@ -4,7 +4,7 @@ import { ProfileTeacherCard, ProfileCard } from "../";
 import { Modal, Paper } from "./style";
 import { Avatar, Button, Typography } from "@mui/material";
 
-export function Profile({ userData }) {
+export function ProfileTeacher({ userData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -18,10 +18,10 @@ export function Profile({ userData }) {
       <Avatar src={PerfilImage} sx={{ width: 64, height: 64 }} />
 
       <Typography sx={{ textAlign: "center" }}>
-        {userData.username_student}
+        {userData.username_professor}
       </Typography>
-      <Typography>{userData.ra_student}</Typography>
-      <Typography>{userData.course_student}</Typography>
+      <Typography>{"não tem"}</Typography>
+      <Typography>{userData.course_professor}</Typography>
 
       <Button variant="contained" onClick={handleOpen}>
         Editar Perfil

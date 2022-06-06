@@ -12,9 +12,9 @@ export function StudentHome() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.get("/StudentIndex");
-      // console.log(data);
-      setUserdata(data[2]);
+      const { data } = await api.post("/StudentShow", { id: 1 });
+      console.log("dados estudante", data);
+      setUserdata(data);
     };
     fetch();
   }, [setUserdata]);
@@ -22,7 +22,7 @@ export function StudentHome() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.get("/ProjectIndex");
-      console.log(data);
+      // console.log(data);
       setInfosCard(data);
     };
     fetch();
