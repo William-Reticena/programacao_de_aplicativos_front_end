@@ -5,8 +5,11 @@ import {
   InformationsCardProjects,
 } from "../../components";
 import { Box, Grid, Typography } from "@mui/material";
+import api from "../../services/api";
 
 export function Applicant() {
+
+  
 
   return (
     <>
@@ -17,7 +20,7 @@ export function Applicant() {
 
         <Grid item xs={8}>
           {/* {projectCards.map((infos) => ( */}
-            <InformationsCardProjects />
+          <InformationsCardProjects />
           {/* ))} */}
 
           <Box

@@ -40,7 +40,7 @@ export function ModalTeacher({ infos, register, onClose, open }) {
       requirements: infos.requirements_project,
     },
     onSubmit: async (values) => {
-      console.log(values);
+      console.log("value", values.id);
       try {
         await api.post("/ProjectUpdate", {
           id: values.id,
@@ -55,6 +55,10 @@ export function ModalTeacher({ infos, register, onClose, open }) {
           description_project: values?.description,
           requirements_project: values?.requirements,
         });
+
+        alert("Projeto atualizado com sucesso!");
+
+        document.location.reload();
       } catch (error) {
         console.log("teste", error);
       }
@@ -63,6 +67,19 @@ export function ModalTeacher({ infos, register, onClose, open }) {
       // },
     },
   });
+
+  const handleDelete = async (id) => {
+    try {
+      await api.post("/ProjectDestroy", { id });
+
+      alert("Projeto excluído com sucesso!");
+
+      document.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Modal
       open={open}
@@ -248,16 +265,30 @@ export function ModalTeacher({ infos, register, onClose, open }) {
                 onChange={formik.handleChange}
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}
               />
-              <Box>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
                   type="submit"
                   variant="contained"
-                  sx={{
-                    margin: "0 auto",
-                    display: "block",
-                  }}
+                  sx={
+                    {
+                      // margin: "0 auto",
+                      // display: "inline-block",
+                    }
+                  }
                 >
                   Concluir
+                </Button>
+
+                <Button
+                  variant="contained"
+                  color="error"
+                  sx={{
+                    margin: "0 16px",
+                    // display: "inline-block",
+                  }}
+                  onClick={() => handleDelete(formik.values.id)}
+                >
+                  Excluir
                 </Button>
               </Box>
             </form>
