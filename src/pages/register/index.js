@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid } from "@mui/material";
-import { Header, ProfileCard } from "../../components";
+import { Header } from "../../components";
 import { StudentForm } from "./studentForm";
 import { TeacherForm } from "./teacherForm";
 

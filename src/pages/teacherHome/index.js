@@ -38,7 +38,7 @@ export function TeacherHome() {
         <Grid item xs={8}>
           <div style={{ textAlign: "center", margin: "16px" }}>
             <Typography variant="h1" sx={{ fontSize: "36px" }}>
-              DESTAQUES
+              MEUS PROJETOS
             </Typography>
           </div>
 

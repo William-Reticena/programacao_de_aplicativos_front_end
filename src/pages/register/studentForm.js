@@ -34,7 +34,7 @@ export function StudentForm({ handleChange, radioValue }) {
   const scheme = Yup.object().shape({
     fullName: Yup.string().required("Insira seu nome completo!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number()
+    collegePeriod: Yup.number().max(10,'Período inválido!')
       .positive("Deve ser um número positivo!")
       .integer("Deve ser um número inteiro!")
       .required("Insira o período em que você se encontra!"),

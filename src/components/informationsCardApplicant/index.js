@@ -103,7 +103,7 @@ export function InformationsCardApplicant () {
               >
                 ACEITAR CANDIDATO
               </Button>
-          </Box> 
+        </Box>
     </Paper>
   );
 };

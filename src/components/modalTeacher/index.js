@@ -9,7 +9,8 @@ export function ModalTeacher({ infos, register, onClose, open }) {
   const scheme = Yup.object().shape({
     projectName: Yup.string().required("Insira seu nome do projeto!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.string().required("Insira um período do curso!"),
+    collegePeriod: Yup.number().required("Insira um período do curso!")
+    .max(10,'Período inválido!'),
     amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     schedules: Yup.string().required("Insira os horários!"),
@@ -111,6 +112,7 @@ export function ModalTeacher({ infos, register, onClose, open }) {
                 />
 
                 <TextField
+                  type= "number"
                   name="collegePeriod"
                   size="small"
                   label="Período Ideal"

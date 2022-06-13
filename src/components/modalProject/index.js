@@ -1,10 +1,29 @@
 import React from "react";
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
 import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 
 export function ModalProject({ data, onClose, open }) {
+  const scheme = Yup.object().shape({
+    projectName: Yup.string().required("Insira seu nome do projeto!"),
+    course: Yup.string().required("Insira seu curso de graduação!"),
+    collegePeriod: Yup.string().required("Insira um período do curso!")
+    .max(10,'Período inválido!'),
+    amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
+    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    schedules: Yup.string().required("Insira os horários!"),
+    numberVacant: Yup.string().required("Insira a quantidade de vagas!"),
+    email: Yup.string()
+      .email("Insira um email válido!")
+      .required("Insira o seu e-mail!"),
+    remuneration: Yup.string().required("Insira o valor da bolsa!"),
+    description: Yup.string().required("Insira uma descrição!"),
+    requirements: Yup.string().required("Insira os requisitos da vaga!"),
+  });
+
   const formik = useFormik({
+    validationSchema: scheme,
     initialValues: {
       teacherName: data.professor_responsable_project,
       projectName: data.name_project,

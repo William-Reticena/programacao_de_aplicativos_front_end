@@ -1,11 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import api from "../../services/api";
 import { TextField } from "./style";
-import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Modal, Paper, Typography, Radio, RadioGroup, FormControl, FormControlLabel } from "@mui/material";
 
-export function ModalShowProjects({ register, onClose, open }) {
+export function ModalShowProjects({ onClose, open }) {
+
+  const [value, setValue] = React.useState("sim");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  
+  const scheme = Yup.object().shape({
+    projectName: Yup.string().required("Insira seu nome do projeto!"),
+    course: Yup.string().required("Insira seu curso de graduação!"),
+    collegePeriod: Yup.number().required("Insira um período do curso!")
+    .max(10,'Período inválido!'),
+    amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
+    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    schedules: Yup.string().required("Insira os horários!"),
+    numberVacant: Yup.string().required("Insira a quantidade de vagas!"),
+    email: Yup.string()
+      .email("Insira um email válido!")
+      .required("Insira o seu e-mail!"),
+    remunerationValue: Yup.string().required("Insira o valor da bolsa!"),
+    description: Yup.string().required("Insira uma descrição!"),
+    requirements: Yup.string().required("Insira os requisitos da vaga!"),
+  });
+
   const formik = useFormik({
+    validationSchema: scheme,
     initialValues: {
       teacherName: "", //ok
       projectName: "", //ok
@@ -18,7 +44,8 @@ export function ModalShowProjects({ register, onClose, open }) {
       email: "", //ok
       description: "", //ok
       requirements: "", //ok
-      remunerationValue: "",
+      remunerationValue: "0",
+      remuneration_project: value,
     },
     onSubmit: async (values) => {
       try {
@@ -35,6 +62,7 @@ export function ModalShowProjects({ register, onClose, open }) {
           // remuneration_internship: "",
           remuneration_value_project: values.remunerationValue,
           professor_responsable_project: "WILLIAM",
+          remuneration_project: values.remuneration_project,
         });
 
         alert("Projeto criado com sucesso!");
@@ -70,6 +98,8 @@ export function ModalShowProjects({ register, onClose, open }) {
             <Grid item xs={12}>
               <TextField
                 name="projectName"
+                error={ formik.touched.projectName && Boolean(formik.errors.projectName)}
+                helperText={formik.touched.projectName && formik.errors.projectName}
                 value={formik.values.projectName}
                 onChange={formik.handleChange}
                 size="small"
@@ -80,6 +110,8 @@ export function ModalShowProjects({ register, onClose, open }) {
               <Grid container item>
                 <TextField
                   name="course"
+                  error={formik.touched.course && Boolean(formik.errors.course)}
+                  helperText={formik.touched.course && formik.errors.course}
                   value={formik.values.course}
                   onChange={formik.handleChange}
                   size="small"
@@ -88,7 +120,10 @@ export function ModalShowProjects({ register, onClose, open }) {
                 />
 
                 <TextField
+                  type= "number"
                   name="collegePeriod"
+                  error={ formik.touched.collegePeriod && Boolean(formik.errors.collegePeriod)}
+                  helperText={ formik.touched.collegePeriod && formik.errors.collegePeriod}
                   value={formik.values.collegePeriod}
                   onChange={formik.handleChange}
                   size="small"
@@ -100,6 +135,8 @@ export function ModalShowProjects({ register, onClose, open }) {
               <Grid container item>
                 <TextField
                   name="amountHours"
+                  error={ formik.touched.amountHours && Boolean(formik.errors.amountHours) }
+                  helperText={formik.touched.amountHours && formik.errors.amountHours}
                   value={formik.values.amountHours}
                   onChange={formik.handleChange}
                   size="small"
@@ -109,6 +146,8 @@ export function ModalShowProjects({ register, onClose, open }) {
 
                 <TextField
                   name="shift"
+                  error={formik.touched.shift && Boolean(formik.errors.shift)}
+                  helperText={formik.touched.shift && formik.errors.shift}
                   value={formik.values.shift}
                   onChange={formik.handleChange}
                   size="small"
@@ -120,6 +159,8 @@ export function ModalShowProjects({ register, onClose, open }) {
               <Grid container item>
                 <TextField
                   name="schedules"
+                  error={ formik.touched.schedules && Boolean(formik.errors.schedules) }
+                  helperText={ formik.touched.schedules && formik.errors.schedules }
                   value={formik.values.schedules}
                   onChange={formik.handleChange}
                   size="small"
@@ -129,6 +170,8 @@ export function ModalShowProjects({ register, onClose, open }) {
 
                 <TextField
                   name="numberVacant"
+                  error={formik.touched.numberVacant && Boolean(formik.errors.numberVacant) }
+                  helperText={ formik.touched.numberVacant && formik.errors.numberVacant }
                   value={formik.values.numberVacant}
                   onChange={formik.handleChange}
                   size="small"
@@ -139,22 +182,58 @@ export function ModalShowProjects({ register, onClose, open }) {
 
               <TextField
                 name="email"
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
                 value={formik.values.email}
                 onChange={formik.handleChange}
                 size="small"
                 label="E-mail"
                 sx={{ width: "45%", margin: "8px" }}
               />
-              <TextField
+
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby="remuneration_project_group"
+                  value={value}
+                  onChange={formik.handleChange}
+                  name="remuneration_project"
+                >
+                  <FormControlLabel value="sim" control={<Radio 
+                      name="remuneration_project"
+                      checked={value === "sim"}
+                      onChange={handleChange}/>} label="Remunerado" />
+                  <FormControlLabel value="nao" control={<Radio 
+                      name="remuneration_project"
+                      checked={value === "nao"}
+                      onChange={handleChange}/>} label="Não Remunerado" />
+                </RadioGroup>
+              </FormControl>
+              {value === "nao" ? (
+                <TextField
                 name="remunerationValue"
+                disabled
+                size="small"
+                label="Valor da bolsa"
+                sx={{ width: "calc(30% - 42px)", margin: "8px" }}
+              />
+              ) : (
+                <TextField
+                name="remunerationValue"
+                error={formik.touched.remunerationValue && Boolean(formik.errors.remunerationValue) }
+                helperText={ formik.touched.remunerationValue && formik.errors.remunerationValue}
                 value={formik.values.remunerationValue}
                 onChange={formik.handleChange}
                 size="small"
                 label="Valor da bolsa"
-                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+                sx={{ width: "calc(30% - 42px)", margin: "8px" }}
               />
+              )}
+              
               <TextField
                 name="description"
+                error={ formik.touched.description && Boolean(formik.errors.description) }
+                helperText={ formik.touched.description && formik.errors.description }
                 value={formik.values.description}
                 onChange={formik.handleChange}
                 size="small"
@@ -165,6 +244,8 @@ export function ModalShowProjects({ register, onClose, open }) {
               />
               <TextField
                 name="requirements"
+                error={ formik.touched.requirements && Boolean(formik.errors.requirements) }
+                helperText={ formik.touched.requirements && formik.errors.requirements }
                 value={formik.values.requirements}
                 onChange={formik.handleChange}
                 size="small"
