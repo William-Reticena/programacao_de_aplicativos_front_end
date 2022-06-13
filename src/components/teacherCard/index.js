@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { APPLICANT } from "../../routes/routes";
+// import { APPLICANT } from "../../routes/routes";
 import { NavigationButton } from "../../components";
 import { ModalTeacher } from "../";
 import {
@@ -57,7 +57,7 @@ export function TeacherCard({ infos }) {
               Editar
             </Button>
 
-            <NavigationButton to={APPLICANT}>
+            <NavigationButton to={`/applicant/${infos.id}`}>
               <Button
                 variant="contained"
                 sx={{ width: "110%", height: "50px" }}

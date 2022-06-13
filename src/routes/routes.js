@@ -1,6 +1,6 @@
 // export const HOME = "/";
 export const ADMIN = "/admin";
-export const APPLICANT = "/applicant";
+export const APPLICANT = "/applicant/:id";
 export const INSCRICAO = "/inscricao";
 export const LOGIN = "/login";
 export const PROJECTS = "/projects";
