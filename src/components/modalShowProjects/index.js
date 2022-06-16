@@ -16,8 +16,10 @@ export function ModalShowProjects({ onClose, open }) {
   const scheme = Yup.object().shape({
     projectName: Yup.string().required("Insira seu nome do projeto!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number().required("Insira um período do curso!")
-    .max(10,'Período inválido!'),
+    collegePeriod: Yup.number()
+      .required("Insira um período do curso!")
+      .max(10,'Período inválido!')
+      .min(1,'Período inválido!'),
     amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     schedules: Yup.string().required("Insira os horários!"),
@@ -25,7 +27,8 @@ export function ModalShowProjects({ onClose, open }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    remunerationValue: Yup.string().required("Insira o valor da bolsa!"),
+    remunerationValue: Yup.number().required("Insira o valor da bolsa!")
+    .min(0,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
     requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
@@ -44,7 +47,7 @@ export function ModalShowProjects({ onClose, open }) {
       email: "", //ok
       description: "", //ok
       requirements: "", //ok
-      remunerationValue: "0",
+      remunerationValue: " ",
       remuneration_project: value,
     },
     onSubmit: async (values) => {

@@ -35,18 +35,7 @@ export function InformationsCardProjects() {
       elevation={5}
       sx={{ padding: "16px", marginBottom: "24px", marginTop: "16px" }}
     >
-      <Grid container spacing={2}>
-        <Grid item xs={2}>
-          <Card elevation={0}>
-            <CardMedia
-              component="img"
-              image={PerfilImage}
-              sx={{ maxHeight: "216px" }}
-            />
-          </Card>
-        </Grid>
-
-        <Grid item xs={10}>
+        <Grid>
           <Box sx={{ marginBottom: "16px" }}>
             <Typography variant="h2" sx={{ fontSize: "24px" }}>
               {projectCard.name_project}
@@ -98,7 +87,6 @@ export function InformationsCardProjects() {
             />
           </Box>
         </Grid>
-      </Grid>
       <Box
         sx={{
           display: "flex",
