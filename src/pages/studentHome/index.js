@@ -5,16 +5,24 @@ import { BoxTypo, GridContainer } from "./style";
 import { UserProvider } from "../../context/userContext";
 import api from "../../services/api";
 import { Grid, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { LOGIN } from "../../routes/routes";
 
 export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
-  const { userData, setUserdata } = useUserInfo();
+  const [userData, setUserdata] = useUserInfo();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.post("/StudentShow", { id: 1 });
-      console.log("dados estudante", data);
-      setUserdata(data);
+      //usar no contexto um id para poder passar aqui no fetch
+      const { data } = await api.post("/StudentShow", { id: userData.id });
+      // console.log("dados estudante", data);
+      setUserdata((prevState) => ({
+        ...prevState,
+        ...data,
+      }));
+      console.log("dados estudante", userData); //testes
     };
     fetch();
   }, [setUserdata]);
@@ -62,6 +70,17 @@ export function StudentHome() {
     // console.log("user", userInfo);
   }, []);
 
+  // if (userData.type !== "teacher") {
+  //   const redirect = () => {
+  //     navigate(LOGIN);
+  //   };
+  //   return (
+  //     <>
+  //       <h1>Acesso não autorizado!!</h1>
+  //       {redirect()}
+  //     </>
+  //   );
+  // }
   return (
     <>
       <Header />
@@ -85,7 +104,7 @@ export function StudentHome() {
 
         <Grid item xs={2}>
           <UserProvider>
-            <Profile userData={userData} />
+            <Profile userData={userData} typeUser={userData.type} />
           </UserProvider>
         </Grid>
       </GridContainer>

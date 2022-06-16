@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import api from "../../services/api";
@@ -6,11 +6,14 @@ import { TextField } from "./style";
 import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 
 export function ModalTeacher({ infos, register, onClose, open }) {
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const scheme = Yup.object().shape({
     projectName: Yup.string().required("Insira seu nome do projeto!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number().required("Insira um período do curso!")
-    .max(10,'Período inválido!'),
+    collegePeriod: Yup.number()
+      .required("Insira um período do curso!")
+      .max(10, "Período inválido!"),
     amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     schedules: Yup.string().required("Insira os horários!"),
@@ -42,6 +45,8 @@ export function ModalTeacher({ infos, register, onClose, open }) {
     },
     onSubmit: async (values) => {
       console.log("value", values.id);
+      setIsDisabled(true);
+
       try {
         await api.post("/ProjectUpdate", {
           id: values.id,
@@ -129,7 +134,7 @@ export function ModalTeacher({ infos, register, onClose, open }) {
                 />
 
                 <TextField
-                  type= "number"
+                  type="number"
                   name="collegePeriod"
                   size="small"
                   label="Período Ideal"
@@ -269,14 +274,9 @@ export function ModalTeacher({ infos, register, onClose, open }) {
               />
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Button
+                  disabled={isDisabled}
                   type="submit"
                   variant="contained"
-                  sx={
-                    {
-                      // margin: "0 auto",
-                      // display: "inline-block",
-                    }
-                  }
                 >
                   Concluir
                 </Button>

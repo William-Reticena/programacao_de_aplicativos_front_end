@@ -4,11 +4,11 @@ import { ProfileTeacherCard, ProfileCard } from "../";
 import { Modal, Paper } from "./style";
 import { Avatar, Button, Typography } from "@mui/material";
 
-export function Profile({ userData }) {
+export function Profile({ userData, typeUser }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   // useEffect(() => {
   // getUserInfos();
   // });
@@ -33,8 +33,9 @@ export function Profile({ userData }) {
         sx={{ justifyContent: "center" }}
       >
         <>
-          <ProfileTeacherCard userData={userData} onClose={handleClose} />
-          <ProfileCard userData={userData} onClose={handleClose} />
+          <ProfileCard userData={userData} onClose={handleClose}>
+            {console.log("student")}
+          </ProfileCard>
         </>
       </Modal>
     </Paper>

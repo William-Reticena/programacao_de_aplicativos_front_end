@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Logo } from "../../images";
 import { NavigationButton } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import { REGISTER, STUDENT_HOME } from "../../routes/routes";
+import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import {
   Box,
   Button,
@@ -16,6 +16,9 @@ import {
   TextField,
 } from "./style";
 import { CardMedia, FormControlLabel, Radio } from "@mui/material";
+import { useUserInfo } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
+// import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
   <Container
@@ -36,6 +39,9 @@ export function SignIn() {
   const [selectedValue, setSelectedValue] = useState("student");
   const [radioStudent, setRadioStudent] = useState(true);
   const [radioTeacher, setRadioTeacher] = useState(false);
+  // const [typeUser, setTypeUser] = useState();
+  const [userData, setUserdata] = useUserInfo();
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -43,8 +49,33 @@ export function SignIn() {
       email: "",
       password: "",
     },
+    // onSubmit: async (values) => {
+    //   try {
+    //     api.post("/Admin/login", {
+    //       username: values.email,
+    //       password: values.password,
+    //     });
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      //only just tests
+      const typeTest = "student";
+      setUserdata((prevState) => ({
+        ...prevState,
+        id: 1,
+        type: typeTest,
+      }));
+
+      // setTypeUser(userData.type)
+
+      console.log(userData);
+      if (typeTest === "student") navigate(STUDENT_HOME);
+      if (typeTest === "teacher") navigate(TEACHER_HOME);
+      // document.location.reload();
+
+      // alert(JSON.stringify(userData, null, 2));
     },
   });
 
@@ -66,31 +97,24 @@ export function SignIn() {
   return (
     <Container
       sx={{
-        /*display: "flex", justifyContent: "center", alignItems: "center",*/ height:
-          "100vh",
+        height: "100vh",
       }}
     >
-      <Paper /*sx={{ width: "450px" }}*/ elevation={5}>
-        <Box /*sx={{ justifyContent: "center", display: "flex", padding:"24px" }}*/
-        >
-          <Card /*sx={{ width: "300px" }}*/ elevation={0}>
+      <Paper elevation={5}>
+        <Box>
+          <Card elevation={0}>
             <CardMedia component="img" image={Logo} />
           </Card>
         </Box>
 
         <Box
           sx={{
-            /*justifyContent: "center", display: "flex",*/ padding:
-              "0 0 24px 0",
+            padding: "0 0 24px 0",
           }}
         >
           <form onSubmit={formik.handleSubmit}>
-            <FormControl /*sx={{ padding: "16px", width: "350px" }}*/>
-              <RadioGroup
-                /*sx={{ flexDirection: "row", display: "flex", flexWrap: "nowrap", left: "32px", position: "relative" }}*/
-                // value={formik.values.type}
-                onChange={formik.handleChange}
-              >
+            <FormControl>
+              <RadioGroup onChange={formik.handleChange}>
                 <FormControlLabel
                   control={
                     <Radio
@@ -104,7 +128,6 @@ export function SignIn() {
                   label={
                     <LabelWrapper user="Aluno" isSelected={radioStudent} />
                   }
-                  // value="student"
                 />
 
                 <FormControlLabel
@@ -120,7 +143,6 @@ export function SignIn() {
                   label={
                     <LabelWrapper user="Professor" isSelected={radioTeacher} />
                   }
-                  // value="teacher"
                 />
               </RadioGroup>
 
@@ -129,7 +151,6 @@ export function SignIn() {
                 name="email"
                 value={formik.values.ra}
                 onChange={formik.handleChange}
-                // sx={{ margin: "8px" }}
               />
 
               <TextField
@@ -138,27 +159,14 @@ export function SignIn() {
                 type="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                // sx={{ margin: "8px" }}
               />
 
-              {/* <NavigationButton to={STUDENT_HOME}> */}
-              <Button
-                type="submit"
-                size="large"
-                variant="contained"
-                // sx={{ margin: "8px", width: "calc(100% - 15px)" }}
-              >
+              <Button type="submit" size="large" variant="contained">
                 Login
               </Button>
-              {/* </NavigationButton> */}
 
               <NavigationButton to={REGISTER}>
-                <Button
-                  size="large"
-                  // sx={{ margin: "8px", width: "calc(100% - 15px)" }}
-                >
-                  Cadastre-se
-                </Button>
+                <Button size="large">Cadastre-se</Button>
               </NavigationButton>
             </FormControl>
           </form>

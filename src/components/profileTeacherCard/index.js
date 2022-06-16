@@ -21,6 +21,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [refCardMedia, setRefCardMedia] = useState(null);
 
   useEffect(() => {
@@ -33,14 +34,14 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
   };
 
   const scheme = Yup.object().shape({
-    fullName: Yup.string().required("Insira seu nome completo!"),
-    course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number()
-      .positive("Deve ser um número positivo!")
-      .integer("Deve ser um número inteiro!")
-      .required("Insira o período em que você se encontra!"),
-    ra: Yup.string().required("Insira seu RA!"),
-    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    // fullName: Yup.string().required("Insira seu nome completo!"),
+    // course: Yup.string().required("Insira seu curso de graduação!"),
+    // collegePeriod: Yup.number()
+    //   .positive("Deve ser um número positivo!")
+    //   .integer("Deve ser um número inteiro!")
+    //   .required("Insira o período em que você se encontra!"),
+    // id: Yup.string().required("Insira seu RA!"),
+    // shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
@@ -48,26 +49,30 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
       .required("Insira o seu e-mail!"),
   });
 
+  console.log(userData);
+
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      type: "teacher",
+      id: userData.id,
+      type: userData.type,
       image: "", // não tem
       imageURL: "", // não tem
-      fullName: register ? "" : "Paula", //ok
-      course: register ? "" : "BCC", //ok
-      collegePeriod: register ? "" : 6, //não tem
-      ra: register ? "" : "4568703",
-      shift: register ? "" : "integral (T/N)",
-      city: register ? "" : "Campo Mourão",
-      cellphone: register ? "" : "(00) 00000-0000",
-      email: register ? "" : "pa23@gmfgffdggfghail.com",
-      description: register ? "" : "",
+      fullName: userData.username_professor, //ok
+      course: userData.course_professor, //ok
+      collegePeriod: "", //não tem
+      // id: "não tem",
+      shift: "",
+      city: userData.city_professor,
+      cellphone: userData.contact_professor,
+      email: userData.email_professor,
+      description: userData.description_professor,
     },
     onSubmit: async (values) => {
+      setIsDisabled(true);
       try {
         await api.post("/ProfessorUpdate", {
-          id: "",
+          id: values.id,
           username_professor: values?.fullName,
           password_professor: values?.password,
           course_professor: values?.course,
@@ -77,6 +82,8 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
           description_professor: values?.description,
           status_professor: 0,
         });
+        // onClose();
+        document.location.reload();
       } catch (error) {
         console.log("teste", error);
       }
@@ -214,9 +221,9 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
             <Grid container item>
               <TextField
                 disabled
-                name="ra"
+                name="id"
                 size="small"
-                label={radioValue === "student" ? "RA" : "ID"}
+                label="ID"
                 error={formik.touched.ra && Boolean(formik.errors.ra)}
                 helperText={formik.touched.ra && formik.errors.ra}
                 value={formik?.values.ra}

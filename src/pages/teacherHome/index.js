@@ -6,13 +6,16 @@ import { UserProvider, useUserInfo } from "../../context/userContext";
 
 export function TeacherHome() {
   const [projectCards, setProjectsCard] = useState([]);
-  const { userData, setUserdata } = useUserInfo();
+  const [userData, setUserdata] = useUserInfo();
 
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/ProfessorShow", { id: 1 });
       console.log("dados estudante", data);
-      setUserdata(data);
+      setUserdata((prevState) => ({
+        ...prevState,
+        ...data,
+      }));
     };
     fetch();
   }, [setUserdata]);
@@ -50,7 +53,7 @@ export function TeacherHome() {
 
         <Grid item xs={2}>
           <UserProvider>
-            <ProfileTeacher userData={userData} />
+            <ProfileTeacher userData={userData} typeUser={userData.type} />
           </UserProvider>
         </Grid>
       </Grid>

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 // import { APPLICANT } from "../../routes/routes";
 import { NavigationButton } from "../../components";
 import { ModalTeacher } from "../";
+import { TextField } from "./style";
 import {
   Box,
   Button,
   Grid,
   Paper,
-  TextField,
+  // TextField,
   Typography,
 } from "@mui/material";
 

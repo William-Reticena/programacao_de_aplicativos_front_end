@@ -25,6 +25,7 @@ export function TeacherForm({ handleChange, radioValue }) {
   const navigate = useNavigate();
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -34,7 +35,7 @@ export function TeacherForm({ handleChange, radioValue }) {
   const scheme = Yup.object().shape({
     fullName: Yup.string().required("Insira seu nome completo!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    id: Yup.string().required("Insira seu RA!"),
+    id: Yup.string().required("Insira seu ID!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
@@ -56,11 +57,12 @@ export function TeacherForm({ handleChange, radioValue }) {
       shift: "", //não tem
       city: "", //ok
       cellphone: "", //ok
-      email: "", //ok   
+      email: "", //ok
       password: "", //ok
       description: "", //ok
     },
     onSubmit: async (values) => {
+      setIsDisabled(true);
       try {
         await api.post("/ProfessorStore", {
           username_professor: values.fullName,
@@ -73,7 +75,7 @@ export function TeacherForm({ handleChange, radioValue }) {
           status_professor: 1,
         });
 
-        navigate(LOGIN)
+        navigate(LOGIN);
       } catch (error) {
         console.log("teste", error);
       }
@@ -301,6 +303,7 @@ export function TeacherForm({ handleChange, radioValue }) {
             >
               {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
               <Button
+                disabled={isDisabled}
                 type="submit"
                 variant="contained"
                 sx={{ marginRight: "16px" }}

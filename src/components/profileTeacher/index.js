@@ -8,7 +8,7 @@ export function ProfileTeacher({ userData }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
+
   // useEffect(() => {
   // getUserInfos();
   // });
@@ -33,8 +33,10 @@ export function ProfileTeacher({ userData }) {
         sx={{ justifyContent: "center" }}
       >
         <>
-          <ProfileTeacherCard userData={userData} onClose={handleClose} />
-          <ProfileCard userData={userData} onClose={handleClose} />
+          <ProfileTeacherCard userData={userData} onClose={handleClose}>
+            {console.log("teacher")}
+          </ProfileTeacherCard>
+          {/* <ProfileCard userData={userData} onClose={handleClose} /> */}
         </>
       </Modal>
     </Paper>

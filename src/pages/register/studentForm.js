@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -25,6 +25,7 @@ export function StudentForm({ handleChange, radioValue }) {
   const navigate = useNavigate();
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -34,7 +35,8 @@ export function StudentForm({ handleChange, radioValue }) {
   const scheme = Yup.object().shape({
     fullName: Yup.string().required("Insira seu nome completo!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number().max(10,'Período inválido!')
+    collegePeriod: Yup.number()
+      .max(10, "Período inválido!")
       .positive("Deve ser um número positivo!")
       .integer("Deve ser um número inteiro!")
       .required("Insira o período em que você se encontra!"),
@@ -59,7 +61,7 @@ export function StudentForm({ handleChange, radioValue }) {
       collegePeriod: "", //ok
       ra: "", //ok
       shift: "", //não tem
-      city: "",//ok
+      city: "", //ok
       cellphone: "", //ok
       email: "", //ok
       password: "", //ok
@@ -75,6 +77,7 @@ export function StudentForm({ handleChange, radioValue }) {
 
       // file.append("username_student", values?.fullName);
 
+      setIsDisabled(true);
       try {
         await api.post("/StudentStore", {
           username_student: values.fullName,
@@ -89,7 +92,7 @@ export function StudentForm({ handleChange, radioValue }) {
           period_student: values.collegePeriod,
         });
 
-        navigate(LOGIN)
+        navigate(LOGIN);
       } catch (error) {
         console.log("teste", error);
       }
@@ -334,6 +337,7 @@ export function StudentForm({ handleChange, radioValue }) {
             >
               {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
               <Button
+                disabled={isDisabled}
                 type="submit"
                 variant="contained"
                 sx={{ marginRight: "16px" }}

@@ -25,6 +25,7 @@ export function ProfileCard({ register, userData, onClose }) {
   const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -65,14 +66,14 @@ export function ProfileCard({ register, userData, onClose }) {
   };
 
   const scheme = Yup.object().shape({
-    fullName: Yup.string().required("Insira seu nome completo!"),
-    course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.number()
-      .positive("Deve ser um número positivo!")
-      .integer("Deve ser um número inteiro!")
-      .required("Insira o período em que você se encontra!"),
-    ra: Yup.string().required("Insira seu RA!"),
-    shift: Yup.string().required("Insira em qual turno você se encontra!"),
+    // fullName: Yup.string().required("Insira seu nome completo!"),
+    // course: Yup.string().required("Insira seu curso de graduação!"),
+    // collegePeriod: Yup.number()
+    //   .positive("Deve ser um número positivo!")
+    //   .integer("Deve ser um número inteiro!")
+    //   .required("Insira o período em que você se encontra!"),
+    // ra: Yup.string().required("Insira seu RA!"),
+    // shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
@@ -80,35 +81,42 @@ export function ProfileCard({ register, userData, onClose }) {
       .required("Insira o seu e-mail!"),
   });
 
+  console.log(userData);
+
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      type: "student", //não tem
+      id: userData.id,
+      type: userData.type, //não tem
       image: "", //não tem
       imageURL: "", //não tem
-      fullName: register ? "" : "Paula", //ok
-      course: register ? "" : "BCC", //ok
-      collegePeriod: register ? "" : 6, 
-      ra: register ? "" : "4568703",
-      shift: register ? "" : "integral (T/N)",
-      city: register ? "" : "Campo Mourão",
-      cellphone: register ? "" : "(00) 00000-0000",
-      email: register ? "" : "pa23@gmail.com",
-      description: register ? "" : "",
+      fullName: userData.username_student, //ok
+      course: userData.course_student, //ok
+      // course: register ? "" : "BCC", //ok
+      collegePeriod: userData.period_student,
+      ra: userData.ra_student,
+      shift: "não tem",
+      city: userData.city_student,
+      cellphone: userData.contact_student,
+      email: userData.email_student,
+      description: userData.description_student,
     },
     onSubmit: async (values) => {
+      setIsDisabled(true);
       try {
-        await api.post("/StudentUpdate", { //tá errado o back
-          id: "",
-          username_professor: values?.fullName,
-          password_professor: values?.password,
-          course_professor: values?.course,
-          email_professor: values?.email,
-          contact_professor: values?.cellphone,
-          city_professor: values?.city,
-          description_professor: values?.description,
+        await api.post("/StudentUpdate", {
+          //tá errado o back as info não batem com a rota
+          id: values.id,
+          username_professor: values.fullName,
+          password_professor: values.password,
+          course_professor: values.course,
+          email_professor: values.email,
+          contact_professor: values.cellphone,
+          city_professor: values.city,
+          description_professor: values.description,
           status_professor: 0,
         });
+        onClose();
       } catch (error) {
         // console.log("teste", error);
       }
@@ -146,7 +154,7 @@ export function ProfileCard({ register, userData, onClose }) {
   return (
     <Paper
       sx={{
-        /*display: "flex", flexDirection: "column",*/ width: "80%",
+        width: "80%",
         padding: "16px",
       }}
     >
@@ -356,6 +364,7 @@ export function ProfileCard({ register, userData, onClose }) {
               }}
             >
               <Button
+                disabled={isDisabled}
                 type="submit"
                 variant="contained"
                 sx={{ marginRight: "16px" }}
@@ -363,19 +372,9 @@ export function ProfileCard({ register, userData, onClose }) {
                 Concluir
               </Button>
 
-              {register && (
-                <NavigationButton to={LOGIN}>
-                  <Button color="error" variant="contained">
-                    Cancelar
-                  </Button>
-                </NavigationButton>
-              )}
-
-              {!register && (
-                <Button color="error" variant="contained" onClick={onClose}>
-                  Cancelar
-                </Button>
-              )}
+              <Button color="error" variant="contained" onClick={onClose}>
+                Cancelar
+              </Button>
             </Box>
           </form>
         </Grid>
