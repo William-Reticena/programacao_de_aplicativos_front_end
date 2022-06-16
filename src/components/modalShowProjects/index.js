@@ -87,7 +87,7 @@ export function ModalShowProjects({ onClose, open }) {
 
         document.location.reload();
       } catch (error) {
-        // console.log("teste", error);
+        console.log("teste", error);
       }
     },
     // onSubmit: (values) => {
@@ -242,7 +242,6 @@ export function ModalShowProjects({ onClose, open }) {
                   name="remuneration_project"
                 >
                   <FormControlLabel
-                    // value="sim"
                     control={
                       <Radio
                         name="remuneration_project"
@@ -254,7 +253,6 @@ export function ModalShowProjects({ onClose, open }) {
                     label="Remunerado"
                   />
                   <FormControlLabel
-                    // value="nao"
                     control={
                       <Radio
                         name="remuneration_project"
@@ -345,7 +343,6 @@ export function ModalShowProjects({ onClose, open }) {
                 >
                   Criar
                 </Button>
-                {/* </Box> */}
               </Box>
             </Grid>
           </Grid>

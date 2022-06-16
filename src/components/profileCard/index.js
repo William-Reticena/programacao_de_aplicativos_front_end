@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
-import { NavigationButton } from "../../components";
-import { LOGIN } from "../../routes/routes";
 import { TextField } from "./style";
 import api from "../../services/api";
 import {
@@ -11,18 +9,14 @@ import {
   Button,
   Card,
   CardMedia,
-  FormControlLabel,
   Grid,
   Input,
   Paper,
-  Radio,
-  RadioGroup,
   Typography,
 } from "@mui/material";
 
 export function ProfileCard({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
-  const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
@@ -32,49 +26,11 @@ export function ProfileCard({ register, userData, onClose }) {
     setRefCardMedia(document.getElementById("cardMedia"));
   }, [setRefFileInput, setRefCardMedia]);
 
-  // useEffect(() => {
-  //   if (radioValue === "teacher") {
-  //     setFunctionPost();
-  //   } else {
-  //     setFunctionPost(userStudent);
-  //   }
-  // }, [radioValue]);
-
-  // const userStudent = async (values) => {
-  //   // console.log("vlaore", values);
-  //   try {
-  //     await api.post("/StudentStore", {
-  //       username_student: values?.fullName,
-  //       password_student: "1256",
-  //       course_student: values?.course,
-  //       email_student: values?.email,
-  //       contact_student: values?.cellphone,
-  //       city_student: values?.city,
-  //       description_student: values?.description,
-  //       image_student: values?.imageURL,
-  //       ra_student: values?.ra,
-  //       period_student: values?.collegePeriod
-  //     });
-  //   } catch (error) {
-  //     console.log("teste", error);
-  //   }
-  // }
-  // const [functionPost, setFunctionPost] = useState(userStudent);
-
   const handleChange = (event) => {
     setRadioValue(event.target.value);
   };
 
   const scheme = Yup.object().shape({
-    // fullName: Yup.string().required("Insira seu nome completo!"),
-    // course: Yup.string().required("Insira seu curso de graduação!"),
-    // collegePeriod: Yup.number()
-    //   .positive("Deve ser um número positivo!")
-    //   .integer("Deve ser um número inteiro!")
-    //   .required("Insira o período em que você se encontra!"),
-    // ra: Yup.string().required("Insira seu RA!"),
-    // shift: Yup.string().required("Insira em qual turno você se encontra!"),
-    city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
       .email("Insira um email válido!")
@@ -118,17 +74,13 @@ export function ProfileCard({ register, userData, onClose }) {
         });
         onClose();
       } catch (error) {
-        // console.log("teste", error);
+        console.log("teste", error);
       }
     },
     // onSubmit: async (values) => {
     //   alert(JSON.stringify(values, null, 2));
     // },
   });
-
-  // const handleBackLogin = () => (
-  //   <NavigationButton to={LOGIN} />
-  // );
 
   const handleClick = (event) => {
     refFileInput.click();
@@ -147,8 +99,6 @@ export function ProfileCard({ register, userData, onClose }) {
         URL.createObjectURL(refFileInput.files[0])
       );
     });
-
-    // console.log(refFileInput);
   };
 
   return (
@@ -201,37 +151,6 @@ export function ProfileCard({ register, userData, onClose }) {
               onChange={formik.handleChange}
               sx={{ display: "none" }}
             />
-
-            {/* {register && 
-              <RadioGroup 
-                onChange={formik?.handleChange}
-                sx={{ flexDirection: "row", marginLeft: "1%" }}
-              >
-                <FormControlLabel 
-                  control={
-                    <Radio 
-                      name="type"
-                      checked={radioValue === "student"}
-                      value="student"
-                      onChange={handleChange}
-                    />
-                  }
-                  label="Aluno"
-                />
-
-                <FormControlLabel 
-                  control={
-                    <Radio
-                      name="type"
-                      checked={radioValue === "teacher"}
-                      value="teacher"
-                      onChange={handleChange}
-                    />
-                  }
-                  label="Professor"
-                />
-              </RadioGroup>
-            } */}
 
             <TextField
               disabled

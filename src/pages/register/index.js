@@ -24,8 +24,6 @@ export function Register() {
           ) : (
             <StudentForm radioValue={radioValue} handleChange={handleChange} />
           )}
-
-          {/* // <TeacherForm radioValue={radioValue} handleChange={handleChange} /> */}
         </Grid>
 
         <Grid item xs={1} />

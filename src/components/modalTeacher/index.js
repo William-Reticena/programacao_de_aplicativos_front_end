@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 import api from "../../services/api";
 import { TextField } from "./style";
-import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
 
 export function ModalTeacher({ infos, register, onClose, open }) {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -44,7 +44,7 @@ export function ModalTeacher({ infos, register, onClose, open }) {
       requirements: infos.requirements_project,
     },
     onSubmit: async (values) => {
-      console.log("value", values.id);
+      // console.log("value", values.id);
       setIsDisabled(true);
 
       try {
@@ -286,7 +286,6 @@ export function ModalTeacher({ infos, register, onClose, open }) {
                   color="error"
                   sx={{
                     margin: "0 16px",
-                    // display: "inline-block",
                   }}
                   onClick={() => handleDelete(formik.values.id)}
                 >

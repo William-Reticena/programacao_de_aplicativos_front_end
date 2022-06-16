@@ -5,7 +5,7 @@ import { BoxTypo, GridContainer } from "./style";
 import { UserProvider } from "../../context/userContext";
 import api from "../../services/api";
 import { Grid, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { LOGIN } from "../../routes/routes";
 
 export function StudentHome() {
@@ -16,16 +16,18 @@ export function StudentHome() {
   useEffect(() => {
     const fetch = async () => {
       //usar no contexto um id para poder passar aqui no fetch
-      const { data } = await api.post("/StudentShow", { id: userData.id });
+      const { data } = await api.post("/StudentShow", {
+        id: localStorage.getItem("id"),
+      });
       // console.log("dados estudante", data);
       setUserdata((prevState) => ({
         ...prevState,
         ...data,
       }));
-      console.log("dados estudante", userData); //testes
+      // console.log("dados estudante", userData); //testes
     };
     fetch();
-  }, [setUserdata]);
+  }, [setUserdata, userData.id]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -34,53 +36,17 @@ export function StudentHome() {
       setInfosCard(data);
     };
     fetch();
-    // RECEBER A REQUISIÇÃO AQUI, TEM Q SER UM ARRAY DE OBJETOS
-    // const fakeData = [
-    //   {
-    //     id: 1,
-    //     teacherName: "Maria Tereza",
-    //     projectName: "Projeto 1",
-    //     course: "BCC",
-    //     collegePeriod: 5,
-    //     amountHours: 30,
-    //     shift: "manha",
-    //     schedules: "7:30 as 13:30",
-    //     numberVacant: 4,
-    //     email: "tereza123@gmail.com",
-    //     description: "Uma vaga aí 1",
-    //     requirements: "Não necessário",
-    //   },
-    //   {
-    //     id: 2,
-    //     teacherName: "João Henrique",
-    //     projectName: "Projeto 2",
-    //     course: "Engenharia Química",
-    //     collegePeriod: 4,
-    //     amountHours: 35,
-    //     shift: "tarde",
-    //     schedules: "13:00 as 16:00",
-    //     numberVacant: 8,
-    //     email: "joaohenrique123@outlook.com",
-    //     description: "Não tem",
-    //     requirements: "Ser bom em química",
-    //   },
-    // ];
-
-    // setInfosCard(fakeData);
-    // console.log("user", userInfo);
   }, []);
 
-  // if (userData.type !== "teacher") {
-  //   const redirect = () => {
-  //     navigate(LOGIN);
-  //   };
-  //   return (
-  //     <>
-  //       <h1>Acesso não autorizado!!</h1>
-  //       {redirect()}
-  //     </>
-  //   );
-  // }
+  console.log(userData);
+  if (userData.type !== "student") {
+    return (
+      <>
+        <Navigate to={LOGIN} />
+      </>
+    );
+  }
+  
   return (
     <>
       <Header />

@@ -3,7 +3,6 @@ import { UserProvider } from "../context/userContext";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import {
   Admin,
-  Projects,
   Register,
   SignIn,
   StudentHome,
@@ -14,7 +13,6 @@ import {
 import {
   ADMIN,
   LOGIN,
-  PROJECTS,
   REGISTER,
   STUDENT_HOME,
   TEACHER_HOME,
@@ -36,7 +34,6 @@ export function AppRoutes() {
         <Route path={REGISTER} element={<Register />} />
         <Route path={STUDENT_HOME} element={<StudentHome />} />
         <Route path={TEACHER_HOME} element={<TeacherHome />} />
-        <Route path={PROJECTS} element={<Projects />} />
         <Route path={APPLICANT} element={<Applicant />} />
         <Route path={INSCRICAO} element={<Inscricao />} />
       </Routes>

@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Filter, Header, TeacherCard, ProfileTeacher } from "../../components";
 import { Grid, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Filter, Header, TeacherCard, ProfileTeacher } from "../../components";
 import api from "../../services/api";
 import { UserProvider, useUserInfo } from "../../context/userContext";
+import { LOGIN } from "../../routes/routes";
 
 export function TeacherHome() {
   const [projectCards, setProjectsCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.post("/ProfessorShow", { id: 1 });
+      const { data } = await api.post("/ProfessorShow", {
+        id: localStorage.getItem("id"),
+      });
       console.log("dados estudante", data);
       setUserdata((prevState) => ({
         ...prevState,
@@ -18,7 +23,7 @@ export function TeacherHome() {
       }));
     };
     fetch();
-  }, [setUserdata]);
+  }, [setUserdata, userData.id]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -28,6 +33,15 @@ export function TeacherHome() {
     };
     fetch();
   }, [setProjectsCard]);
+
+  console.log(userData);
+  if (userData.type !== "teacher") {
+    return (
+      <>
+        <Navigate to={LOGIN} />
+      </>
+    );
+  }
 
   return (
     <>

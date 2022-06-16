@@ -9,7 +9,7 @@ export function Inscricao() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.get("/ProjectIndex");
-      console.log(data);
+      // console.log(data);
       setInfosCard(data);
     };
     fetch();
@@ -23,7 +23,7 @@ export function Inscricao() {
 
         <Grid item xs={8}>
           {infosCards.map((infos) => (
-            <InformationsCardInscricao key={infos.id} data={infos}/>
+            <InformationsCardInscricao key={infos.id} data={infos} />
           ))}
         </Grid>
 

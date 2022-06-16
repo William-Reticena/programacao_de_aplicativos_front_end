@@ -2,24 +2,18 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import { LOGIN, STUDENT_HOME, INSCRICAO } from "../../routes/routes";
 import { Logo } from "../../images";
-import { NavigationButton, ModalShowProjects } from "../../components"
+import { NavigationButton, ModalShowProjects } from "../../components";
 import { Favorite, Logout, Search, AddCircle } from "@mui/icons-material";
+import { AppBar, Card } from "./style";
 import {
-  AppBar,
-  Card,
-  // Typography,
-} from "./style";
-import {
-  // AppBar,
   Box,
-  // Card,
   CardMedia,
   IconButton,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 
-export function Header ({ title, add }) {
+export function Header({ title, add }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,15 +22,15 @@ export function Header ({ title, add }) {
     initialValues: {
       searchField: "",
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-    }
+    },
   });
 
   return (
-    <AppBar /*sx={{ height: "80px", flexDirection: "row", justifyContent: "space-around", alignItems: "center" }}*/>
+    <AppBar>
       <NavigationButton to={STUDENT_HOME}>
-        <Card /*sx={{ width: "100px", background: "inherit" }}*/ elevation={0}>
+        <Card elevation={0}>
           <CardMedia component="img" image={Logo} />
         </Card>
       </NavigationButton>
@@ -52,10 +46,18 @@ export function Header ({ title, add }) {
         )}
 
         {!title && (
-          <Box sx={{ background: "#88B0F1", borderRadius: "4px", display: "flex", alignItems: "center", padding: "4px 10px"}}>
-            <form 
+          <Box
+            sx={{
+              background: "#88B0F1",
+              borderRadius: "4px",
+              display: "flex",
+              alignItems: "center",
+              padding: "4px 10px",
+            }}
+          >
+            <form
               onSubmit={formik.handleSubmit}
-              style={{width: "100%", display: "flex", alignItems: "center" }}
+              style={{ width: "100%", display: "flex", alignItems: "center" }}
             >
               <TextField
                 name="searchField"
@@ -78,81 +80,71 @@ export function Header ({ title, add }) {
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
-            {!title && (
-              <>
-                {/* <Box>
-                  <NavigationButton to={INSCRICAO} style={{ textDecoration: "none" }}>
-                  <IconButton>
-                    {add ? <AddCircle/> : <Favorite/>}
-                  </IconButton>
-                  </NavigationButton>
-                </Box> */}
-
-                {!add && (
-                  <>
-                    <NavigationButton to={INSCRICAO}>
-                      <Box>
-                        <IconButton>
-                          <Favorite />
-                        </IconButton>
-                      </Box>
-                    </NavigationButton>
-
-                    <Typography
-                      component="span"
-                      sx={{ fontSize: "12px", display: "block" }}
-                    >
-                      INSCRIÇÕES
-                    </Typography>
-                  </>
-                )}
-
-                {add && (
-                  <>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          {!title && (
+            <>
+              {!add && (
+                <>
+                  <NavigationButton to={INSCRICAO}>
                     <Box>
-                      <IconButton onClick={handleOpen}>
-                        <AddCircle />
+                      <IconButton>
+                        <Favorite />
                       </IconButton>
                     </Box>
+                  </NavigationButton>
 
-                    <Typography
-                      component="span"
-                      sx={{ fontSize: "12px", display: "block" }}
-                    >
-                      PROJETOS
-                    </Typography>
+                  <Typography
+                    component="span"
+                    sx={{ fontSize: "12px", display: "block" }}
+                  >
+                    INSCRIÇÕES
+                  </Typography>
+                </>
+              )}
 
-                    <ModalShowProjects
-                      open={open}
-                      onClose={handleClose}
-                    />
-                  </>
-                )}
+              {add && (
+                <>
+                  <Box>
+                    <IconButton onClick={handleOpen}>
+                      <AddCircle />
+                    </IconButton>
+                  </Box>
 
-                {/* <Typography
-                  component="span"
-                  sx={{ fontSize: "12px", display: "block" }}
-                >
-                  {add ? "PROJETOS" : "INSCRIÇÕES"}
-                </Typography> */}
-              </>
-            )}
+                  <Typography
+                    component="span"
+                    sx={{ fontSize: "12px", display: "block" }}
+                  >
+                    PROJETOS
+                  </Typography>
 
-          </Box>
+                  <ModalShowProjects open={open} onClose={handleClose} />
+                </>
+              )}
+            </>
+          )}
+        </Box>
 
         <NavigationButton to={LOGIN}>
-          <Box sx={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
             <Box>
               <IconButton>
                 <Logout />
               </IconButton>
             </Box>
 
-            <Typography
-              component="span"
-              sx={{ fontSize: "12px" }}
-            >
+            <Typography component="span" sx={{ fontSize: "12px" }}>
               SAIR
             </Typography>
           </Box>
@@ -160,4 +152,4 @@ export function Header ({ title, add }) {
       </Box>
     </AppBar>
   );
-};
+}

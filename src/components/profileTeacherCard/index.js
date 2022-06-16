@@ -18,8 +18,6 @@ import {
 } from "@mui/material";
 
 export function ProfileTeacherCard({ register, userData, onClose }) {
-  const [radioValue, setRadioValue] = useState("student");
-  const [userInfos, setUserInfos] = useState({});
   const [refFileInput, setRefFileInput] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const [refCardMedia, setRefCardMedia] = useState(null);
@@ -29,19 +27,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     setRefCardMedia(document.getElementById("cardMedia"));
   }, [setRefFileInput, setRefCardMedia]);
 
-  const handleChange = (event) => {
-    setRadioValue(event.target.value);
-  };
-
   const scheme = Yup.object().shape({
-    // fullName: Yup.string().required("Insira seu nome completo!"),
-    // course: Yup.string().required("Insira seu curso de graduação!"),
-    // collegePeriod: Yup.number()
-    //   .positive("Deve ser um número positivo!")
-    //   .integer("Deve ser um número inteiro!")
-    //   .required("Insira o período em que você se encontra!"),
-    // id: Yup.string().required("Insira seu RA!"),
-    // shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
@@ -49,7 +35,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
       .required("Insira o seu e-mail!"),
   });
 
-  console.log(userData);
+  // console.log(userData);
 
   const formik = useFormik({
     validationSchema: scheme,
@@ -93,10 +79,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     // },
   });
 
-  // const handleBackLogin = () => (
-  //   <NavigationButton to={LOGIN} />
-  // );
-
   const handleClick = (event) => {
     refFileInput.click();
 
@@ -115,7 +97,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
       );
     });
 
-    console.log(refFileInput);
+    // console.log(refFileInput);
   };
 
   return (
@@ -191,31 +173,8 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 helperText={formik.touched.course && formik.errors.course}
                 value={formik?.values.course}
                 onChange={formik?.handleChange}
-                sx={{
-                  width: radioValue === "student" ? "55%" : "100%",
-                  margin: "8px",
-                }}
+                sx={{ width: "100%", margin: "8px" }}
               />
-
-              {radioValue === "student" && (
-                <TextField
-                  type="number"
-                  disabled
-                  name="collegePeriod"
-                  size="small"
-                  label="Período"
-                  error={
-                    formik.touched.collegePeriod &&
-                    Boolean(formik.errors.collegePeriod)
-                  }
-                  helperText={
-                    formik.touched.collegePeriod && formik.errors.collegePeriod
-                  }
-                  value={formik?.values.collegePeriod}
-                  onChange={formik?.handleChange}
-                  sx={{ width: "calc(45% - 32px)", margin: "8px" }}
-                />
-              )}
             </Grid>
 
             <Grid container item>
@@ -282,6 +241,20 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
             />
 
             <TextField
+              name="Senha"
+              size="small"
+              label="Nova senha"
+              sx={{ width: "45%", margin: "8px" }}
+            />
+
+            <TextField
+              name="Senha"
+              size="small"
+              label="Confirmar senha"
+              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+            />
+
+            <TextField
               name="description"
               size="small"
               multiline
@@ -307,19 +280,17 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 Concluir
               </Button>
 
-              {register && (
+              {/* {register && (
                 <NavigationButton to={LOGIN}>
                   <Button color="error" variant="contained">
                     Cancelar
                   </Button>
                 </NavigationButton>
-              )}
+              )} */}
 
-              {!register && (
-                <Button color="error" variant="contained" onClick={onClose}>
-                  Cancelar
-                </Button>
-              )}
+              <Button color="error" variant="contained" onClick={onClose}>
+                Cancelar
+              </Button>
             </Box>
           </form>
         </Grid>

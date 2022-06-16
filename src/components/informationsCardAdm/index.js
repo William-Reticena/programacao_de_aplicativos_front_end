@@ -10,13 +10,12 @@ CardMedia,
 Grid,
 Paper,
 Typography,
-// TextField,
 } from "@mui/material";
 
 export function InformationsCardAdm () {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleClose = () => setOpen(false);
 
   const formik = useFormik({
     initialValues: {

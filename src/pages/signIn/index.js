@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { Logo } from "../../images";
-import { NavigationButton } from "../../components";
-import { ChalkboardUser, GraduationCap } from "../../icons";
-import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import {
   Box,
   Button,
@@ -16,8 +12,12 @@ import {
   TextField,
 } from "./style";
 import { CardMedia, FormControlLabel, Radio } from "@mui/material";
-import { useUserInfo } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import { useUserInfo } from "../../context/userContext";
+import { Logo } from "../../images";
+import { NavigationButton } from "../../components";
+import { ChalkboardUser, GraduationCap } from "../../icons";
+import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 // import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
@@ -61,31 +61,23 @@ export function SignIn() {
     // },
     onSubmit: (values) => {
       //only just tests
-      const typeTest = "student";
+      const typeTest = "teacher";
       setUserdata((prevState) => ({
         ...prevState,
         id: 1,
         type: typeTest,
       }));
 
+      localStorage.setItem("type", typeTest);
+      localStorage.setItem("id", 1);
+
       // setTypeUser(userData.type)
 
       console.log(userData);
       if (typeTest === "student") navigate(STUDENT_HOME);
       if (typeTest === "teacher") navigate(TEACHER_HOME);
-      // document.location.reload();
-
-      // alert(JSON.stringify(userData, null, 2));
     },
   });
-
-  // SOMENTE PARA TESTES
-  // useEffect(() => {
-  //   setSelectedValue("student");
-  //   console.log("effec", selectedValue);
-  //   console.log("aluno:", radioStudent);
-  //   console.log("professor:", radioTeacher);
-  // }, [selectedValue, radioTeacher, radioStudent]);
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

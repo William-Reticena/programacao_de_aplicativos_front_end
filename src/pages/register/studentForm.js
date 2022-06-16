@@ -119,14 +119,12 @@ export function StudentForm({ handleChange, radioValue }) {
         URL.createObjectURL(refFileInput.files[0])
       );
     });
-
-    // console.log(refFileInput);
   };
 
   return (
     <Paper
       sx={{
-        /*display: "flex", flexDirection: "column",*/ width: "80%",
+        width: "80%",
         padding: "16px",
       }}
     >
@@ -335,7 +333,6 @@ export function StudentForm({ handleChange, radioValue }) {
                 justifyContent: "center",
               }}
             >
-              {/* <Box sx={{ width: "60%", display: "inline-flex", justifyContent: "right", margin: "8px" }}> */}
               <Button
                 disabled={isDisabled}
                 type="submit"
@@ -344,24 +341,6 @@ export function StudentForm({ handleChange, radioValue }) {
               >
                 Concluir
               </Button>
-
-              {/* {register && <NavigationButton to={LOGIN}>
-              <Button
-                color="error"
-                variant="contained"
-              >
-                Cancelar
-              </Button>
-            </NavigationButton>} */}
-
-              {/* {!register && <Button
-                color="error"
-                variant="contained"
-                onClick={onClose}
-              >
-                Cancelar
-              </Button>} */}
-              {/* </Box> */}
             </Box>
           </form>
         </Grid>
