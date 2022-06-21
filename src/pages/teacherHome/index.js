@@ -34,14 +34,14 @@ export function TeacherHome() {
     fetch();
   }, [setProjectsCard]);
 
-  console.log(userData);
-  if (userData.type !== "teacher") {
-    return (
-      <>
-        <Navigate to={LOGIN} />
-      </>
-    );
-  }
+  // console.log(userData);
+  // if (userData.type !== "teacher") {
+  //   return (
+  //     <>
+  //       <Navigate to={LOGIN} />
+  //     </>
+  //   );
+  // }
 
   return (
     <>

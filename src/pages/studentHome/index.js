@@ -38,14 +38,14 @@ export function StudentHome() {
     fetch();
   }, []);
 
-  console.log(userData);
-  if (userData.type !== "student") {
-    return (
-      <>
-        <Navigate to={LOGIN} />
-      </>
-    );
-  }
+  // console.log(userData);
+  // if (userData.type !== "student") {
+  //   return (
+  //     <>
+  //       <Navigate to={LOGIN} />
+  //     </>
+  //   );
+  // }
   
   return (
     <>
