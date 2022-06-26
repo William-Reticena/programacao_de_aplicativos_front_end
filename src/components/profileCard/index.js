@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { ModalPassword } from "../modalPassword";
 
-export function ProfileCard({ register, userData, onClose }) {
+export function ProfileCard({ userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
@@ -279,36 +279,6 @@ export function ProfileCard({ register, userData, onClose }) {
             />
 
             <TextField
-              name="password"
-              type="password"
-              size="small"
-              label="Nova senha"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              sx={{ width: "45%", margin: "8px" }}
-            />
-
-            <TextField
-              name="passwordConfirmation"
-              type="password"
-              size="small"
-              label="Confirmar senha"
-              value={formik.values.passwordConfirmation}
-              onChange={formik.handleChange}
-              error={
-                formik.touched.passwordConfirmation &&
-                Boolean(formik.errors.passwordConfirmation)
-              }
-              helperText={
-                formik.touched.passwordConfirmation &&
-                formik.errors.passwordConfirmation
-              }
-              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-            />
-
-            <TextField
               name="description"
               size="small"
               multiline
@@ -348,7 +318,7 @@ export function ProfileCard({ register, userData, onClose }) {
                 disabled={isDisabled}
                 type="submit"
                 variant="contained"
-                sx={{ marginRight: "16px" }}
+                sx={{ marginLeft: "50px", marginRight: "16px"  }}
               >
                 Concluir
               </Button>

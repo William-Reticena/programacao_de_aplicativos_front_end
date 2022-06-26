@@ -11,14 +11,20 @@ import {
   CardMedia,
   Grid,
   Input,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
+import { ModalPassword } from "../modalPassword";
 
 export function ProfileTeacherCard({ register, userData, onClose }) {
   const [refFileInput, setRefFileInput] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const [refCardMedia, setRefCardMedia] = useState(null);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -245,30 +251,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
             />
 
             <TextField
-              name="password"
-              type="password"
-              size="small"
-              label="Nova senha"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-              sx={{ width: "45%", margin: "8px" }}
-            />
-
-            <TextField
-              name="passwordConfirmation"
-              type="password"
-              size="small"
-              label="Confirmar senha"
-              value={formik.values.passwordConfirmation}
-              onChange={formik.handleChange}
-              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
-              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
-              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-            />
-
-            <TextField
               name="description"
               size="small"
               multiline
@@ -286,21 +268,31 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 justifyContent: "center",
               }}
             >
+              <Button variant="contained" onClick={handleOpen}>
+                Editar Senha
+              </Button>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <>
+                  <ModalPassword userData={userData} onClose={handleClose} />
+                </>
+              </Modal>
+
               <Button
                 type="submit"
                 variant="contained"
-                sx={{ marginRight: "16px" }}
+                sx={{ marginLeft: "50px", marginRight: "16px" }}
               >
                 Concluir
               </Button>
-
-              {/* {register && (
-                <NavigationButton to={LOGIN}>
-                  <Button color="error" variant="contained">
-                    Cancelar
-                  </Button>
-                </NavigationButton>
-              )} */}
 
               <Button color="error" variant="contained" onClick={onClose}>
                 Cancelar

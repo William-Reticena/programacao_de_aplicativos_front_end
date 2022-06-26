@@ -250,7 +250,7 @@ export function ModalTeacher({ infos, onClose, open }) {
                       <Radio
                         name="remuneration_project"
                         checked={value === "sim"}
-                        value="sim"
+                        value="1"
                         onChange={handleChange}
                       />
                     }
@@ -261,7 +261,7 @@ export function ModalTeacher({ infos, onClose, open }) {
                       <Radio
                         name="remuneration_project"
                         checked={value === "nao"}
-                        value="nao"
+                        value="0"
                         onChange={handleChange}
                       />
                     }

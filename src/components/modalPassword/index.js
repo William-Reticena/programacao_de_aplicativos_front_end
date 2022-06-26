@@ -60,7 +60,7 @@ export function ModalPassword({ userData,onClose, open }) {
           Editar Senha
         </Typography>
 
-        <Grid>
+      <Grid>
         <TextField
               name="password"
               type="password"
@@ -70,7 +70,7 @@ export function ModalPassword({ userData,onClose, open }) {
               onChange={formik.handleChange}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
-              sx={{ width: "45%", margin: "8px" }}
+              sx={{ width: "40%", margin: "8px", marginLeft: "114px" }}
             />
 
             <TextField
@@ -82,7 +82,7 @@ export function ModalPassword({ userData,onClose, open }) {
               onChange={formik.handleChange}
               error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
               helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
-              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+              sx={{ width: "40%", margin: "8px" }}
             />
         </Grid>
         <Grid>
@@ -91,6 +91,7 @@ export function ModalPassword({ userData,onClose, open }) {
               width: "100%",
               display: "inline-flex",
               justifyContent: "center",
+              marginTop: "8px",
             }}
           >
           <Button
