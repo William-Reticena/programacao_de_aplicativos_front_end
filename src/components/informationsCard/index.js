@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { TextField } from "./style";
 import { ModalProject } from "../";
 import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { useUserInfo } from "../../context/userContext";
 
 export function InformationsCard({ data }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [userData] = useUserInfo();
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
@@ -57,7 +59,7 @@ export function InformationsCard({ data }) {
             visualizar vaga
           </Button>
 
-          <ModalProject open={open} onClose={handleClose} data={data} />
+          <ModalProject open={open} onClose={handleClose} data={data} userId={userData.id} />
         </Box>
       </Grid>
     </Paper>

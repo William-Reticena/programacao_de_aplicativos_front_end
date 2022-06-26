@@ -41,10 +41,13 @@ export function ProfileCard({ register, userData, onClose }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string().notRequired(' Insira uma nova senha')
+    password: Yup.string()
+      .notRequired(" Insira uma nova senha")
       .min(6, "A senha deve ter pelo menos 6 caracteres"),
-    passwordConfirmation: Yup.string()
-       .oneOf([Yup.ref('password'), null], 'Senhas inválidas'),
+    passwordConfirmation: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Senhas inválidas"
+    ),
   });
 
   console.log(userData);
@@ -294,8 +297,14 @@ export function ProfileCard({ register, userData, onClose }) {
               label="Confirmar senha"
               value={formik.values.passwordConfirmation}
               onChange={formik.handleChange}
-              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
-              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+              error={
+                formik.touched.passwordConfirmation &&
+                Boolean(formik.errors.passwordConfirmation)
+              }
+              helperText={
+                formik.touched.passwordConfirmation &&
+                formik.errors.passwordConfirmation
+              }
               sx={{ width: "calc(55% - 32px)", margin: "8px" }}
             />
 
@@ -324,11 +333,14 @@ export function ProfileCard({ register, userData, onClose }) {
               <Modal
                 open={open}
                 onClose={handleClose}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
                 <>
-                  <ModalPassword userData={userData} onClose={handleClose}>
-                    {/* {console.log("student")} */}
-                  </ModalPassword>
+                  <ModalPassword userData={userData} onClose={handleClose} />
                 </>
               </Modal>
 

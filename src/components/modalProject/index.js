@@ -3,27 +3,11 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
 import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
+import api from "../../services/api";
 
-export function ModalProject({ data, onClose, open }) {
-  const scheme = Yup.object().shape({
-    projectName: Yup.string().required("Insira seu nome do projeto!"),
-    course: Yup.string().required("Insira seu curso de graduação!"),
-    collegePeriod: Yup.string().required("Insira um período do curso!")
-    .max(10,'Período inválido!'),
-    amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
-    shift: Yup.string().required("Insira em qual turno você se encontra!"),
-    schedules: Yup.string().required("Insira os horários!"),
-    numberVacant: Yup.string().required("Insira a quantidade de vagas!"),
-    email: Yup.string()
-      .email("Insira um email válido!")
-      .required("Insira o seu e-mail!"),
-    remuneration: Yup.string().required("Insira o valor da bolsa!"),
-    description: Yup.string().required("Insira uma descrição!"),
-    requirements: Yup.string().required("Insira os requisitos da vaga!"),
-  });
-
+export function ModalProject({ data, onClose, open, userId }) {
   const formik = useFormik({
-    validationSchema: scheme,
+    // validationSchema: scheme,
     initialValues: {
       teacherName: data.professor_responsable_project,
       projectName: data.name_project,
@@ -38,8 +22,24 @@ export function ModalProject({ data, onClose, open }) {
       requirements: data.requirements_project,
       remunerationValue: data.remuneration_value_project,
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: () => {
+      api.post("/CandidateStore", {
+        status_candidate: 1,
+        student_candidate: userId,
+        project_candidate: data.id,
+      });
+      // alert(
+      //   JSON.stringify(
+      //     {
+      //       status_candidate: 1,
+      //       student_candidate: userId,
+      //       project_candidate: data.id,
+      //     },
+      //     // values,
+      //     null,
+      //     2
+      //   )
+      // );
     },
   });
 
