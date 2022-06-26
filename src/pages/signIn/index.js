@@ -18,6 +18,7 @@ import { Logo } from "../../images";
 import { NavigationButton } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
 import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
+import api from "../../services/api";
 // import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
@@ -60,22 +61,44 @@ export function SignIn() {
     //   }
     // },
     onSubmit: (values) => {
+      if (values.type === "student") {
+        const fetch = async () => {
+          // const { data } = await api.post("/Student/login", {
+          //   username: values.email,
+          //   password: values.password,
+          // });
+
+          // const { id, token } = data;
+
+          // if (data.id) {
+            setUserdata((prevState) => ({
+              ...prevState,
+              id: 1,
+              type: values.type,
+            }));
+            // localStorage.setItem("token", token);
+            navigate(STUDENT_HOME);
+          // }
+        };
+        fetch();
+      } else if (values.type === "teacher") {
+        setUserdata((prevState) => ({
+          ...prevState,
+          id: 1,
+          type: values.type,
+        }));
+
+        navigate(TEACHER_HOME);
+      }
       //only just tests
-      const typeTest = "teacher";
-      setUserdata((prevState) => ({
-        ...prevState,
-        id: 1,
-        type: typeTest,
-      }));
+      // const typeTest = "teacher";
 
-      localStorage.setItem("type", typeTest);
-      localStorage.setItem("id", 1);
+      // localStorage.setItem("type", typeTest);
+      // localStorage.setItem("id", 1);
 
-      // setTypeUser(userData.type)
+      // // setTypeUser(userData.type)
 
-      console.log(userData);
-      if (typeTest === "student") navigate(STUDENT_HOME);
-      if (typeTest === "teacher") navigate(TEACHER_HOME);
+      // console.log(userData);
     },
   });
 

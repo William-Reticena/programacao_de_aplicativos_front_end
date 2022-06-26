@@ -10,6 +10,10 @@ import {
   FormControlLabel,
   Grid,
   Input,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  Select,
   Paper,
   Radio,
   RadioGroup,
@@ -34,14 +38,19 @@ export function TeacherForm({ handleChange, radioValue }) {
   const scheme = Yup.object().shape({
     fullName: Yup.string().required("Insira seu nome completo!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
-    id: Yup.string().required("Insira seu ID!"),
+    id: Yup.number()
+      .required("Insira seu ID!")
+      .positive("Deve ser um número positivo!")
+      .integer("Deve ser um número inteiro!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string().required("Insira uma senha!"),
+    password: Yup.string()
+      .required("Insira uma senha!")
+      .min(6, "A senha deve ter pelo menos 6 caracteres"),
   });
 
   const formik = useFormik({
@@ -67,6 +76,7 @@ export function TeacherForm({ handleChange, radioValue }) {
           username_professor: values.fullName,
           password_professor: values.password,
           course_professor: values.course,
+          shift: values.shift,
           email_professor: values.email,
           contact_professor: values.cellphone,
           city_professor: values.city,
@@ -221,18 +231,22 @@ export function TeacherForm({ handleChange, radioValue }) {
                 sx={{ width: "45%", margin: "8px" }}
               />
 
-              <TextField
-                name="shift"
-                size="small"
-                label="Turno"
-                error={formik.touched.shift && Boolean(formik.errors.shift)}
-                helperText={formik.touched.shift && formik.errors.shift}
-                value={formik?.values.shift}
-                onChange={formik?.handleChange}
-                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-              />
+              <FormControl sx={{ width: "50%", margin: "8px" }} size="small">
+                <InputLabel id="select-shift">Turno</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  label="Turno"
+                  id="select-shift"
+                  name="shift"
+                  value={formik.values.shift}
+                  onChange={formik.handleChange}
+                >
+                  <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
+                  <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
+                  <MenuItem value={"Noite"}>Noite</MenuItem>
+  </Select>
+              </FormControl>
             </Grid>
-
             <Grid container item>
               <TextField
                 name="city"
