@@ -19,6 +19,7 @@ import {
   APPLICANT,
   INSCRICAO,
 } from "./routes";
+import { ProtectedRoutes } from "./protectedRoutes";
 
 export function AppRoutes() {
   const location = useLocation();
@@ -29,11 +30,14 @@ export function AppRoutes() {
     <UserProvider>
       <Routes>
         {/* <Route exact path={HOME} element={<Home />} /> */}
-        <Route path={ADMIN} element={<Admin />} />
+        {/* <Route path={ADMIN} element={<Admin />} /> */}
+        <Route path={ADMIN} element={<ProtectedRoutes />} />
         <Route path={LOGIN} element={<SignIn />} />
         <Route path={REGISTER} element={<Register />} />
-        <Route path={STUDENT_HOME} element={<StudentHome />} />
-        <Route path={TEACHER_HOME} element={<TeacherHome />} />
+        {/* <Route path={STUDENT_HOME} element={<StudentHome />} /> */}
+        {/* <ProtectedRoutes path={STUDENT_HOME} element={<StudentHome />} /> */}
+        <Route path={STUDENT_HOME} element={<ProtectedRoutes />} />
+        <Route path={TEACHER_HOME} element={<ProtectedRoutes />} />
         <Route path={APPLICANT} element={<Applicant />} />
         <Route path={INSCRICAO} element={<Inscricao />} />
       </Routes>
