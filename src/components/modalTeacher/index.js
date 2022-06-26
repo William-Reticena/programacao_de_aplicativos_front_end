@@ -1,19 +1,30 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
+import { Box, Button, Grid, Modal, Paper, Typography,Radio,
+  RadioGroup,
+  FormControl,
+  FormControlLabel, } from "@mui/material";
 import api from "../../services/api";
 import { TextField } from "./style";
 
-export function ModalTeacher({ infos, register, onClose, open }) {
+export function ModalTeacher({ infos, onClose, open }) {
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const [value, setValue] = useState("sim");
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+
 
   const scheme = Yup.object().shape({
     projectName: Yup.string().required("Insira seu nome do projeto!"),
     course: Yup.string().required("Insira seu curso de graduação!"),
     collegePeriod: Yup.number()
       .required("Insira um período do curso!")
-      .max(10, "Período inválido!"),
+      .max(10, "Período inválido!")
+      .min(1,'Período inválido!'),
     amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     schedules: Yup.string().required("Insira os horários!"),
@@ -21,7 +32,8 @@ export function ModalTeacher({ infos, register, onClose, open }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    remuneration: Yup.string().required("Insira o valor da bolsa!"),
+    remunerationValue: Yup.string().required("Insira o valor da bolsa!")
+      .min(1,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
     requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
@@ -39,8 +51,9 @@ export function ModalTeacher({ infos, register, onClose, open }) {
       schedules: infos.schedules_project,
       numberVacant: infos.number_vacancies_project,
       email: infos.email_project,
-      remuneration: infos.remuneration_value_project,
+      remuneration_project: infos.remuneration_project,
       description: infos.description_project,
+      remunerationValue: infos.remuneration_value_project,
       requirements: infos.requirements_project,
     },
     onSubmit: async (values) => {
@@ -57,7 +70,8 @@ export function ModalTeacher({ infos, register, onClose, open }) {
           schedules_project: values.schedules,
           number_vacancies_project: values.numberVacant,
           email_project: values.email,
-          remuneration_value_project: values.remuneration,
+          remuneration_project: values.remuneration_project,
+          remuneration_value_project: values.remunerationValue,
           description_project: values?.description,
           requirements_project: values?.requirements,
         });
@@ -223,21 +237,69 @@ export function ModalTeacher({ infos, register, onClose, open }) {
                 onChange={formik.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
-              <TextField
-                name="remuneration"
-                size="small"
-                label="Valor da bolsa"
-                error={
-                  formik.touched.remuneration &&
-                  Boolean(formik.errors.remuneration)
-                }
-                helperText={
-                  formik.touched.remuneration && formik.errors.remuneration
-                }
-                value={formik.values.remuneration}
-                onChange={formik.handleChange}
-                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-              />
+              <FormControl>
+                <RadioGroup
+                  row
+                  aria-labelledby="remuneration_project_group"
+                  value={value}
+                  onChange={formik.handleChange}
+                  name="remuneration_project"
+                >
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        name="remuneration_project"
+                        checked={value === "sim"}
+                        value="sim"
+                        onChange={handleChange}
+                      />
+                    }
+                    label="Remunerado"
+                  />
+                  <FormControlLabel
+                    control={
+                      <Radio
+                        name="remuneration_project"
+                        checked={value === "nao"}
+                        value="nao"
+                        onChange={handleChange}
+                      />
+                    }
+                    label="Não Remunerado"
+                  />
+                </RadioGroup>
+              </FormControl>
+              
+                {value === "nao" ? (
+                  <TextField
+                    name="remunerationValue"
+                    value={""}
+                    disabled
+                    onChange={formik.handleChange}
+                    size="small"
+                    label="Valor da bolsa"
+                    sx={{ width: "calc(25% - 33px)", margin: "8px" }}
+                  />
+                ) : (
+                  <TextField
+                    name="remunerationValue"
+                    error={
+                      formik.touched.remunerationValue &&
+                      Boolean(formik.errors.remunerationValue)
+                    }
+                    helperText={
+                      formik.touched.remunerationValue &&
+                      formik.errors.remunerationValue
+                    }
+                    value={formik.values.remunerationValue}
+                    onChange={formik.handleChange}
+                    size="small"
+                    label="Valor da bolsa"
+                    fullWidth
+                    sx={{ width: "calc(25% - 33px)", margin: "8px" }}
+                  />
+                )}
+
               <TextField
                 name="description"
                 size="small"

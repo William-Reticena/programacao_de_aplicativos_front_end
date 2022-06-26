@@ -35,6 +35,10 @@ export function ProfileCard({ register, userData, onClose }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
+    password: Yup.string().notRequired(' Insira uma nova senha')
+      .min(6, "A senha deve ter pelo menos 6 caracteres"),
+    passwordConfirmation: Yup.string()
+       .oneOf([Yup.ref('password'), null], 'Senhas inválidas'),
   });
 
   console.log(userData);
@@ -56,6 +60,8 @@ export function ProfileCard({ register, userData, onClose }) {
       cellphone: userData.contact_student,
       email: userData.email_student,
       description: userData.description_student,
+      password: "",
+      passwordConfirmation: "",
     },
     onSubmit: async (values) => {
       setIsDisabled(true);
@@ -63,14 +69,13 @@ export function ProfileCard({ register, userData, onClose }) {
         await api.post("/StudentUpdate", {
           //tá errado o back as info não batem com a rota
           id: values.id,
-          username_professor: values.fullName,
-          password_professor: values.password,
-          course_professor: values.course,
-          email_professor: values.email,
-          contact_professor: values.cellphone,
-          city_professor: values.city,
-          description_professor: values.description,
-          status_professor: 0,
+          username_student: values.fullName,
+          password_student: values.passwordConfirmation,
+          course_student: values.course,
+          email_student: values.email,
+          contact_student: values.cellphone,
+          city_student: values.city,
+          description_student: values.description,
         });
         onClose();
       } catch (error) {
@@ -262,6 +267,30 @@ export function ProfileCard({ register, userData, onClose }) {
               value={formik?.values.email}
               onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
+            <TextField
+              name="password"
+              type="password"
+              size="small"
+              label="Nova senha"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              sx={{ width: "45%", margin: "8px" }}
+            />
+
+            <TextField
+              name="passwordConfirmation"
+              type="password"
+              size="small"
+              label="Confirmar senha"
+              value={formik.values.passwordConfirmation}
+              onChange={formik.handleChange}
+              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
+              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
             />
 
             <TextField

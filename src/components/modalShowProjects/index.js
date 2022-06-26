@@ -42,7 +42,7 @@ export function ModalShowProjects({ onClose, open }) {
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
     remunerationValue: Yup.number().required("Insira o valor da bolsa!")
-    .min(0,'Valor inválido!'),
+      .min(0,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
     requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
@@ -61,7 +61,7 @@ export function ModalShowProjects({ onClose, open }) {
       email: "", //ok
       description: "", //ok
       requirements: "", //ok
-      remunerationValue: "0",
+      remunerationValue: "",
       remuneration_project: "sim",
     },
     onSubmit: async (values) => {
@@ -269,7 +269,7 @@ export function ModalShowProjects({ onClose, open }) {
                 {value === "nao" ? (
                   <TextField
                     name="remunerationValue"
-                    value={(formik.remuneration_project = "")}
+                    value={""}
                     disabled
                     onChange={formik.handleChange}
                     size="small"
@@ -287,7 +287,7 @@ export function ModalShowProjects({ onClose, open }) {
                       formik.touched.remunerationValue &&
                       formik.errors.remunerationValue
                     }
-                    value={formik.remuneration_project}
+                    value={formik.values.remunerationValue}
                     onChange={formik.handleChange}
                     size="small"
                     label="Valor da bolsa"
