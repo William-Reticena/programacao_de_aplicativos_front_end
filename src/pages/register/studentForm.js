@@ -10,12 +10,16 @@ import {
   FormControlLabel,
   Grid,
   Input,
+  InputLabel,
+  MenuItem,
+  FormControl,
   Paper,
   Radio,
   RadioGroup,
   // TextField,
   Typography,
 } from "@mui/material";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from "./style";
 import api from "../../services/api";
 import PerfilImage from "../../images/perfil-image.png";
@@ -83,6 +87,7 @@ export function StudentForm({ handleChange, radioValue }) {
           username_student: values.fullName,
           password_student: values.password,
           course_student: values.course,
+          shift: values.shift,
           email_student: values.email,
           contact_student: values.cellphone,
           city_student: values.city,
@@ -254,16 +259,23 @@ export function StudentForm({ handleChange, radioValue }) {
                 sx={{ width: "45%", margin: "8px" }}
               />
 
-              <TextField
-                name="shift"
-                size="small"
-                label="Turno"
-                error={formik.touched.shift && Boolean(formik.errors.shift)}
-                helperText={formik.touched.shift && formik.errors.shift}
-                value={formik.values.shift}
-                onChange={formik.handleChange}
-                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-              />
+              <Box sx={{ minWidth: 420,  margin: "8px"  }}>
+                <FormControl fullWidth>
+                  <InputLabel id="select-shift">Turno</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="select-shift"
+                    name="shift"
+                    value={formik.values.shift}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value={1}>Integral</MenuItem>
+                    <MenuItem value={2}>Manhã</MenuItem>
+                    <MenuItem value={3}>Tarde</MenuItem>
+                    <MenuItem value={4}>Noite</MenuItem>
+                  </Select>
+                </FormControl>
+              </Box>
             </Grid>
 
             <Grid container item>
