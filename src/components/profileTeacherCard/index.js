@@ -64,7 +64,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
         await api.post("/ProfessorUpdate", {
           id: values.id,
           username_professor: values?.fullName,
-          password_professor: values.passwordConfirmation,
+          password_professor: values?.passwordConfirmation,
           course_professor: values?.course,
           email_professor: values?.email,
           contact_professor: values?.cellphone,

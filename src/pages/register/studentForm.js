@@ -10,6 +10,10 @@ import {
   FormControlLabel,
   Grid,
   Input,
+  InputLabel, 
+  MenuItem, 
+  FormControl, 
+  Select,
   Paper,
   Radio,
   RadioGroup,
@@ -37,17 +41,21 @@ export function StudentForm({ handleChange, radioValue }) {
     course: Yup.string().required("Insira seu curso de graduação!"),
     collegePeriod: Yup.number()
       .max(10, "Período inválido!")
+      .min(1, "Perído inválido")
       .positive("Deve ser um número positivo!")
       .integer("Deve ser um número inteiro!")
       .required("Insira o período em que você se encontra!"),
-    ra: Yup.string().required("Insira seu RA!"),
+    ra: Yup.number().required("Insira seu RA!")
+      .positive("Deve ser um número positivo!")
+      .integer("Deve ser um número inteiro!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string().required("Insira uma senha!"),
+    password: Yup.string().required("Insira uma senha!")
+      .min(6, "A senha deve ter pelo menos 6 caracteres"),
   });
 
   const formik = useFormik({
@@ -80,6 +88,7 @@ export function StudentForm({ handleChange, radioValue }) {
       setIsDisabled(true);
       try {
         await api.post("/StudentStore", {
+          image_student: values.image,
           username_student: values.fullName,
           password_student: values.password,
           course_student: values.course,
@@ -94,6 +103,7 @@ export function StudentForm({ handleChange, radioValue }) {
 
         navigate(LOGIN);
       } catch (error) {
+        setIsDisabled(false);
         console.log("teste", error);
       }
     },
@@ -254,16 +264,21 @@ export function StudentForm({ handleChange, radioValue }) {
                 sx={{ width: "45%", margin: "8px" }}
               />
 
-              <TextField
-                name="shift"
-                size="small"
-                label="Turno"
-                error={formik.touched.shift && Boolean(formik.errors.shift)}
-                helperText={formik.touched.shift && formik.errors.shift}
-                value={formik.values.shift}
-                onChange={formik.handleChange}
-                sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-              />
+              <FormControl sx={{width: "50%", margin: "8px"}} size= "small">
+                <InputLabel id="select-shift">Turno</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  label="Turno"
+                  id="select-shift"
+                  name="shift"
+                  value={formik.values.shift}
+                  onChange={formik.handleChange}
+                >
+                  <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
+                  <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
+                  <MenuItem value={"Noite"}>Noite</MenuItem>
+                </Select>
+              </FormControl>
             </Grid>
 
             <Grid container item>
