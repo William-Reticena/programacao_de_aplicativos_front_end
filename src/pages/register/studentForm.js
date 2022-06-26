@@ -10,23 +10,16 @@ import {
   FormControlLabel,
   Grid,
   Input,
-<<<<<<< HEAD
-  InputLabel,
-  MenuItem,
-  FormControl,
-=======
   InputLabel, 
   MenuItem, 
   FormControl, 
   Select,
->>>>>>> 34e426348dc1840e7126bd253bdbb3df0c8a8e68
   Paper,
   Radio,
   RadioGroup,
   // TextField,
   Typography,
 } from "@mui/material";
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from "./style";
 import api from "../../services/api";
 import PerfilImage from "../../images/perfil-image.png";
@@ -272,26 +265,7 @@ export function StudentForm({ handleChange, radioValue }) {
                 sx={{ width: "45%", margin: "8px" }}
               />
 
-<<<<<<< HEAD
-              <Box sx={{ minWidth: 420,  margin: "8px"  }}>
-                <FormControl fullWidth>
-                  <InputLabel id="select-shift">Turno</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="select-shift"
-                    name="shift"
-                    value={formik.values.shift}
-                    onChange={formik.handleChange}
-                  >
-                    <MenuItem value={1}>Integral</MenuItem>
-                    <MenuItem value={2}>Manhã</MenuItem>
-                    <MenuItem value={3}>Tarde</MenuItem>
-                    <MenuItem value={4}>Noite</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-=======
-              <FormControl sx={{width: "50%", margin: "8px"}} size= "small">
+              <FormControl sx={{width: "51%", margin: "8px"}} size= "small">
                 <InputLabel id="select-shift">Turno</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -306,7 +280,6 @@ export function StudentForm({ handleChange, radioValue }) {
                   <MenuItem value={"Noite"}>Noite</MenuItem>
                 </Select>
               </FormControl>
->>>>>>> 34e426348dc1840e7126bd253bdbb3df0c8a8e68
             </Grid>
 
             <Grid container item>

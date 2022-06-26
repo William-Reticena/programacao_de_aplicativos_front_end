@@ -11,15 +11,21 @@ import {
   CardMedia,
   Grid,
   Input,
+  Modal,
   Paper,
   Typography,
 } from "@mui/material";
+import { ModalPassword } from "../modalPassword";
 
 export function ProfileCard({ register, userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -311,6 +317,21 @@ export function ProfileCard({ register, userData, onClose }) {
                 justifyContent: "center",
               }}
             >
+              <Button variant="contained" onClick={handleOpen}>
+                Editar Senha
+              </Button>
+
+              <Modal
+                open={open}
+                onClose={handleClose}
+              >
+                <>
+                  <ModalPassword userData={userData} onClose={handleClose}>
+                    {/* {console.log("student")} */}
+                  </ModalPassword>
+                </>
+              </Modal>
+
               <Button
                 disabled={isDisabled}
                 type="submit"
