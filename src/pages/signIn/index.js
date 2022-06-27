@@ -50,11 +50,11 @@ export function SignIn() {
   const handleClose = () => setOpen(false);
 
   const scheme = Yup.object().shape({
-
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string().required(' Insira uma senha')
+    password: Yup.string()
+      .required(" Insira uma senha")
       .min(6, "A senha deve ter pelo menos 6 caracteres"),
   });
 
@@ -77,33 +77,62 @@ export function SignIn() {
     // },
     onSubmit: (values) => {
       if (values.type === "student") {
-        const fetch = async () => {
-          // const { data } = await api.post("/Student/login", {
-          //   username: values.email,
-          //   password: values.password,
-          // });
+        try {
+          const fetch = async () => {
+            const { data } = await api.post("/Student/login", {
+              email: values.email,
+              password: values.password,
+            });
+            // console.log(data.error);
 
-          // const { id, token } = data;
+            const { id, token } = data;
 
-          // if (data.id) {
-            setUserdata((prevState) => ({
-              ...prevState,
-              id: 1,
-              type: values.type,
-            }));
-            // localStorage.setItem("token", token);
-            navigate(STUDENT_HOME);
-          // }
-        };
-        fetch();
+            if (id) {
+              setUserdata((prevState) => ({
+                ...prevState,
+                id,
+                type: values.type,
+              }));
+              localStorage.setItem("token", token);
+              localStorage.setItem("type", values.type);
+              localStorage.setItem("id", id);
+              navigate(STUDENT_HOME);
+            } else {
+              alert("Usuário não encontrado");
+            }
+          };
+          fetch();
+        } catch (e) {
+          console.error(e);
+        }
       } else if (values.type === "teacher") {
-        setUserdata((prevState) => ({
-          ...prevState,
-          id: 1,
-          type: values.type,
-        }));
+        try {
+          const fetch = async () => {
+            const { data } = await api.post("/Professor/login", {
+              email: values.email,
+              password: values.password,
+            });
 
-        navigate(TEACHER_HOME);
+            const { id, token } = data;
+
+            if (data.id) {
+              setUserdata((prevState) => ({
+                ...prevState,
+                id,
+                type: values.type,
+              }));
+              localStorage.setItem("token", token);
+              localStorage.setItem("type", values.type);
+              localStorage.setItem("id", id);
+              navigate(TEACHER_HOME);
+            } else {
+              alert("Usuário não encontrado");
+            }
+          };
+          fetch();
+        } catch (error) {
+          alert(error.response.data);
+        }
       }
       //only just tests
       // const typeTest = "teacher";
@@ -207,7 +236,9 @@ export function SignIn() {
                 type="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
-                error={formik.touched.password && Boolean(formik.errors.password)}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
                 helperText={formik.touched.password && formik.errors.password}
               />
 

@@ -7,19 +7,23 @@ import api from "../../services/api";
 import { Grid, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import { LOGIN } from "../../routes/routes";
+import { useFilter } from "../../context/filterContext";
 
 export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
+  // const id = localStorage.getItem("id");
+  const [filter] = useFilter();
 
+  const id = localStorage.getItem("id");
   useEffect(() => {
     const fetch = async () => {
       //usar no contexto um id para poder passar aqui no fetch
       const { data } = await api.post("/StudentShow", {
-        id: localStorage.getItem("id"),
+        id,
       });
-      // console.log("dados estudante", data);
+      console.log("dados estudante", data);
       setUserdata((prevState) => ({
         ...prevState,
         ...data,
@@ -27,16 +31,16 @@ export function StudentHome() {
       // console.log("dados estudante", userData); //testes
     };
     fetch();
-  }, [setUserdata, userData.id]);
+  }, [setUserdata, id, userData.id]);
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.get("/ProjectIndex");
-      // console.log(data);
+      const { data } = await api.post("/ProjectIndex", { flag: filter });
+      console.log(data);
       setInfosCard(data);
     };
     fetch();
-  }, []);
+  }, [filter]);
 
   // console.log(userData);
   // if (userData.type !== "student") {
@@ -46,7 +50,7 @@ export function StudentHome() {
   //     </>
   //   );
   // }
-  
+
   return (
     <>
       <Header />

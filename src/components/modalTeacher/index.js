@@ -39,7 +39,7 @@ export function ModalTeacher({ infos, onClose, open }) {
       .min(1,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
   });
-
+console.log(infos);
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
@@ -256,8 +256,8 @@ export function ModalTeacher({ infos, onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "1"}
-                        value="1"
+                        checked={value === 1}
+                        value={1}
                         onChange={handleChange}
                       />
                     }
@@ -267,8 +267,8 @@ export function ModalTeacher({ infos, onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "0"}
-                        value="0"
+                        checked={value === 0}
+                        value={0}
                         onChange={handleChange}
                       />
                     }

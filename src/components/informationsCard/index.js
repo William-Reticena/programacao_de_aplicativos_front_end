@@ -10,6 +10,7 @@ export function InformationsCard({ data }) {
   const handleClose = () => setOpen(false);
   const [userData] = useUserInfo();
 
+  console.log(data);
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
       <Grid>
@@ -47,7 +48,7 @@ export function InformationsCard({ data }) {
             disabled
             size="small"
             label="RESPONSÁVEL"
-            value={data.professor_responsable_project}
+            value={data.professor_project.username_professor}
             sx={{ width: "35%" }}
           />
 
@@ -59,7 +60,12 @@ export function InformationsCard({ data }) {
             visualizar vaga
           </Button>
 
-          <ModalProject open={open} onClose={handleClose} data={data} userId={userData.id} />
+          <ModalProject
+            open={open}
+            onClose={handleClose}
+            data={data}
+            userId={userData.id}
+          />
         </Box>
       </Grid>
     </Paper>

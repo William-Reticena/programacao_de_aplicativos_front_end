@@ -9,6 +9,8 @@ export function Profile({ userData, typeUser }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log(userData);
+
   return (
     <Paper elevation={5}>
       <Avatar src={PerfilImage} sx={{ width: 64, height: 64 }} />

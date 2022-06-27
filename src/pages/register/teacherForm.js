@@ -71,7 +71,42 @@ export function TeacherForm({ handleChange, radioValue }) {
     },
     onSubmit: async (values) => {
       setIsDisabled(true);
+
+      const {
+        type, //não tem
+        image, // não tem
+        imageURL, // não tem
+        fullName, //ok
+        course, //ok
+        id, // não tem
+        shift, //não tem
+        city, //ok
+        cellphone, //ok
+        email, //ok
+        password, //ok
+        description, //ok
+      } = values;
+
+      const file = new FormData();
+
+      file.append("file", imageURL);
+      file.append("username_professor", fullName);
+      file.append("password_professor", password);
+      file.append("course_professor", course);
+      file.append("id_professor", id);
+      file.append("turno_professor", shift);
+      file.append("email_professor", email);
+      file.append("contact_professor", cellphone);
+      file.append("city_professor", city);
+      file.append("description_professor", description);
+      file.append("status_professor", 1);
+
+      // for (const value of file.values()) {
+      //   console.log(value);
+      // }
+
       try {
+<<<<<<< HEAD
         await api.post("/ProfessorStore", {
           username_professor: values.fullName,
           password_professor: values.password,
@@ -84,6 +119,20 @@ export function TeacherForm({ handleChange, radioValue }) {
           description_professor: values?.description,
           status_professor: 1,
         });
+=======
+        await api.post("/ProfessorStore", file);
+        // await api.post("/ProfessorStore", {
+        //   username_professor: values.fullName,
+        //   password_professor: values.password,
+        //   course_professor: values.course,
+        //   turno_professor: values.shift,
+        //   email_professor: values.email,
+        //   contact_professor: values.cellphone,
+        //   city_professor: values.city,
+        //   description_professor: values?.description,
+        //   status_professor: 1,
+        // });
+>>>>>>> 19ab9efadf20bc930c1eb41032d96d60505aa93e
 
         navigate(LOGIN);
       } catch (error) {
@@ -103,14 +152,10 @@ export function TeacherForm({ handleChange, radioValue }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
+        formik.setFieldValue("imageURL", refFileInput.files[0]);
       };
 
       reader.readAsDataURL(refFileInput.files[0]);
-
-      formik.setFieldValue(
-        "imageURL",
-        URL.createObjectURL(refFileInput.files[0])
-      );
     });
 
     // console.log(refFileInput);
@@ -245,7 +290,7 @@ export function TeacherForm({ handleChange, radioValue }) {
                   <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
                   <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
                   <MenuItem value={"Noite"}>Noite</MenuItem>
-  </Select>
+                </Select>
               </FormControl>
             </Grid>
             <Grid container item>
