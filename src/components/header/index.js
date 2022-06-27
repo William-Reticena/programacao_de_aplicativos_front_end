@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { LOGIN, STUDENT_HOME, INSCRICAO } from "../../routes/routes";
-import { Logo } from "../../images";
+import Logo from "../../images/Logo-UTFPR.png";
 import { NavigationButton, ModalShowProjects } from "../../components";
 import { Favorite, Logout, Search, AddCircle } from "@mui/icons-material";
 import { AppBar, Card } from "./style";

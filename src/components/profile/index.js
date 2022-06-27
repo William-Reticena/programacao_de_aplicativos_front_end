@@ -9,11 +9,11 @@ export function Profile({ userData, typeUser }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(userData);
+  console.log(userData.img.path);
 
   return (
     <Paper elevation={5}>
-      <Avatar src={PerfilImage} sx={{ width: 64, height: 64 }} />
+      <Avatar src={"./tpm/upload"+userData.img?.path} sx={{ width: 64, height: 64 }} />
 
       <Typography sx={{ textAlign: "center" }}>
         {userData.username_student}
