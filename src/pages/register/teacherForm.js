@@ -106,7 +106,6 @@ export function TeacherForm({ handleChange, radioValue }) {
       // }
 
       try {
-<<<<<<< HEAD
         await api.post("/ProfessorStore", {
           username_professor: values.fullName,
           password_professor: values.password,
@@ -119,20 +118,6 @@ export function TeacherForm({ handleChange, radioValue }) {
           description_professor: values?.description,
           status_professor: 1,
         });
-=======
-        await api.post("/ProfessorStore", file);
-        // await api.post("/ProfessorStore", {
-        //   username_professor: values.fullName,
-        //   password_professor: values.password,
-        //   course_professor: values.course,
-        //   turno_professor: values.shift,
-        //   email_professor: values.email,
-        //   contact_professor: values.cellphone,
-        //   city_professor: values.city,
-        //   description_professor: values?.description,
-        //   status_professor: 1,
-        // });
->>>>>>> 19ab9efadf20bc930c1eb41032d96d60505aa93e
 
         navigate(LOGIN);
       } catch (error) {

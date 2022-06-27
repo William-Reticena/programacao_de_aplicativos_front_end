@@ -20,7 +20,7 @@ import { NavigationButton, ModalProject } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
 import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-// import api from "../../services/api";
+import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
   <Container
