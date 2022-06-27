@@ -283,7 +283,7 @@ console.log(infos);
                   <TextField
                     name="remunerationValue"
                     disabled
-                    value={formik.values.remunerationValue}
+                    value={formik.values.remunerationValue = "0"}
                     onChange={formik.handleChange}
                     size="small"
                     label="Valor da bolsa"

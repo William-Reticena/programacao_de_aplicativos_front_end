@@ -50,7 +50,6 @@ export function TeacherHome() {
 
       <Grid container sx={{ marginTop: "80px" }}>
         <Grid item xs={2}>
-          <Filter />
         </Grid>
 
         <Grid item xs={8}>
