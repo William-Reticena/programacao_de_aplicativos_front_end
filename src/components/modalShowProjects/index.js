@@ -79,7 +79,7 @@ export function ModalShowProjects({ onClose, open }) {
           requirements_project: values.requirements,
           // remuneration_internship: "",
           remuneration_value_project: values.remunerationValue,
-          professor_responsable_project: userData.username_professor,
+          professor_responsable_project: userData.id,
           remuneration_project: values.remuneration_project,
         });
 

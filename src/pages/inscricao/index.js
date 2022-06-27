@@ -11,7 +11,7 @@ export function Inscricao() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/CandidateIndex", { id: userData.id });
-      // console.log(data);
+      console.log("data", data);
       setInfosCard(data);
     };
     fetch();
@@ -24,9 +24,16 @@ export function Inscricao() {
         <Grid item xs={2}></Grid>
 
         <Grid item xs={8}>
-          {infosCards.map((infos) => (
-            <InformationsCardInscricao key={infos.id} data={infos} />
-          ))}
+          {infosCards.map((infos, index) => {
+            console.log("infos", infos);
+            return (
+              <InformationsCardInscricao
+                key={infos.id}
+                data={infos}
+                index={index}
+              />
+            );
+          })}
         </Grid>
 
         <Grid item xs={2}></Grid>

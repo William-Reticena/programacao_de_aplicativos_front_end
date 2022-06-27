@@ -79,7 +79,7 @@ export function ProfileCard({ userData, onClose }) {
           //tá errado o back as info não batem com a rota
           id: values.id,
           username_student: values.fullName,
-          password_student: values.passwordConfirmation,
+          // password_student: values.passwordConfirmation,
           course_student: values.course,
           email_student: values.email,
           contact_student: values.cellphone,
@@ -88,6 +88,7 @@ export function ProfileCard({ userData, onClose }) {
         });
         onClose();
       } catch (error) {
+        setIsDisabled(false);
         console.log("teste", error);
       }
     },
@@ -318,7 +319,7 @@ export function ProfileCard({ userData, onClose }) {
                 disabled={isDisabled}
                 type="submit"
                 variant="contained"
-                sx={{ marginLeft: "50px", marginRight: "16px"  }}
+                sx={{ marginLeft: "50px", marginRight: "16px" }}
               >
                 Concluir
               </Button>

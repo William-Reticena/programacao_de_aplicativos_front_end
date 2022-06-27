@@ -1,46 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import React, { useState } from "react";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { ModalProject } from "../modalProject";
 import api from "../../services/api";
 
 export function InformationsCardInscricao({ data }) {
-  const [dataProj, setDataProj] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log("dataid", data);
-
-  useEffect(() => {
-    const id = data.project_candidate;
-    console.log("id", id);
-    const fetch = async () => {
-      const { dataProject } = await api.post("/ProjectShow", {
-        id,
-      });
-      // setDataProj(dataProject);
-      console.log(dataProject);
-    };
-    fetch();
-  }, [setDataProj, data.project_candidate]);
-
-  const formik = useFormik({
-    initialValues: {
-      // vaga: dataProj.name_project,
-      // descricao: dataProj.description_project,
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const handleDelete = async () => {
+    // console.log(data.id);
+    try {
+      await api.post("/CandidateDestroy", { id: data.id });
+      document.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
       <Grid>
         <Box sx={{ marginBottom: "16px" }}>
           <Typography variant="h2" sx={{ fontSize: "24px" }}>
-            {dataProj.name_project}
+            {data.project[0].name_project}
           </Typography>
         </Box>
 
@@ -56,8 +39,7 @@ export function InformationsCardInscricao({ data }) {
             multiline
             minRows={3}
             label="Descricao"
-            // value={formik.values.descricao}
-            onChange={formik.handleChange}
+            value={data.project[0].description_project}
             sx={{ width: "100%" }}
           />
         </Box>
@@ -69,17 +51,17 @@ export function InformationsCardInscricao({ data }) {
             variant="contained"
             onClick={handleOpen}
             sx={{ width: "25%", marginRight: "16px" }}
-            color="error"
           >
-            Cancelar Inscrição
+            Visualizar Vaga
           </Button>
 
           <Button
             variant="contained"
-            onClick={handleOpen}
+            onClick={handleDelete}
             sx={{ width: "25%" }}
+            color="error"
           >
-            Visualizar Vaga
+            Cancelar Inscrição
           </Button>
 
           <ModalProject open={open} onClose={handleClose} data={data} />

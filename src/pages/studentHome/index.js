@@ -12,12 +12,13 @@ export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
+  const { id } = userData;
 
   useEffect(() => {
     const fetch = async () => {
       //usar no contexto um id para poder passar aqui no fetch
       const { data } = await api.post("/StudentShow", {
-        id: localStorage.getItem("id"),
+        id,
       });
       // console.log("dados estudante", data);
       setUserdata((prevState) => ({
@@ -27,7 +28,7 @@ export function StudentHome() {
       // console.log("dados estudante", userData); //testes
     };
     fetch();
-  }, [setUserdata, userData.id]);
+  }, [setUserdata, id]);
 
   useEffect(() => {
     const fetch = async () => {
@@ -46,7 +47,7 @@ export function StudentHome() {
   //     </>
   //   );
   // }
-  
+
   return (
     <>
       <Header />

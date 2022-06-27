@@ -12,9 +12,10 @@ export function TeacherHome() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const { id } = userData
     const fetch = async () => {
       const { data } = await api.post("/ProfessorShow", {
-        id: localStorage.getItem("id"),
+        id,
       });
       console.log("dados estudante", data);
       setUserdata((prevState) => ({
@@ -23,7 +24,7 @@ export function TeacherHome() {
       }));
     };
     fetch();
-  }, [setUserdata, userData.id]);
+  }, [setUserdata, userData]);
 
   useEffect(() => {
     const fetch = async () => {
