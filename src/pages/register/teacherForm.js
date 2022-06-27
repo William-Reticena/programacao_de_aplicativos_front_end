@@ -101,23 +101,24 @@ export function TeacherForm({ handleChange, radioValue }) {
       file.append("description_professor", description);
       file.append("status_professor", 1);
 
-      // for (const value of file.values()) {
-      //   console.log(value);
-      // }
+      for (const value of file.values()) {
+        console.log(value);
+      }
 
       try {
-        await api.post("/ProfessorStore", {
-          username_professor: values.fullName,
-          password_professor: values.password,
-          id_professor: values.id,
-          course_professor: values.course,
-          turno_professor: values.shift,
-          email_professor: values.email,
-          contact_professor: values.cellphone,
-          city_professor: values.city,
-          description_professor: values?.description,
-          status_professor: 1,
-        });
+        await api.post("/ProfessorStore", file);
+        // await api.post("/ProfessorStore", {
+        //   username_professor: values.fullName,
+        //   password_professor: values.password,
+        //   id_professor: values.id,
+        //   course_professor: values.course,
+        //   turno_professor: values.shift,
+        //   email_professor: values.email,
+        //   contact_professor: values.cellphone,
+        //   city_professor: values.city,
+        //   description_professor: values?.description,
+        //   status_professor: 1,
+        // });
 
         navigate(LOGIN);
       } catch (error) {

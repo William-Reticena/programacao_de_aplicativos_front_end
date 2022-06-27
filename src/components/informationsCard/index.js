@@ -48,7 +48,7 @@ export function InformationsCard({ data }) {
             disabled
             size="small"
             label="RESPONSÁVEL"
-            value={data.professor_project.username_professor}
+            value={data.professor_project?.username_professor}
             sx={{ width: "35%" }}
           />
 

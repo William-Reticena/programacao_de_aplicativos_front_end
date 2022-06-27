@@ -45,6 +45,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
+      id: userData.id,
       idTeacher: userData.id_professor,
       type: userData.type,
       image: "", // não tem
