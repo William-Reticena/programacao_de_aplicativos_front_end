@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { RadioGroup, Radio } from "@mui/material";
 import { FormControl, FormControlLabel, Paper, Typography } from "./style";
+import { useFilter } from "../../context/filterContext";
 
 export function Filter() {
-  const [, setRadioValue] = useState("all");
+  const [, setFilter] = useFilter()
+  // const [, setRadioValue] = useState("all");
 
   const handleChange = (event) => {
-    setRadioValue(event.target.value);
+    setFilter(event.target.value);
   };
 
   return (
@@ -17,20 +19,20 @@ export function Filter() {
         <FormControl>
           <RadioGroup onChange={handleChange}>
             <FormControlLabel
-              control={<Radio name="all" />}
-              value="all"
+              control={<Radio name="2" />}
+              value="2"
               label="Todos"
             />
 
             <FormControlLabel
-              control={<Radio name="paid" />}
-              value="paid"
+              control={<Radio name="1" />}
+              value="1"
               label="Remunerados"
             />
 
             <FormControlLabel
-              control={<Radio name="unpaid" />}
-              value="unpaid"
+              control={<Radio name="0" />}
+              value="0"
               label="Não Remunerados"
             />
           </RadioGroup>

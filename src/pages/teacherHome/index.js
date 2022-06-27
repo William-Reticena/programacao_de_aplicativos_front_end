@@ -11,7 +11,7 @@ export function TeacherHome() {
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
 
-  const id = localStorage.getItem("id")
+  const id = localStorage.getItem("id");
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/ProfessorShow", {
@@ -28,7 +28,9 @@ export function TeacherHome() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.get("/ProjectIndex");
+      const { data } = await api.post("/ProjectProfessor", {
+        id: localStorage.getItem("id"),
+      });
       // console.log(data);
       setProjectsCard(data);
     };
@@ -49,8 +51,7 @@ export function TeacherHome() {
       <Header add />
 
       <Grid container sx={{ marginTop: "80px" }}>
-        <Grid item xs={2}>
-        </Grid>
+        <Grid item xs={2}></Grid>
 
         <Grid item xs={8}>
           <div style={{ textAlign: "center", margin: "16px" }}>

@@ -7,12 +7,14 @@ import api from "../../services/api";
 import { Grid, Typography } from "@mui/material";
 import { Navigate, useNavigate } from "react-router-dom";
 import { LOGIN } from "../../routes/routes";
+import { useFilter } from "../../context/filterContext";
 
 export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
+  const [filter] = useFilter();
 
   useEffect(() => {
     const fetch = async () => {
@@ -32,12 +34,12 @@ export function StudentHome() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await api.get("/ProjectIndex");
-      // console.log(data);
+      const { data } = await api.post("/ProjectIndex", { flag: filter });
+      console.log(data);
       setInfosCard(data);
     };
     fetch();
-  }, []);
+  }, [filter]);
 
   // console.log(userData);
   // if (userData.type !== "student") {
