@@ -92,7 +92,7 @@ export function SignIn() {
               setUserdata((prevState) => ({
                 ...prevState,
                 id,
-                // type: values.type,
+                type: values.type,
               }));
               localStorage.setItem("token", token);
               localStorage.setItem("type", values.type);
@@ -120,7 +120,7 @@ export function SignIn() {
               setUserdata((prevState) => ({
                 ...prevState,
                 id,
-                // type: values.type,
+                type: values.type,
               }));
               localStorage.setItem("token", token);
               localStorage.setItem("type", values.type);

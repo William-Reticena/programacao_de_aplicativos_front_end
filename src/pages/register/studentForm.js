@@ -78,55 +78,58 @@ export function StudentForm({ handleChange, radioValue }) {
       description: "", //ok
     },
     onSubmit: async (values) => {
-      // const {
-      //   type, //não tem
-      //   image, // não tem
-      //   imageURL, //ok
-      //   fullName, //ok
-      //   course, //ok
-      //   collegePeriod, //ok
-      //   ra, //ok
-      //   shift, //não tem
-      //   city, //ok
-      //   cellphone, //ok
-      //   email, //ok
-      //   password, //ok
-      //   description, //ok
-      // } = values;
+      const {
+        type, //não tem
+        image, // não tem
+        imageURL, //ok
+        fullName, //ok
+        course, //ok
+        collegePeriod, //ok
+        ra, //ok
+        shift, //não tem
+        city, //ok
+        cellphone, //ok
+        email, //ok
+        password, //ok
+        description, //ok
+      } = values;
 
-      // const file = new FormData();
+      const file = new FormData();
 
-      // file.append("file", imageURL);
-      // file.append("username_student", fullName);
-      // file.append("password_student", password);
-      // file.append("course_student", course);
-      // file.append("shift", shift);
-      // file.append("email_student", email);
-      // file.append("contact_student", cellphone);
-      // file.append("city_student", city);
-      // file.append("description_student", description);
-      // file.append("image_student", imageURL);
-      // file.append("ra_student", ra);
-      // file.append("period_student", collegePeriod);
+      file.append("file", imageURL);
+      file.append("username_student", fullName);
+      file.append("password_student", password);
+      file.append("course_student", course);
+      file.append("shift", shift);
+      file.append("email_student", email);
+      file.append("contact_student", cellphone);
+      file.append("city_student", city);
+      file.append("description_student", description);
+      file.append("ra_student", ra);
+      file.append("period_student", collegePeriod);
+
+      // for (const value of file.values()) {
+      //   console.log(value);
+      // }
 
       setIsDisabled(true);
       try {
-        // await api.post("/StudentStore", file);
-        await api.post("/StudentStore", {
-          // image_student: values.image,
-          file: values.image,
-          username_student: values.fullName,
-          password_student: values.password,
-          course_student: values.course,
-          turno_student: values.shift,
-          email_student: values.email,
-          contact_student: values.cellphone,
-          city_student: values.city,
-          description_student: values.description,
-          image_student: values.imageURL,
-          ra_student: values.ra,
-          period_student: values.collegePeriod,
-        });
+        await api.post("/StudentStore", file);
+        // await api.post("/StudentStore", {
+        //   // image_student: values.image,
+        //   file: values.image,
+        //   username_student: values.fullName,
+        //   password_student: values.password,
+        //   course_student: values.course,
+        //   turno_student: values.shift,
+        //   email_student: values.email,
+        //   contact_student: values.cellphone,
+        //   city_student: values.city,
+        //   description_student: values.description,
+        //   image_student: values.imageURL,
+        //   ra_student: values.ra,
+        //   period_student: values.collegePeriod,
+        // });
 
         navigate(LOGIN);
       } catch (error) {
@@ -147,14 +150,10 @@ export function StudentForm({ handleChange, radioValue }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
+        formik.setFieldValue("imageURL", refFileInput.files[0]);
       };
 
       reader.readAsDataURL(refFileInput.files[0]);
-
-      formik.setFieldValue(
-        "imageURL",
-        URL.createObjectURL(refFileInput.files[0])
-      );
     });
   };
 

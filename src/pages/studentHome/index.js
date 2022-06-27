@@ -13,16 +13,17 @@ export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
-  const id = localStorage.getItem("id");
+  // const id = localStorage.getItem("id");
   const [filter] = useFilter();
 
+  const id = localStorage.getItem("id");
   useEffect(() => {
     const fetch = async () => {
       //usar no contexto um id para poder passar aqui no fetch
       const { data } = await api.post("/StudentShow", {
         id,
       });
-      // console.log("dados estudante", data);
+      console.log("dados estudante", data);
       setUserdata((prevState) => ({
         ...prevState,
         ...data,
@@ -30,7 +31,7 @@ export function StudentHome() {
       // console.log("dados estudante", userData); //testes
     };
     fetch();
-  }, [setUserdata, id]);
+  }, [setUserdata, id, userData.id]);
 
   useEffect(() => {
     const fetch = async () => {

@@ -9,6 +9,7 @@ import { LOGIN } from "../../routes/routes";
 export function TeacherHome() {
   const [projectCards, setProjectsCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
+  // const [userData, setUserdata] = useState();
   const navigate = useNavigate();
 
   const id = localStorage.getItem("id");
@@ -24,7 +25,7 @@ export function TeacherHome() {
       }));
     };
     fetch();
-  }, [setUserdata, id]);
+  }, [setUserdata, id, userData.id]);
 
   useEffect(() => {
     const fetch = async () => {
