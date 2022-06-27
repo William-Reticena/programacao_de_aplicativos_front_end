@@ -14,11 +14,14 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
+  InputLabel, 
+  MenuItem, 
+  Select,
 } from "@mui/material";
 import { useUserInfo } from "../../context/userContext";
 
 export function ModalShowProjects({ onClose, open }) {
-  const [value, setValue] = useState("sim");
+  const [value, setValue] = useState("1");
   const [isDisabled, setIsDisabled] = useState(false);
 
   const [userData] = useUserInfo();
@@ -55,14 +58,14 @@ export function ModalShowProjects({ onClose, open }) {
       course: "", //ok
       collegePeriod: "", //ok
       amountHours: "", //ok
-      shift: "", //não tem
+      shift: "", //ok
       schedules: "", //ok
       numberVacant: "", //ok
       email: "", //ok
       description: "", //ok
       requirements: "", //ok
       remunerationValue: "",
-      remuneration_project: "sim",
+      remuneration_project: "1",
     },
     onSubmit: async (values) => {
       setIsDisabled(true);
@@ -71,6 +74,7 @@ export function ModalShowProjects({ onClose, open }) {
           name_project: values.projectName,
           ideal_period_project: values.collegePeriod,
           course_project: values.course,
+          turno_project: values.shift,
           weekly_workload_project: values.amountHours,
           email_project: values.email,
           schedules_project: values.schedules,
@@ -177,16 +181,21 @@ export function ModalShowProjects({ onClose, open }) {
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
-                <TextField
+              <FormControl sx={{width: "51%", margin: "8px"}} size= "small">
+                <InputLabel id="select-shift">Turno</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  label="Turno"
+                  id="select-shift"
                   name="shift"
-                  error={formik.touched.shift && Boolean(formik.errors.shift)}
-                  helperText={formik.touched.shift && formik.errors.shift}
                   value={formik.values.shift}
                   onChange={formik.handleChange}
-                  size="small"
-                  label="Turno"
-                  sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-                />
+                >
+                  <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
+                  <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
+                  <MenuItem value={"Noite"}>Noite</MenuItem>
+                </Select>
+              </FormControl>
               </Grid>
 
               <Grid container item>
@@ -245,8 +254,8 @@ export function ModalShowProjects({ onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "sim"}
-                        value="sim"
+                        checked={value === "1"}
+                        value="1"
                         onChange={handleChange}
                       />
                     }
@@ -256,8 +265,8 @@ export function ModalShowProjects({ onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "nao"}
-                        value="nao"
+                        checked={value === "0"}
+                        value="0"
                         onChange={handleChange}
                       />
                     }
@@ -266,11 +275,11 @@ export function ModalShowProjects({ onClose, open }) {
                 </RadioGroup>
               </FormControl>
               
-                {value === "nao" ? (
+                {value === "0" ? (
                   <TextField
                     name="remunerationValue"
-                    value={""}
                     disabled
+                    value={formik.values.remunerationValue = "0"}
                     onChange={formik.handleChange}
                     size="small"
                     label="Valor da bolsa"

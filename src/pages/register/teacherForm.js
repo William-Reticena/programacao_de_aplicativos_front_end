@@ -76,7 +76,7 @@ export function TeacherForm({ handleChange, radioValue }) {
           username_professor: values.fullName,
           password_professor: values.password,
           course_professor: values.course,
-          shift: values.shift,
+          turno_professor: values.shift,
           email_professor: values.email,
           contact_professor: values.cellphone,
           city_professor: values.city,

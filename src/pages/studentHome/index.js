@@ -12,7 +12,7 @@ export function StudentHome() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
-  const { id } = userData;
+  const id = localStorage.getItem("id");
 
   useEffect(() => {
     const fetch = async () => {

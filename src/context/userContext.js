@@ -4,7 +4,7 @@ import React, { createContext, useState, useContext } from "react";
 export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [userData, setUserdata] = useState({ type: "" });
+  const [userData, setUserdata] = useState({ type: localStorage.getItem("type") });
 
   return (
     <UserContext.Provider value={[userData, setUserdata]}>

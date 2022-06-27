@@ -11,8 +11,8 @@ export function TeacherHome() {
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
 
+  const id = localStorage.getItem("id")
   useEffect(() => {
-    const { id } = userData
     const fetch = async () => {
       const { data } = await api.post("/ProfessorShow", {
         id,
@@ -24,7 +24,7 @@ export function TeacherHome() {
       }));
     };
     fetch();
-  }, [setUserdata, userData]);
+  }, [setUserdata, id]);
 
   useEffect(() => {
     const fetch = async () => {

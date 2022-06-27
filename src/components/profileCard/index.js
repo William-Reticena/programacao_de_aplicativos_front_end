@@ -11,21 +11,15 @@ import {
   CardMedia,
   Grid,
   Input,
-  Modal,
   Paper,
   Typography,
 } from "@mui/material";
-import { ModalPassword } from "../modalPassword";
 
 export function ProfileCard({ userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
   const [refFileInput, setRefFileInput] = useState(null);
   const [refCardMedia, setRefCardMedia] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
-
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     setRefFileInput(document.getElementById("fileInput"));
@@ -37,17 +31,15 @@ export function ProfileCard({ userData, onClose }) {
   };
 
   const scheme = Yup.object().shape({
+    city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string()
-      .notRequired(" Insira uma nova senha")
+     password: Yup.string().notRequired(' Insira uma nova senha')
       .min(6, "A senha deve ter pelo menos 6 caracteres"),
-    passwordConfirmation: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Senhas inválidas"
-    ),
+    passwordConfirmation: Yup.string()
+       .oneOf([Yup.ref('password'), null], 'Senhas inválidas'),
   });
 
   console.log(userData);
@@ -64,7 +56,7 @@ export function ProfileCard({ userData, onClose }) {
       // course: register ? "" : "BCC", //ok
       collegePeriod: userData.period_student,
       ra: userData.ra_student,
-      shift: "não tem",
+      shift: userData.turno_student,
       city: userData.city_student,
       cellphone: userData.contact_student,
       email: userData.email_student,
@@ -81,6 +73,7 @@ export function ProfileCard({ userData, onClose }) {
           username_student: values.fullName,
           // password_student: values.passwordConfirmation,
           course_student: values.course,
+          turno_student: values.shift,
           email_student: values.email,
           contact_student: values.cellphone,
           city_student: values.city,
@@ -279,6 +272,41 @@ export function ProfileCard({ userData, onClose }) {
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
+<TextField
+              name="password"
+              type="password"
+              size="small"
+              label="Nova senha"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              sx={{ width: "45%", margin: "8px" }}
+            />
+
+            <TextField
+              name="passwordConfirmation"
+              type="password"
+              size="small"
+              label="Confirmar senha"
+              value={formik.values.passwordConfirmation}
+              onChange={formik.handleChange}
+              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
+              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+              sx={{ width: "calc(55% - 32px)", margin: "8px" }}
+            />
+
+            <TextField
+              name="description"
+              size="small"
+              multiline
+              minRows={3}
+              label="Descrição"
+              value={formik?.values.description}
+              onChange={formik?.handleChange}
+              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
+            />
+
             <TextField
               name="description"
               size="small"
@@ -297,29 +325,11 @@ export function ProfileCard({ userData, onClose }) {
                 justifyContent: "center",
               }}
             >
-              <Button variant="contained" onClick={handleOpen}>
-                Editar Senha
-              </Button>
-
-              <Modal
-                open={open}
-                onClose={handleClose}
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <>
-                  <ModalPassword userData={userData} onClose={handleClose} />
-                </>
-              </Modal>
-
               <Button
                 disabled={isDisabled}
                 type="submit"
                 variant="contained"
-                sx={{ marginLeft: "50px", marginRight: "16px" }}
+                sx={{marginRight: "16px"  }}
               >
                 Concluir
               </Button>

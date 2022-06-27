@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Yup from "yup";
 import { useFormik } from "formik";
 import {
   Box,
@@ -44,7 +45,17 @@ export function SignIn() {
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
 
+  const scheme = Yup.object().shape({
+    email: Yup.string()
+      .email("Insira um email válido!")
+      .required("Insira o seu e-mail!"),
+    password: Yup.string()
+      .required(" Insira uma senha")
+      .min(6, "A senha deve ter pelo menos 6 caracteres"),
+  });
+
   const formik = useFormik({
+    validationSchema: scheme,
     initialValues: {
       type: "student",
       email: "",
@@ -76,9 +87,11 @@ export function SignIn() {
               setUserdata((prevState) => ({
                 ...prevState,
                 id,
-                type: values.type,
+                // type: values.type,
               }));
               localStorage.setItem("token", token);
+              localStorage.setItem("type", values.type);
+              localStorage.setItem("id", id);
               navigate(STUDENT_HOME);
             } else {
               alert("Usuário não encontrado");
@@ -102,9 +115,11 @@ export function SignIn() {
               setUserdata((prevState) => ({
                 ...prevState,
                 id,
-                type: values.type,
+                // type: values.type,
               }));
               localStorage.setItem("token", token);
+              localStorage.setItem("type", values.type);
+              localStorage.setItem("id", id);
               navigate(TEACHER_HOME);
             } else {
               alert("Usuário não encontrado");
@@ -191,6 +206,8 @@ export function SignIn() {
                 name="email"
                 value={formik.values.ra}
                 onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
               />
 
               <TextField
@@ -199,6 +216,10 @@ export function SignIn() {
                 type="password"
                 value={formik.values.password}
                 onChange={formik.handleChange}
+                error={
+                  formik.touched.password && Boolean(formik.errors.password)
+                }
+                helperText={formik.touched.password && formik.errors.password}
               />
 
               <Button type="submit" size="large" variant="contained">
