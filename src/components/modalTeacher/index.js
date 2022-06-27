@@ -4,14 +4,17 @@ import { useFormik } from "formik";
 import { Box, Button, Grid, Modal, Paper, Typography,Radio,
   RadioGroup,
   FormControl,
-  FormControlLabel, } from "@mui/material";
+  FormControlLabel,
+  InputLabel, 
+  MenuItem, 
+  Select } from "@mui/material";
 import api from "../../services/api";
 import { TextField } from "./style";
 
 export function ModalTeacher({ infos, onClose, open }) {
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const [value, setValue] = useState("sim");
+  const [value, setValue] = useState(infos.remuneration_project);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -47,7 +50,7 @@ export function ModalTeacher({ infos, onClose, open }) {
       course: infos.course_project,
       collegePeriod: infos.ideal_period_project,
       amountHours: infos.weekly_workload_project,
-      shift: "",
+      shift: infos.turno_project,
       schedules: infos.schedules_project,
       numberVacant: infos.number_vacancies_project,
       email: infos.email_project,
@@ -65,6 +68,7 @@ export function ModalTeacher({ infos, onClose, open }) {
           id: values.id,
           name_project: values.projectName,
           course_project: values.course,
+          turno_project: values.shift,
           ideal_period_project: values.collegePeriod,
           weekly_workload_project: values.amountHours,
           schedules_project: values.schedules,
@@ -182,16 +186,21 @@ export function ModalTeacher({ infos, onClose, open }) {
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
-                <TextField
-                  name="shift"
-                  size="small"
-                  label="Turno"
-                  error={formik.touched.shift && Boolean(formik.errors.shift)}
-                  helperText={formik.touched.shift && formik.errors.shift}
-                  value={formik.values.shift}
-                  onChange={formik.handleChange}
-                  sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-                />
+                <FormControl sx={{width: "51%", margin: "8px"}} size= "small">
+                  <InputLabel id="select-shift">Turno</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    label="Turno"
+                    id="select-shift"
+                    name="shift"
+                    value={formik.values.shift}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
+                    <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
+                    <MenuItem value={"Noite"}>Noite</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
 
               <Grid container item>
@@ -249,7 +258,7 @@ export function ModalTeacher({ infos, onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "sim"}
+                        checked={value === "1"}
                         value="1"
                         onChange={handleChange}
                       />
@@ -260,7 +269,7 @@ export function ModalTeacher({ infos, onClose, open }) {
                     control={
                       <Radio
                         name="remuneration_project"
-                        checked={value === "nao"}
+                        checked={value === "0"}
                         value="0"
                         onChange={handleChange}
                       />
@@ -270,11 +279,11 @@ export function ModalTeacher({ infos, onClose, open }) {
                 </RadioGroup>
               </FormControl>
               
-                {value === "nao" ? (
+                {value === "0" ? (
                   <TextField
                     name="remunerationValue"
-                    value={""}
                     disabled
+                    value={formik.values.remunerationValue}
                     onChange={formik.handleChange}
                     size="small"
                     label="Valor da bolsa"

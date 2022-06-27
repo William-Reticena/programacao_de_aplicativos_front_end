@@ -92,7 +92,7 @@ export function StudentForm({ handleChange, radioValue }) {
           username_student: values.fullName,
           password_student: values.password,
           course_student: values.course,
-          shift: values.shift,
+          turno_student: values.shift,
           email_student: values.email,
           contact_student: values.cellphone,
           city_student: values.city,
