@@ -14,7 +14,7 @@ export function ModalProject({ data, onClose, open, userId }) {
       course: data.course_project,
       collegePeriod: data.ideal_period_project,
       amountHours: data.weekly_workload_project,
-      shift: "não tem",
+      shift: data.turno_project,
       schedules: data.schedules_project,
       numberVacant: data.number_vacancies_project,
       email: data.email_project,

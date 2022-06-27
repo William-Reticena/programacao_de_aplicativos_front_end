@@ -271,7 +271,7 @@ export function ProfileCard({ userData, onClose }) {
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
-<TextField
+            <TextField
               name="password"
               type="password"
               size="small"

@@ -18,9 +18,8 @@ import { useUserInfo } from "../../context/userContext";
 import { Logo } from "../../images";
 import { NavigationButton, ModalProject } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import { REGISTER, STUDENT_HOME, TEACHER_HOME, ADMIN } from "../../routes/routes";
+import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import api from "../../services/api";
 // import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
@@ -127,23 +126,23 @@ export function SignIn() {
 
   return (
     <Container
-      sx={{
-        height: "100vh",
-      }}
+    sx={{
+      height: "100vh",
+    }}
     >
-      <Box>
-         <IconButton onClick={handleOpen}>
-            <SupervisedUserCircleIcon />
-        </IconButton>
-      </Box>
+    <Box>
+       <IconButton onClick={handleOpen}>
+          <SupervisedUserCircleIcon />
+      </IconButton>
+    </Box>
           <Modal
             open={open}
             onClose={handleClose}
             sx={{ justifyContent: "center" }}
           >
             <>
-              <ModalProject userData={userData} onClose={handleClose}>
-                {/* {console.log("student")} */}
+              <ModalProject onClose={handleClose}>
+
               </ModalProject>
             </>
           </Modal>

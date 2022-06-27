@@ -61,8 +61,8 @@ export function TeacherForm({ handleChange, radioValue }) {
       imageURL: "", // não tem
       fullName: "", //ok
       course: "", //ok
-      id: "", // não tem
-      shift: "", //não tem
+      id: "", // ok
+      shift: "", // ok
       city: "", //ok
       cellphone: "", //ok
       email: "", //ok
@@ -75,6 +75,7 @@ export function TeacherForm({ handleChange, radioValue }) {
         await api.post("/ProfessorStore", {
           username_professor: values.fullName,
           password_professor: values.password,
+          id_professor: values.id,
           course_professor: values.course,
           turno_professor: values.shift,
           email_professor: values.email,

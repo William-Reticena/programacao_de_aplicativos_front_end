@@ -38,7 +38,6 @@ export function ModalTeacher({ infos, onClose, open }) {
     remunerationValue: Yup.string().required("Insira o valor da bolsa!")
       .min(1,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
-    requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
 
   const formik = useFormik({
@@ -196,9 +195,8 @@ export function ModalTeacher({ infos, onClose, open }) {
                     value={formik.values.shift}
                     onChange={formik.handleChange}
                   >
-                    <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
-                    <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
-                    <MenuItem value={"Noite"}>Noite</MenuItem>
+                    <MenuItem value={"Manhã"}>Manhã</MenuItem>
+                    <MenuItem value={"Tarde"}>Tarde</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -332,13 +330,6 @@ export function ModalTeacher({ infos, onClose, open }) {
                 multiline
                 minRows={3}
                 label="Requisitos"
-                error={
-                  formik.touched.requirements &&
-                  Boolean(formik.errors.requirements)
-                }
-                helperText={
-                  formik.touched.requirements && formik.errors.requirements
-                }
                 value={formik.values.requirements}
                 onChange={formik.handleChange}
                 sx={{ width: "calc(100% - 16px)", margin: "8px" }}

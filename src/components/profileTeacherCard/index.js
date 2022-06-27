@@ -42,14 +42,12 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      id: userData.id,
+      id: userData.id_professor,
       type: userData.type,
       image: "", // não tem
       imageURL: "", // não tem
       fullName: userData.username_professor, //ok
       course: userData.course_professor, //ok
-      collegePeriod: "", //não tem
-      // id: "não tem",
       shift: userData.turno_professor,
       city: userData.city_professor,
       cellphone: userData.contact_professor,
@@ -62,7 +60,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
       setIsDisabled(true);
       try {
         await api.post("/ProfessorUpdate", {
-          id: values.id,
+          id_professor: values.id,
           username_professor: values?.fullName,
           password_professor: values?.passwordConfirmation,
           turno_professor: values.shift,
@@ -161,8 +159,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
               name="fullName"
               size="small"
               label="Nome Completo"
-              error={formik.touched.fullName && Boolean(formik.errors.fullName)}
-              helperText={formik.touched.fullName && formik.errors.fullName}
               value={formik?.values.fullName}
               onChange={formik?.handleChange}
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
@@ -174,8 +170,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 name="course"
                 size="small"
                 label="Curso"
-                error={formik.touched.course && Boolean(formik.errors.course)}
-                helperText={formik.touched.course && formik.errors.course}
                 value={formik?.values.course}
                 onChange={formik?.handleChange}
                 sx={{ width: "100%", margin: "8px" }}
@@ -188,9 +182,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 name="id"
                 size="small"
                 label="ID"
-                error={formik.touched.ra && Boolean(formik.errors.ra)}
-                helperText={formik.touched.ra && formik.errors.ra}
-                value={formik?.values.ra}
+                value={formik?.values.id}
                 onChange={formik?.handleChange}
                 sx={{ width: "45%", margin: "8px" }}
               />
@@ -200,8 +192,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
                 name="shift"
                 size="small"
                 label="Turno"
-                error={formik.touched.shift && Boolean(formik.errors.shift)}
-                helperText={formik.touched.shift && formik.errors.shift}
                 value={formik?.values.shift}
                 onChange={formik?.handleChange}
                 sx={{ width: "calc(55% - 32px)", margin: "8px" }}

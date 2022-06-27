@@ -16,7 +16,7 @@ export function ProfileTeacher({ userData }) {
       <Typography sx={{ textAlign: "center" }}>
         {userData.username_professor}
       </Typography>
-      <Typography>{userData.turno_professor}</Typography>
+      <Typography>{userData.id_professor}</Typography>
       <Typography>{userData.course_professor}</Typography>
 
       <Button variant="contained" onClick={handleOpen}>
