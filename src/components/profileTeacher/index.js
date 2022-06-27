@@ -11,7 +11,7 @@ export function ProfileTeacher({ userData }) {
 
   return (
     <Paper elevation={5}>
-      <Avatar src={PerfilImage} sx={{ width: 64, height: 64 }} />
+      <Avatar src={userData.img?.url} sx={{ width: 64, height: 64 }} />
 
       <Typography sx={{ textAlign: "center" }}>
         {userData.username_professor}

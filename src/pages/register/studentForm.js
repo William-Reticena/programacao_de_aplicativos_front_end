@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { TextField } from "./style";
 import api from "../../services/api";
-import PerfilImage from "../../images/perfil-image.png";
+import PerfilImage from "../../images/avatar.jpg";
 import { LOGIN } from "../../routes/routes";
 
 export function StudentForm({ handleChange, radioValue }) {

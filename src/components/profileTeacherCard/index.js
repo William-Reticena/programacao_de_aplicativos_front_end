@@ -31,18 +31,22 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    password: Yup.string().notRequired(' Insira uma nova senha')
+    password: Yup.string()
+      .notRequired(" Insira uma nova senha")
       .min(6, "A senha deve ter pelo menos 6 caracteres"),
-    passwordConfirmation: Yup.string()
-       .oneOf([Yup.ref('password'), null], 'Senhas inválidas'),
+    passwordConfirmation: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Senhas inválidas"
+    ),
   });
 
-  // console.log(userData);
+  console.log("update", userData);
 
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      id: userData.id_professor,
+      id: userData.id,
+      idTeacher: userData.id_professor,
       type: userData.type,
       image: "", // não tem
       imageURL: "", // não tem
@@ -58,20 +62,52 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     },
     onSubmit: async (values) => {
       setIsDisabled(true);
+      const {
+        type, //não tem
+        image, // não tem
+        imageURL, // não tem
+        fullName, //ok
+        course, //ok
+        idTeacher,
+        id, // não tem
+        shift, //não tem
+        city, //ok
+        cellphone, //ok
+        email, //ok
+        password, //ok
+        description, //ok
+      } = values;
+
+      const file = new FormData();
+
+      file.append("file", imageURL);
+      file.append("id", id);
+      file.append("username_professor", fullName);
+      file.append("password_professor", password);
+      file.append("course_professor", course);
+      file.append("id_professor", idTeacher);
+      file.append("turno_professor", shift);
+      file.append("email_professor", email);
+      file.append("contact_professor", cellphone);
+      file.append("city_professor", city);
+      file.append("description_professor", description);
+      file.append("status_professor", 0);
+
       try {
-        await api.post("/ProfessorUpdate", {
-          id_professor: values.id,
-          username_professor: values?.fullName,
-          password_professor: values?.passwordConfirmation,
-          turno_professor: values.shift,
-          course_professor: values?.course,
-          email_professor: values?.email,
-          contact_professor: values?.cellphone,
-          city_professor: values?.city,
-          description_professor: values?.description,
-          status_professor: 0,
-        });
-        // onClose();
+        await api.post("/ProfessorUpdate", file);
+        // await api.post("/ProfessorUpdate", {
+        //   id_professor: values.id,
+        //   username_professor: values?.fullName,
+        //   password_professor: values?.passwordConfirmation,
+        //   turno_professor: values.shift,
+        //   course_professor: values?.course,
+        //   email_professor: values?.email,
+        //   contact_professor: values?.cellphone,
+        //   city_professor: values?.city,
+        //   description_professor: values?.description,
+        //   status_professor: 0,
+        // });
+        onClose();
         document.location.reload();
       } catch (error) {
         console.log("teste", error);
@@ -90,14 +126,10 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
+        formik.setFieldValue("imageURL", refFileInput.files[0]);
       };
 
       reader.readAsDataURL(refFileInput.files[0]);
-
-      formik.setFieldValue(
-        "imageURL",
-        URL.createObjectURL(refFileInput.files[0])
-      );
     });
 
     // console.log(refFileInput);
@@ -134,7 +166,7 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
           >
             <CardMedia
               component="img"
-              image={PerfilImage}
+              image={userData.img?.url}
               id="cardMedia"
               sx={{ backgroundSize: "contain" }}
             />
@@ -254,8 +286,14 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
               label="Confirmar senha"
               value={formik.values.passwordConfirmation}
               onChange={formik.handleChange}
-              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
-              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+              error={
+                formik.touched.passwordConfirmation &&
+                Boolean(formik.errors.passwordConfirmation)
+              }
+              helperText={
+                formik.touched.passwordConfirmation &&
+                formik.errors.passwordConfirmation
+              }
               sx={{ width: "calc(55% - 32px)", margin: "8px" }}
             />
 
