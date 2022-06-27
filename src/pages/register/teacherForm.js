@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { TextField } from "./style";
 import api from "../../services/api";
-import PerfilImage from "../../images/perfil-image.png";
+import PerfilImage from "../../images/avatar.jpg";
 import { LOGIN } from "../../routes/routes";
 
 export function TeacherForm({ handleChange, radioValue }) {
@@ -61,8 +61,8 @@ export function TeacherForm({ handleChange, radioValue }) {
       imageURL: "", // não tem
       fullName: "", //ok
       course: "", //ok
-      id: "", // não tem
-      shift: "", //não tem
+      id: "", // ok
+      shift: "", // ok
       city: "", //ok
       cellphone: "", //ok
       email: "", //ok
@@ -106,18 +106,18 @@ export function TeacherForm({ handleChange, radioValue }) {
       // }
 
       try {
-        await api.post("/ProfessorStore", file);
-        // await api.post("/ProfessorStore", {
-        //   username_professor: values.fullName,
-        //   password_professor: values.password,
-        //   course_professor: values.course,
-        //   turno_professor: values.shift,
-        //   email_professor: values.email,
-        //   contact_professor: values.cellphone,
-        //   city_professor: values.city,
-        //   description_professor: values?.description,
-        //   status_professor: 1,
-        // });
+        await api.post("/ProfessorStore", {
+          username_professor: values.fullName,
+          password_professor: values.password,
+          id_professor: values.id,
+          course_professor: values.course,
+          turno_professor: values.shift,
+          email_professor: values.email,
+          contact_professor: values.cellphone,
+          city_professor: values.city,
+          description_professor: values?.description,
+          status_professor: 1,
+        });
 
         navigate(LOGIN);
       } catch (error) {

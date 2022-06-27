@@ -2,17 +2,14 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
-import { Button, Paper, Typography, Box } from "@mui/material";
+import { Button, Paper, Typography, Box, Modal } from "@mui/material";
 import api from "../../services/api";
 import { ADMIN } from "../../routes/routes";
 
 
-export function ModalAdmin({ data, onClose, open }) {
-
-  const navigate = useNavigate();
+export function ModalAdmin({ onClose }) {
 
   const scheme = Yup.object().shape({
-
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
@@ -27,15 +24,9 @@ export function ModalAdmin({ data, onClose, open }) {
       password: "",
     },
     onSubmit: async (values) => {
-      api.post("/CandidateStore", {
-        status_candidate: 1,
-        student_candidate: userId,
-        project_candidate: data.id,
-      });
-
-      navigate(ADMIN);
 
     },
+    
   });
 
   return (

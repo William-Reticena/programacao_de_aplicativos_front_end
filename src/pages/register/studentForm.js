@@ -22,7 +22,7 @@ import {
 } from "@mui/material";
 import { TextField } from "./style";
 import api from "../../services/api";
-import PerfilImage from "../../images/perfil-image.png";
+import PerfilImage from "../../images/avatar.jpg";
 import { LOGIN } from "../../routes/routes";
 
 export function StudentForm({ handleChange, radioValue }) {
@@ -100,7 +100,7 @@ export function StudentForm({ handleChange, radioValue }) {
       file.append("username_student", fullName);
       file.append("password_student", password);
       file.append("course_student", course);
-      file.append("shift", shift);
+      file.append("turno_student", shift);
       file.append("email_student", email);
       file.append("contact_student", cellphone);
       file.append("city_student", city);

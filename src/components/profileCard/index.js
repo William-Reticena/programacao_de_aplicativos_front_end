@@ -30,19 +30,24 @@ export function ProfileCard({ userData, onClose }) {
     setRadioValue(event.target.value);
   };
 
+  console.log(userData);
+
   const scheme = Yup.object().shape({
     city: Yup.string().required("Insira o nome da sua cidade!"),
     cellphone: Yup.string().required("Insira seu número de celular!"),
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-     password: Yup.string().notRequired(' Insira uma nova senha')
+    password: Yup.string()
+      .notRequired(" Insira uma nova senha")
       .min(6, "A senha deve ter pelo menos 6 caracteres"),
-    passwordConfirmation: Yup.string()
-       .oneOf([Yup.ref('password'), null], 'Senhas inválidas'),
+    passwordConfirmation: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Senhas inválidas"
+    ),
   });
 
-  console.log(userData);
+  // console.log(userData);
 
   const formik = useFormik({
     validationSchema: scheme,
@@ -66,20 +71,53 @@ export function ProfileCard({ userData, onClose }) {
     },
     onSubmit: async (values) => {
       setIsDisabled(true);
+      const {
+        type, //não tem
+        image, // não tem
+        imageURL, //ok
+        id,
+        fullName, //ok
+        course, //ok
+        collegePeriod, //ok
+        ra, //ok
+        shift, //não tem
+        city, //ok
+        cellphone, //ok
+        email, //ok
+        password, //ok
+        description, //ok
+      } = values;
+
+      const file = new FormData();
+
+      file.append("file", imageURL);
+      file.append("id", id);
+      file.append("username_student", fullName);
+      file.append("password_student", password);
+      file.append("course_student", course);
+      file.append("turno_student", shift);
+      file.append("email_student", email);
+      file.append("contact_student", cellphone);
+      file.append("city_student", city);
+      file.append("description_student", description);
+      file.append("ra_student", ra);
+      file.append("period_student", collegePeriod);
       try {
-        await api.post("/StudentUpdate", {
-          //tá errado o back as info não batem com a rota
-          id: values.id,
-          username_student: values.fullName,
-          // password_student: values.passwordConfirmation,
-          course_student: values.course,
-          turno_student: values.shift,
-          email_student: values.email,
-          contact_student: values.cellphone,
-          city_student: values.city,
-          description_student: values.description,
-        });
+        await api.post("/StudentUpdate", file);
+        // await api.post("/StudentUpdate", {
+        //   //tá errado o back as info não batem com a rota
+        //   id: values.id,
+        //   username_student: values.fullName,
+        //   password_student: values.password,
+        //   course_student: values.course,
+        //   turno_student: values.shift,
+        //   email_student: values.email,
+        //   contact_student: values.cellphone,
+        //   city_student: values.city,
+        //   description_student: values.description,
+        // });
         onClose();
+        document.location.reload();
       } catch (error) {
         setIsDisabled(false);
         console.log("teste", error);
@@ -98,14 +136,10 @@ export function ProfileCard({ userData, onClose }) {
 
       reader.onload = () => {
         refCardMedia.src = reader.result;
+        formik.setFieldValue("imageURL", refFileInput.files[0]);
       };
 
       reader.readAsDataURL(refFileInput.files[0]);
-
-      formik.setFieldValue(
-        "imageURL",
-        URL.createObjectURL(refFileInput.files[0])
-      );
     });
   };
 
@@ -140,7 +174,7 @@ export function ProfileCard({ userData, onClose }) {
           >
             <CardMedia
               component="img"
-              image={PerfilImage}
+              image={userData.img?.url}
               id="cardMedia"
               sx={{ backgroundSize: "contain" }}
             />
@@ -272,7 +306,7 @@ export function ProfileCard({ userData, onClose }) {
               sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
-<TextField
+            <TextField
               name="password"
               type="password"
               size="small"
@@ -291,8 +325,14 @@ export function ProfileCard({ userData, onClose }) {
               label="Confirmar senha"
               value={formik.values.passwordConfirmation}
               onChange={formik.handleChange}
-              error={formik.touched.passwordConfirmation && Boolean(formik.errors.passwordConfirmation)}
-              helperText={formik.touched.passwordConfirmation && formik.errors.passwordConfirmation}
+              error={
+                formik.touched.passwordConfirmation &&
+                Boolean(formik.errors.passwordConfirmation)
+              }
+              helperText={
+                formik.touched.passwordConfirmation &&
+                formik.errors.passwordConfirmation
+              }
               sx={{ width: "calc(55% - 32px)", margin: "8px" }}
             />
 
@@ -329,7 +369,7 @@ export function ProfileCard({ userData, onClose }) {
                 disabled={isDisabled}
                 type="submit"
                 variant="contained"
-                sx={{marginRight: "16px"  }}
+                sx={{ marginRight: "16px" }}
               >
                 Concluir
               </Button>

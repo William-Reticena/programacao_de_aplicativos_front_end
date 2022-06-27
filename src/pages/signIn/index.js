@@ -21,18 +21,12 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../../context/userContext";
-import  Logo  from "../../images/Logo-UTFPR.png";
-import { NavigationButton, ModalProject } from "../../components";
+import Logo from "../../images/Logo-UTFPR.png";
+import { NavigationButton, ModalProject, ModalAdmin } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import {
-  REGISTER,
-  STUDENT_HOME,
-  TEACHER_HOME,
-  ADMIN,
-} from "../../routes/routes";
+import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import api from "../../services/api";
-// import api from "../../services/api";
 
 const LabelWrapper = ({ isSelected, user }) => (
   <Container
@@ -182,14 +176,12 @@ export function SignIn() {
         sx={{ justifyContent: "center" }}
       >
         <>
-          <ModalProject userData={userData} onClose={handleClose}>
-            {/* {console.log("student")} */}
-          </ModalProject>
+          <ModalAdmin onClose={handleClose} />
         </>
       </Modal>
       <Paper elevation={5}>
         <Box>
-          <Card elevation={0}>
+          <Card elevation={0} >
             <CardMedia component="img" image={Logo} />
           </Card>
         </Box>

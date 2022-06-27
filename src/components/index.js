@@ -13,6 +13,7 @@ export { ProfileCard } from "./profileCard";
 export { TeacherCard } from "./teacherCard";
 export { ModalTeacher } from "./modalTeacher";
 export { ModalShowProjects } from "./modalShowProjects";
+export { ModalAdmin } from "./modalAdmin";
 export { ProfileTeacherCard } from "./profileTeacherCard";
 export { ProfileTeacher } from "./profileTeacher";
 // export { ProfilePaper } from "./profilePaper/prof";

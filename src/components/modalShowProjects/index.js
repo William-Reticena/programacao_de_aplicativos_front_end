@@ -47,7 +47,6 @@ export function ModalShowProjects({ onClose, open }) {
     remunerationValue: Yup.number().required("Insira o valor da bolsa!")
       .min(0,'Valor inválido!'),
     description: Yup.string().required("Insira uma descrição!"),
-    requirements: Yup.string().required("Insira os requisitos da vaga!"),
   });
 
   const formik = useFormik({
@@ -81,7 +80,6 @@ export function ModalShowProjects({ onClose, open }) {
           number_vacancies_project: values.numberVacant,
           description_project: values.description,
           requirements_project: values.requirements,
-          // remuneration_internship: "",
           remuneration_value_project: values.remunerationValue,
           professor_responsable_project: userData.id,
           remuneration_project: values.remuneration_project,
@@ -191,9 +189,8 @@ export function ModalShowProjects({ onClose, open }) {
                   value={formik.values.shift}
                   onChange={formik.handleChange}
                 >
-                  <MenuItem value={"Integral M/T"}>Integral M/T</MenuItem>
-                  <MenuItem value={"Integral T/N"}>Integral T/N</MenuItem>
-                  <MenuItem value={"Noite"}>Noite</MenuItem>
+                  <MenuItem value={"Manhã"}>Manhã</MenuItem>
+                  <MenuItem value={"Tarde"}>Tarde</MenuItem>
                 </Select>
               </FormControl>
               </Grid>
@@ -325,13 +322,6 @@ export function ModalShowProjects({ onClose, open }) {
               />
               <TextField
                 name="requirements"
-                error={
-                  formik.touched.requirements &&
-                  Boolean(formik.errors.requirements)
-                }
-                helperText={
-                  formik.touched.requirements && formik.errors.requirements
-                }
                 value={formik.values.requirements}
                 onChange={formik.handleChange}
                 size="small"
