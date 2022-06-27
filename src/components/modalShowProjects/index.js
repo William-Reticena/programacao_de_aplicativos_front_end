@@ -65,7 +65,7 @@ export function ModalShowProjects({ onClose, open }) {
       description: "", //ok
       requirements: "", //ok
       remunerationValue: "",
-      remuneration_project: "",
+      remuneration_project: "1",
     },
     onSubmit: async (values) => {
       setIsDisabled(true);

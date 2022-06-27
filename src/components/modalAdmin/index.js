@@ -2,12 +2,12 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
-import { Button, Paper, Typography } from "@mui/material";
+import { Button, Paper, Typography, Box } from "@mui/material";
 import api from "../../services/api";
 import { ADMIN } from "../../routes/routes";
 
 
-export function ModalAdmin({ data, onClose, open, userId }) {
+export function ModalAdmin({ data, onClose, open }) {
 
   const navigate = useNavigate();
 
@@ -23,10 +23,15 @@ export function ModalAdmin({ data, onClose, open, userId }) {
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      email: userData.email_professor,
+      email: "",
       password: "",
     },
     onSubmit: async (values) => {
+      api.post("/CandidateStore", {
+        status_candidate: 1,
+        student_candidate: userId,
+        project_candidate: data.id,
+      });
 
       navigate(ADMIN);
 
@@ -35,7 +40,7 @@ export function ModalAdmin({ data, onClose, open, userId }) {
 
   return (
     <Paper>
-
+      <Box>
       <Typography sx={{ textAlign: "center", marginBottom: "16px" }}>Admin</Typography>
 
       <TextField
@@ -60,6 +65,7 @@ export function ModalAdmin({ data, onClose, open, userId }) {
         <Button type="submit" size="large" variant="contained">
           Login
         </Button>
+      </Box>
     </Paper>
   );
 }

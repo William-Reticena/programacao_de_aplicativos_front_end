@@ -12,13 +12,14 @@ import {
   Span,
   TextField,
 } from "./style";
-import { CardMedia, FormControlLabel, Radio } from "@mui/material";
+import { CardMedia, FormControlLabel, Radio, IconButton, Modal, } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../../context/userContext";
 import { Logo } from "../../images";
-import { NavigationButton } from "../../components";
+import { NavigationButton, ModalProject } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
-import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
+import { REGISTER, STUDENT_HOME, TEACHER_HOME, ADMIN } from "../../routes/routes";
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import api from "../../services/api";
 // import api from "../../services/api";
 
@@ -44,6 +45,10 @@ export function SignIn() {
   // const [typeUser, setTypeUser] = useState();
   const [userData, setUserdata] = useUserInfo();
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const scheme = Yup.object().shape({
 
@@ -126,6 +131,22 @@ export function SignIn() {
         height: "100vh",
       }}
     >
+      <Box>
+         <IconButton onClick={handleOpen}>
+            <SupervisedUserCircleIcon />
+        </IconButton>
+      </Box>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            sx={{ justifyContent: "center" }}
+          >
+            <>
+              <ModalProject userData={userData} onClose={handleClose}>
+                {/* {console.log("student")} */}
+              </ModalProject>
+            </>
+          </Modal>
       <Paper elevation={5}>
         <Box>
           <Card elevation={0}>
@@ -199,6 +220,7 @@ export function SignIn() {
                 <Button size="large">Cadastre-se</Button>
               </NavigationButton>
             </FormControl>
+
           </form>
         </Box>
       </Paper>

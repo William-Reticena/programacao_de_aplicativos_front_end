@@ -283,7 +283,7 @@ export function ModalTeacher({ infos, onClose, open }) {
                   <TextField
                     name="remunerationValue"
                     disabled
-                    value={formik.values.remunerationValue}
+                    value={formik.values.remunerationValue = "0"}
                     onChange={formik.handleChange}
                     size="small"
                     label="Valor da bolsa"
