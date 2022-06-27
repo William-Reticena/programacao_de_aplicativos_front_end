@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png"
 import {
@@ -11,11 +12,26 @@ Paper,
 TextField,
 Typography,
 } from "@mui/material";
+import api from "../../services/api";
+
 
 export function InformationsCardApplicant () {
+  const { id } = useParams();
+  const [candidateCard, setcandidateCard] = useState({});
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await api.post("/CandidateShow", { id });
+      // console.log(data);
+      setcandidateCard(data);
+    };
+    fetch();
+  }, [setcandidateCard, id],);
+
 
   const formik = useFormik({
     initialValues: {
@@ -42,7 +58,7 @@ export function InformationsCardApplicant () {
         <Grid item xs={8}>
           <Box sx={{ marginBottom: "16px" }}>
             <Typography variant="h2" sx={{ fontSize: "24px" }}>
-              {formik.values.nome}
+              {candidateCard.student_candidate}
             </Typography>
           </Box>
 

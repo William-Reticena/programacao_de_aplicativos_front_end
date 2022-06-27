@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useFormik } from "formik";
 import {
   Box,
   Grid,
@@ -20,7 +21,7 @@ export function InformationsCardProjects() {
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/ProjectShow", { id });
-      // console.log(data);
+      //console.log(data);
       setProjectCard(data);
     };
     fetch();

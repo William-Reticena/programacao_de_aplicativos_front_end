@@ -26,7 +26,7 @@ export function InformationsCardAdm () {
       celular: "",
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      
     }
   });
 

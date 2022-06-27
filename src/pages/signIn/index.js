@@ -16,7 +16,7 @@ import { CardMedia, FormControlLabel, Radio, IconButton, Modal, } from "@mui/mat
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../../context/userContext";
 import { Logo } from "../../images";
-import { NavigationButton, ModalProject } from "../../components";
+import { NavigationButton, ModalAdmin } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
 import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
@@ -159,29 +159,27 @@ export function SignIn() {
       height: "100vh",
     }}
     >
-    <Box>
-       <IconButton onClick={handleOpen}>
-          <SupervisedUserCircleIcon />
-      </IconButton>
-    </Box>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            sx={{ justifyContent: "center" }}
-          >
-            <>
-              <ModalProject onClose={handleClose}>
+      <IconButton onClick={handleOpen}>
+              <SupervisedUserCircleIcon />
+          </IconButton>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                sx={{ justifyContent: "center"}}
+              >
+                <>
+                  <ModalAdmin onClose={handleClose}>
 
-              </ModalProject>
-            </>
-          </Modal>
+                  </ModalAdmin>
+                </>
+              </Modal>
       <Paper elevation={5}>
         <Box>
           <Card elevation={0}>
             <CardMedia component="img" image={Logo} />
           </Card>
         </Box>
-
+        
         <Box
           sx={{
             padding: "0 0 24px 0",
