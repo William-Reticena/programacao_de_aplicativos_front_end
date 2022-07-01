@@ -1,43 +1,31 @@
-# Primeiro baixe e instale o [node.js](https://nodejs.org/en/download/) e o [git](https://git-scm.com/downloads)
+# Projeto feito na disciplina de Programação de Aplicativos
 
-## No node instale o yarn globalmente com o comando
-```npm install --global yarn```
+## 🚀 Tecnologias
 
-## Instalando o yarn no windows!
-As vezes o windows impede que os comandos do yarn sejam executados.
-Para isso entre no Windows PowerShell como administrador e rode os seguintes comandos de uma vez...
+- [ReactJS](https://pt-br.reactjs.org/)
+- [Material UI](https://mui.com/pt/)
+- [Styled Components](https://styled-components.com/)
 
-```Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted```
+## UTFPRojetos
 
-Em teoria, isso é o suficiente para os scripts yarn executarem
+![](src/images/Logo-UTFPR.png)
 
-## Configurando a ferramenta Git
-`NOTA:` Tudo que está entre tags, deve ser substítuido pelos itens respectivos, dentro das mesmas. Utilize o Git Bash para as configurações.
-Para as configurações iniciais execute:
-  Comandos usados para indentificar os participantes na hora de um commit
-  
-```git config --global user.name "<nome do usuário>"```
+O propósito do sistema é ajudar professores a criar bolsas e oportunidades
+de estágio para os alunos, e os alunos terem acesso a essas vagas de estágio e
+bolsas. Com isso os alunos são capazes de verem quais bolsas estão sendo
+ofertadas dentro da UTFPR, por quais professores, assim como seus detalhes e
+requisitos.
 
-```git config --global user.email <email do GitHub>```
+## Criadores que contribuiram para a realização do mesmo
 
-### Geração da chave SSH para clone de repositórios remotos:
-```ssh-keygen -t rsa -b 4096 -C "<email do GitHub>"```
+### Front-end
 
-### Pegando a chave SSH:
-`NOTA:` Essa chave deve ser copiada no início ao fim (até o seu email) e deve ser colada no [SSH and GPG keys](https://github.com/settings/ssh/new) do GitHub
+- [iagosasaki](https://github.com/iagosasaki)
+- [JoaquimCJunior](https://github.com/JoaquimCJunior)
+- [William-Reticena](https://github.com/William-Reticena)
 
-```cat ~/.ssh/id_rsa.pub```
+### Back-end
 
-### Inicializando o agente SSH:
-```eval `ssh-agent -s` ```
-
-```ssh-add ~/.ssh/id_rsa```
-
-## Pronto está tudo configurado!!
-
-Agora para clonar o repositório cole no terminal:
-
-```git clone git@github.com:William-Reticena/programacao_de_aplicativos_front_end.git```
-
-Na pasta do repositório clonado apenas digite `yarn` e ele irá fazer a instalação de todas as dependências 
-
+- [acacio90](https://github.com/acacio90)
+- [Pedrobk222](https://github.com/Pedrobk222)
+- [RyanRamos01](https://github.com/RyanRamos01)
