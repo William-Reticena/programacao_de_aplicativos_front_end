@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PerfilImage from "../../images/perfil-image.png";
 import { ProfileTeacherCard } from "../";
 import { Modal, Paper } from "./style";
 import { Avatar, Button, Typography } from "@mui/material";
@@ -29,9 +28,7 @@ export function ProfileTeacher({ userData }) {
         sx={{ justifyContent: "center" }}
       >
         <>
-          <ProfileTeacherCard userData={userData} onClose={handleClose}>
-            {/* {console.log("teacher")} */}
-          </ProfileTeacherCard>
+          <ProfileTeacherCard userData={userData} onClose={handleClose} />
         </>
       </Modal>
     </Paper>

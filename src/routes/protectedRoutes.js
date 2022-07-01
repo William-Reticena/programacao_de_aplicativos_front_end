@@ -10,6 +10,3 @@ export const ProtectedRoutes = () => {
   else if (userData.type === "admin") return <Admin />;
   else return <SignIn />
 };
-
-// if (userData.type === "student")
-//   return <Route path={STUDENT_HOME} element={<StudentHome />} />;

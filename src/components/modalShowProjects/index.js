@@ -14,8 +14,8 @@ import {
   RadioGroup,
   FormControl,
   FormControlLabel,
-  InputLabel, 
-  MenuItem, 
+  InputLabel,
+  MenuItem,
   Select,
 } from "@mui/material";
 import { useUserInfo } from "../../context/userContext";
@@ -35,8 +35,8 @@ export function ModalShowProjects({ onClose, open }) {
     course: Yup.string().required("Insira seu curso de graduação!"),
     collegePeriod: Yup.number()
       .required("Insira um período do curso!")
-      .max(10,'Período inválido!')
-      .min(1,'Período inválido!'),
+      .max(10, "Período inválido!")
+      .min(1, "Período inválido!"),
     amountHours: Yup.string().required("Informe a quantidade horas semanais!"),
     shift: Yup.string().required("Insira em qual turno você se encontra!"),
     schedules: Yup.string().required("Insira os horários!"),
@@ -44,25 +44,26 @@ export function ModalShowProjects({ onClose, open }) {
     email: Yup.string()
       .email("Insira um email válido!")
       .required("Insira o seu e-mail!"),
-    remunerationValue: Yup.number().required("Insira o valor da bolsa!")
-      .min(0,'Valor inválido!'),
+    remunerationValue: Yup.number()
+      .required("Insira o valor da bolsa!")
+      .min(0, "Valor inválido!"),
     description: Yup.string().required("Insira uma descrição!"),
   });
 
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
-      teacherName: "", //ok
-      projectName: "", //ok
-      course: "", //ok
-      collegePeriod: "", //ok
-      amountHours: "", //ok
-      shift: "", //ok
-      schedules: "", //ok
-      numberVacant: "", //ok
-      email: "", //ok
-      description: "", //ok
-      requirements: "", //ok
+      teacherName: "",
+      projectName: "",
+      course: "",
+      collegePeriod: "",
+      amountHours: "",
+      shift: "",
+      schedules: "",
+      numberVacant: "",
+      email: "",
+      description: "",
+      requirements: "",
       remunerationValue: "",
       remuneration_project: "1",
     },
@@ -179,20 +180,20 @@ export function ModalShowProjects({ onClose, open }) {
                   sx={{ width: "45%", margin: "8px" }}
                 />
 
-              <FormControl sx={{width: "51%", margin: "8px"}} size= "small">
-                <InputLabel id="select-shift">Turno</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  label="Turno"
-                  id="select-shift"
-                  name="shift"
-                  value={formik.values.shift}
-                  onChange={formik.handleChange}
-                >
-                  <MenuItem value={"Manhã"}>Manhã</MenuItem>
-                  <MenuItem value={"Tarde"}>Tarde</MenuItem>
-                </Select>
-              </FormControl>
+                <FormControl sx={{ width: "51%", margin: "8px" }} size="small">
+                  <InputLabel id="select-shift">Turno</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    label="Turno"
+                    id="select-shift"
+                    name="shift"
+                    value={formik.values.shift}
+                    onChange={formik.handleChange}
+                  >
+                    <MenuItem value={"Manhã"}>Manhã</MenuItem>
+                    <MenuItem value={"Tarde"}>Tarde</MenuItem>
+                  </Select>
+                </FormControl>
               </Grid>
 
               <Grid container item>
@@ -271,37 +272,36 @@ export function ModalShowProjects({ onClose, open }) {
                   />
                 </RadioGroup>
               </FormControl>
-              
-                {value === "0" ? (
-                  <TextField
-                    name="remunerationValue"
-                    disabled
-                    value={formik.values.remunerationValue = "0"}
-                    onChange={formik.handleChange}
-                    size="small"
-                    label="Valor da bolsa"
-                    sx={{ width: "calc(25% - 33px)", margin: "8px" }}
-                  />
-                ) : (
-                  <TextField
-                    name="remunerationValue"
-                    error={
-                      formik.touched.remunerationValue &&
-                      Boolean(formik.errors.remunerationValue)
-                    }
-                    helperText={
-                      formik.touched.remunerationValue &&
-                      formik.errors.remunerationValue
-                    }
-                    value={formik.values.remunerationValue}
-                    onChange={formik.handleChange}
-                    size="small"
-                    label="Valor da bolsa"
-                    fullWidth
-                    sx={{ width: "calc(25% - 33px)", margin: "8px" }}
-                  />
-                )}
-              
+
+              {value === "0" ? (
+                <TextField
+                  name="remunerationValue"
+                  disabled
+                  value={(formik.values.remunerationValue = "0")}
+                  onChange={formik.handleChange}
+                  size="small"
+                  label="Valor da bolsa"
+                  sx={{ width: "calc(25% - 33px)", margin: "8px" }}
+                />
+              ) : (
+                <TextField
+                  name="remunerationValue"
+                  error={
+                    formik.touched.remunerationValue &&
+                    Boolean(formik.errors.remunerationValue)
+                  }
+                  helperText={
+                    formik.touched.remunerationValue &&
+                    formik.errors.remunerationValue
+                  }
+                  value={formik.values.remunerationValue}
+                  onChange={formik.handleChange}
+                  size="small"
+                  label="Valor da bolsa"
+                  fullWidth
+                  sx={{ width: "calc(25% - 33px)", margin: "8px" }}
+                />
+              )}
 
               <TextField
                 name="description"

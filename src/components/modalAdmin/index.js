@@ -2,12 +2,10 @@ import React from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
-import { Button, Paper, Typography, Box, Modal } from "@mui/material";
-import api from "../../services/api";
-import { ADMIN } from "../../routes/routes";
+import { Button, Paper, Typography, Box } from "@mui/material";
 
 
-export function ModalAdmin({ onClose }) {
+export function ModalAdmin() {
 
   const scheme = Yup.object().shape({
     email: Yup.string()

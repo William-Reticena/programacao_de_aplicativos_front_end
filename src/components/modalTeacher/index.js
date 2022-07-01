@@ -59,7 +59,6 @@ console.log(infos);
       requirements: infos.requirements_project,
     },
     onSubmit: async (values) => {
-      // console.log("value", values.id);
       setIsDisabled(true);
 
       try {
@@ -85,9 +84,6 @@ console.log(infos);
       } catch (error) {
         console.log("teste", error);
       }
-      // onSubmit: (values) => {
-      //   alert(JSON.stringify(values, null, 2));
-      // },
     },
   });
 
