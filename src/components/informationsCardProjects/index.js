@@ -14,13 +14,11 @@ export function InformationsCardProjects() {
   const { id } = useParams();
   const [projectCard, setProjectCard] = useState({});
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/ProjectShow", { id });
-      // console.log(data);
       setProjectCard(data);
     };
     fetch();

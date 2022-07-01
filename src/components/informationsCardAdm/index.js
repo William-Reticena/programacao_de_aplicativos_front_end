@@ -13,9 +13,8 @@ import {
 } from "@mui/material";
 
 export function InformationsCardAdm() {
-  const [open, setOpen] = useState(false);
+  const [, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
 
   const formik = useFormik({
     initialValues: {
