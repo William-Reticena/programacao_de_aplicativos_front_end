@@ -13,6 +13,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Avatar from "../../images/avatar.jpg";
 
 export function ProfileCard({ userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
@@ -151,12 +152,21 @@ export function ProfileCard({ userData, onClose }) {
             }}
             onClick={handleClick}
           >
-            <CardMedia
-              component="img"
-              image={userData.img?.url}
-              id="cardMedia"
-              sx={{ backgroundSize: "contain" }}
-            />
+            {userData.img ? (
+              <CardMedia
+                component="img"
+                image={userData.img?.url}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                image={Avatar}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            )}
           </Card>
         </Grid>
 
@@ -313,17 +323,6 @@ export function ProfileCard({ userData, onClose }) {
                 formik.errors.passwordConfirmation
               }
               sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-            />
-
-            <TextField
-              name="description"
-              size="small"
-              multiline
-              minRows={3}
-              label="Descrição"
-              value={formik?.values.description}
-              onChange={formik?.handleChange}
-              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
             <TextField

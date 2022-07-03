@@ -10,6 +10,8 @@ export function InformationsCard({ data }) {
   const handleClose = () => setOpen(false);
   const [userData] = useUserInfo();
 
+  console.log("data", data);
+
   return (
     <Paper elevation={5} sx={{ padding: "16px", marginBottom: "24px" }}>
       <Grid>
@@ -47,7 +49,7 @@ export function InformationsCard({ data }) {
             disabled
             size="small"
             label="RESPONSÁVEL"
-            value={data.username_professor}
+            value={data.professor_project?.username_professor}
             sx={{ width: "35%" }}
           />
 

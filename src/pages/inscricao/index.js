@@ -8,6 +8,8 @@ export function Inscricao() {
   const [infosCards, setInfosCard] = useState([]);
   const [userData] = useUserInfo();
 
+  console.log("id", userData.id);
+
   useEffect(() => {
     const fetch = async () => {
       const { data } = await api.post("/CandidateIndex", { id: userData.id });

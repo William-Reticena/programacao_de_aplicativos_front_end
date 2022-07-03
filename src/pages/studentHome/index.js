@@ -12,6 +12,8 @@ export function StudentHome() {
   const [userData, setUserdata] = useUserInfo();
   const [filter] = useFilter();
 
+  console.log("infos", infosCards);
+
   const id = localStorage.getItem("id");
   useEffect(() => {
     const fetch = async () => {

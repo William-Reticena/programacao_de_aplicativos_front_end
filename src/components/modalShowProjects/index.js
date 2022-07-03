@@ -21,7 +21,7 @@ import {
 import { useUserInfo } from "../../context/userContext";
 
 export function ModalShowProjects({ onClose, open }) {
-  const [value, setValue] = useState("1");
+  const [value, setValue] = useState("0");
   const [isDisabled, setIsDisabled] = useState(false);
 
   const [userData] = useUserInfo();
@@ -65,7 +65,7 @@ export function ModalShowProjects({ onClose, open }) {
       description: "",
       requirements: "",
       remunerationValue: "",
-      remuneration_project: "1",
+      remuneration_project: "0",
     },
     onSubmit: async (values) => {
       setIsDisabled(true);

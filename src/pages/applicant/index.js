@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Header,
   InformationsCardApplicant,
   InformationsCardProjects,
 } from "../../components";
 import { Box, Grid, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
+import api from "../../services/api";
 
 export function Applicant() {
+  const [studentCards, setStudentCards] = useState([]);
+  const [projectCard, setProjectCard] = useState("");
+  const { id } = useParams();
 
-  
+  useEffect(() => {
+    const fecth = async () => {
+      const { data } = await api.post("/IndexStudents", { id });
+      setStudentCards(data);
+    };
+    fecth();
+  }, [id]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await api.post("/ProjectShow", { id });
+      setProjectCard(data);
+      // console.log("projetos", projectCard);
+    };
+    fetch();
+  }, [setProjectCard, id]);
 
   return (
     <>
@@ -18,7 +38,7 @@ export function Applicant() {
         <Grid item xs={2}></Grid>
 
         <Grid item xs={8}>
-          <InformationsCardProjects />
+          <InformationsCardProjects projectCard={projectCard} />
 
           <Box
             sx={{
@@ -32,8 +52,8 @@ export function Applicant() {
             </Typography>
           </Box>
 
-          {[0, 1, 2, 3, 4, 5].map((infos) => (
-            <InformationsCardApplicant key={infos} />
+          {studentCards.map((infos) => (
+            <InformationsCardApplicant key={infos.id} studentInfo={infos} />
           ))}
         </Grid>
         <Grid item xs={2}></Grid>

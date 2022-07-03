@@ -13,6 +13,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Avatar from "../../images/avatar.jpg";
 
 export function ProfileTeacherCard({ register, userData, onClose }) {
   const [refFileInput, setRefFileInput] = useState(null);
@@ -144,12 +145,21 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
             }}
             onClick={handleClick}
           >
-            <CardMedia
-              component="img"
-              image={userData.img?.url}
-              id="cardMedia"
-              sx={{ backgroundSize: "contain" }}
-            />
+            {userData.img ? (
+              <CardMedia
+                component="img"
+                image={userData.img?.url}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                image={Avatar}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            )}
           </Card>
         </Grid>
 
