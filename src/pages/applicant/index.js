@@ -52,8 +52,13 @@ export function Applicant() {
             </Typography>
           </Box>
 
+<<<<<<< HEAD
+          {[0,1].map((infos) => (
+            <InformationsCardApplicant key={infos} />
+=======
           {studentCards.map((infos) => (
             <InformationsCardApplicant key={infos.id} studentInfo={infos} />
+>>>>>>> ac75113a02a7def1d42daeb561045a60d04fa6fb
           ))}
         </Grid>
         <Grid item xs={2}></Grid>
