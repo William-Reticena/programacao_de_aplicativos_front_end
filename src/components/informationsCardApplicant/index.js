@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import PerfilImage from "../../images/perfil-image.png";
-import {
-  Box,
-  Button,
-  Card,
-  CardMedia,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import React from "react";
+import { Box, Card, CardMedia, Grid, Paper, Typography } from "@mui/material";
 import { TextField } from "./style";
 
 export function InformationsCardApplicant({ studentInfo }) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
-  console.log("estudante", studentInfo);
-
   return (
     <Paper
       elevation={5}
       sx={{ padding: "16px", marginBottom: "24px", marginTop: "16px" }}
     >
       <Grid container spacing={3}>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{ display: "flex", alignItems: "center" }}>
           <Card elevation={0}>
             <CardMedia
               component="img"

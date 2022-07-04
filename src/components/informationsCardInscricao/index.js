@@ -8,7 +8,6 @@ export function InformationsCardInscricao({ data }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log("data incr", data);
   const handleDelete = async () => {
     try {
       await api.post("/CandidateDestroy", { id: data.id });

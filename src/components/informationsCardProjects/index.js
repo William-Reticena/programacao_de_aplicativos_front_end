@@ -19,15 +19,6 @@ export function InformationsCardProjects({ projectCard }) {
     requirements_project,
   } = projectCard;
 
-  // useEffect(() => {
-  //   const fetch = async () => {
-  //     const { data } = await api.post("/ProjectShow", { id });
-  //     setProjectCard(data);
-  //   };
-  //   fetch();
-  // }, [setProjectCard, id]);
-  console.log("projetos", projectCard);
-
   return (
     <Paper
       elevation={5}
