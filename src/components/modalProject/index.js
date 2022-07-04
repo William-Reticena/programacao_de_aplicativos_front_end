@@ -28,7 +28,7 @@ export function ModalProject({ data, onClose, open, userId }) {
       });
     },
   });
-
+  console.log("data",  data);
   return (
     <Modal
       open={open}

@@ -9,7 +9,11 @@ export function InformationsCardApplicant({ studentInfo }) {
       sx={{ padding: "16px", marginBottom: "24px", marginTop: "16px" }}
     >
       <Grid container spacing={3}>
-        <Grid item xs={2} sx={{ display: "flex", alignItems: "center" }}>
+        <Grid
+          item
+          xs={2}
+          sx={{ display: "flex", alignItems: "center", marginTop: "40px" }}
+        >
           <Card elevation={0}>
             <CardMedia
               component="img"
