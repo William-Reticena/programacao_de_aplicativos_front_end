@@ -32,7 +32,7 @@ export function Applicant() {
             </Typography>
           </Box>
 
-          {[0, 1, 2, 3, 4, 5].map((infos) => (
+          {[0,1].map((infos) => (
             <InformationsCardApplicant key={infos} />
           ))}
         </Grid>
