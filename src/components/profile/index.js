@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PerfilImage from "../../images/perfil-image.png";
 import { ProfileCard } from "../";
 import { Modal, Paper } from "./style";
 import { Avatar, Button, Typography } from "@mui/material";
@@ -8,8 +7,6 @@ export function Profile({ userData, typeUser }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  // console.log(userData);
 
   return (
     <Paper elevation={5}>
@@ -31,9 +28,7 @@ export function Profile({ userData, typeUser }) {
         sx={{ justifyContent: "center" }}
       >
         <>
-          <ProfileCard userData={userData} onClose={handleClose}>
-            {/* {console.log("student")} */}
-          </ProfileCard>
+          <ProfileCard userData={userData} onClose={handleClose} />
         </>
       </Modal>
     </Paper>

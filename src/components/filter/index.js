@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RadioGroup, Radio } from "@mui/material";
 import { FormControl, FormControlLabel, Paper, Typography } from "./style";
 import { useFilter } from "../../context/filterContext";

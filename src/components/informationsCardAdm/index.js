@@ -3,19 +3,18 @@ import { useFormik } from "formik";
 import PerfilImage from "../../images/perfil-image.png";
 import { TextField } from "./style";
 import {
-Box,
-Button,
-Card,
-CardMedia,
-Grid,
-Paper,
-Typography,
+  Box,
+  Button,
+  Card,
+  CardMedia,
+  Grid,
+  Paper,
+  Typography,
 } from "@mui/material";
 
-export function InformationsCardAdm () {
-  const [open, setOpen] = useState(false);
+export function InformationsCardAdm() {
+  const [, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  // const handleClose = () => setOpen(false);
 
   const formik = useFormik({
     initialValues: {
@@ -25,9 +24,9 @@ export function InformationsCardAdm () {
       email: "",
       celular: "",
     },
-    onSubmit: values => {
-      
-    }
+    onSubmit: (values) => {
+      alert(JSON.stringify(values, null, 2));
+    },
   });
 
   return (
@@ -35,7 +34,11 @@ export function InformationsCardAdm () {
       <Grid container spacing={2}>
         <Grid item xs={2}>
           <Card elevation={0}>
-            <CardMedia component="img" image={PerfilImage} sx={{ maxHeight: "216px" }} />
+            <CardMedia
+              component="img"
+              image={PerfilImage}
+              sx={{ maxHeight: "216px" }}
+            />
           </Card>
         </Grid>
 
@@ -45,9 +48,15 @@ export function InformationsCardAdm () {
               <Typography variant="h2" sx={{ fontSize: "24px" }}>
                 {formik.values.nome}
               </Typography>
-            </Box >
-            
-            <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                marginTop: "16px",
+                justifyContent: "space-between",
+              }}
+            >
               <TextField
                 disabled
                 size="small"
@@ -67,7 +76,13 @@ export function InformationsCardAdm () {
               />
             </Box>
 
-            <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>
+            <Box
+              sx={{
+                display: "flex",
+                marginTop: "16px",
+                justifyContent: "space-between",
+              }}
+            >
               <TextField
                 disabled
                 size="small"
@@ -78,7 +93,13 @@ export function InformationsCardAdm () {
               />
             </Box>
 
-            <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "space-between" }}>
+            <Box
+              sx={{
+                display: "flex",
+                marginTop: "16px",
+                justifyContent: "space-between",
+              }}
+            >
               <TextField
                 disabled
                 size="small"
@@ -104,11 +125,10 @@ export function InformationsCardAdm () {
               >
                 Excluir
               </Button>
-
             </Box>
           </form>
         </Grid>
       </Grid>
     </Paper>
   );
-};
+}

@@ -36,47 +36,9 @@ export function Header({ title, add }) {
       </NavigationButton>
 
       <Box sx={{ width: "40%" }}>
-        {title && (
-          <Typography
-            variant="h1"
-            sx={{ fontSize: "2em", textAlign: "center" }}
-          >
-            {title}
-          </Typography>
-        )}
-
-        {!title && (
-          <Box
-            sx={{
-              background: "#88B0F1",
-              borderRadius: "4px",
-              display: "flex",
-              alignItems: "center",
-              padding: "4px 10px",
-            }}
-          >
-            <form
-              onSubmit={formik.handleSubmit}
-              style={{ width: "100%", display: "flex", alignItems: "center" }}
-            >
-              <TextField
-                name="searchField"
-                size="small"
-                variant="standard"
-                placeholder="Pesquisar"
-                sx={{ width: "calc(100% - 40px)", marginTop: "5px" }}
-                onChange={formik.handleChange}
-                InputProps={{
-                  disableUnderline: true,
-                }}
-              />
-
-              <IconButton type="submit">
-                <Search />
-              </IconButton>
-            </form>
-          </Box>
-        )}
+        <Typography variant="h1" sx={{ fontSize: "2em", textAlign: "center" }}>
+          {title}
+        </Typography>
       </Box>
 
       <Box sx={{ display: "flex", justifyContent: "center" }}>

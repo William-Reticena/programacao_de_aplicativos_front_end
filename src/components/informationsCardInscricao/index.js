@@ -8,8 +8,8 @@ export function InformationsCardInscricao({ data }) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  console.log("data incr", data);
   const handleDelete = async () => {
-    // console.log(data.id);
     try {
       await api.post("/CandidateDestroy", { id: data.id });
       document.location.reload();
@@ -23,7 +23,7 @@ export function InformationsCardInscricao({ data }) {
       <Grid>
         <Box sx={{ marginBottom: "16px" }}>
           <Typography variant="h2" sx={{ fontSize: "24px" }}>
-            {data.project[0].name_project}
+            {data.project[0]?.name_project}
           </Typography>
         </Box>
 
@@ -39,7 +39,7 @@ export function InformationsCardInscricao({ data }) {
             multiline
             minRows={3}
             label="Descricao"
-            value={data.project[0].description_project}
+            value={data.project[0]?.description_project}
             sx={{ width: "100%" }}
           />
         </Box>

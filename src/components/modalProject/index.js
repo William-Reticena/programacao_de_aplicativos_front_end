@@ -1,5 +1,4 @@
 import React from "react";
-import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextField } from "./style";
 import { Box, Button, Grid, Modal, Paper, Typography } from "@mui/material";
@@ -7,7 +6,6 @@ import api from "../../services/api";
 
 export function ModalProject({ data, onClose, open, userId }) {
   const formik = useFormik({
-    // validationSchema: scheme,
     initialValues: {
       teacherName: data.professor_responsable_project,
       projectName: data.name_project,
@@ -28,18 +26,6 @@ export function ModalProject({ data, onClose, open, userId }) {
         student_candidate: userId,
         project_candidate: data.id,
       });
-      // alert(
-      //   JSON.stringify(
-      //     {
-      //       status_candidate: 1,
-      //       student_candidate: userId,
-      //       project_candidate: data.id,
-      //     },
-      //     // values,
-      //     null,
-      //     2
-      //   )
-      // );
     },
   });
 

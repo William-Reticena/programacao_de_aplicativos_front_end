@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import PerfilImage from "../../images/perfil-image.png";
 import { TextField } from "./style";
 import api from "../../services/api";
 import {
@@ -14,6 +13,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Avatar from "../../images/avatar.jpg";
 
 export function ProfileCard({ userData, onClose }) {
   const [radioValue, setRadioValue] = useState("student");
@@ -47,18 +47,15 @@ export function ProfileCard({ userData, onClose }) {
     ),
   });
 
-  // console.log(userData);
-
   const formik = useFormik({
     validationSchema: scheme,
     initialValues: {
       id: userData.id,
-      type: userData.type, //não tem
-      image: "", //não tem
-      imageURL: "", //não tem
-      fullName: userData.username_student, //ok
-      course: userData.course_student, //ok
-      // course: register ? "" : "BCC", //ok
+      type: userData.type,
+      image: "",
+      imageURL: "",
+      fullName: userData.username_student,
+      course: userData.course_student,
       collegePeriod: userData.period_student,
       ra: userData.ra_student,
       shift: userData.turno_student,
@@ -72,20 +69,18 @@ export function ProfileCard({ userData, onClose }) {
     onSubmit: async (values) => {
       setIsDisabled(true);
       const {
-        type, //não tem
-        image, // não tem
-        imageURL, //ok
+        imageURL,
         id,
-        fullName, //ok
-        course, //ok
-        collegePeriod, //ok
-        ra, //ok
-        shift, //não tem
-        city, //ok
-        cellphone, //ok
-        email, //ok
-        password, //ok
-        description, //ok
+        fullName,
+        course,
+        collegePeriod,
+        ra,
+        shift,
+        city,
+        cellphone,
+        email,
+        password,
+        description,
       } = values;
 
       const file = new FormData();
@@ -104,18 +99,6 @@ export function ProfileCard({ userData, onClose }) {
       file.append("period_student", collegePeriod);
       try {
         await api.post("/StudentUpdate", file);
-        // await api.post("/StudentUpdate", {
-        //   //tá errado o back as info não batem com a rota
-        //   id: values.id,
-        //   username_student: values.fullName,
-        //   password_student: values.password,
-        //   course_student: values.course,
-        //   turno_student: values.shift,
-        //   email_student: values.email,
-        //   contact_student: values.cellphone,
-        //   city_student: values.city,
-        //   description_student: values.description,
-        // });
         onClose();
         document.location.reload();
       } catch (error) {
@@ -123,9 +106,6 @@ export function ProfileCard({ userData, onClose }) {
         console.log("teste", error);
       }
     },
-    // onSubmit: async (values) => {
-    //   alert(JSON.stringify(values, null, 2));
-    // },
   });
 
   const handleClick = (event) => {
@@ -172,12 +152,21 @@ export function ProfileCard({ userData, onClose }) {
             }}
             onClick={handleClick}
           >
-            <CardMedia
-              component="img"
-              image={userData.img?.url}
-              id="cardMedia"
-              sx={{ backgroundSize: "contain" }}
-            />
+            {userData.img ? (
+              <CardMedia
+                component="img"
+                image={userData.img?.url}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                image={Avatar}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            )}
           </Card>
         </Grid>
 
@@ -334,17 +323,6 @@ export function ProfileCard({ userData, onClose }) {
                 formik.errors.passwordConfirmation
               }
               sx={{ width: "calc(55% - 32px)", margin: "8px" }}
-            />
-
-            <TextField
-              name="description"
-              size="small"
-              multiline
-              minRows={3}
-              label="Descrição"
-              value={formik?.values.description}
-              onChange={formik?.handleChange}
-              sx={{ width: "calc(100% - 16px)", margin: "8px" }}
             />
 
             <TextField

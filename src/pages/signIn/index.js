@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useUserInfo } from "../../context/userContext";
-import { Logo } from "../../images";
+import Logo from "../../images/Logo-UTFPR.png";
 import { NavigationButton, ModalAdmin } from "../../components";
 import { ChalkboardUser, GraduationCap } from "../../icons";
 import { REGISTER, STUDENT_HOME, TEACHER_HOME } from "../../routes/routes";
@@ -47,8 +47,7 @@ export function SignIn() {
   const [selectedValue, setSelectedValue] = useState("student");
   const [radioStudent, setRadioStudent] = useState(true);
   const [radioTeacher, setRadioTeacher] = useState(false);
-  // const [typeUser, setTypeUser] = useState();
-  const [userData, setUserdata] = useUserInfo();
+  const [, setUserdata] = useUserInfo();
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -71,26 +70,14 @@ export function SignIn() {
       email: "",
       password: "",
     },
-    // onSubmit: async (values) => {
-    //   try {
-    //     api.post("/Admin/login", {
-    //       username: values.email,
-    //       password: values.password,
-    //     });
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // },
     onSubmit: (values) => {
-      if (values.type === "student") {
+      const fetch = async () => {
         try {
-          const fetch = async () => {
+          if (values.type === "student") {
             const { data } = await api.post("/Student/login", {
               email: values.email,
               password: values.password,
             });
-            // console.log(data.error);
-
             const { id, token } = data;
 
             if (id) {
@@ -103,25 +90,15 @@ export function SignIn() {
               localStorage.setItem("type", values.type);
               localStorage.setItem("id", id);
               navigate(STUDENT_HOME);
-            } else {
-              alert("Usuário não encontrado");
             }
-          };
-          fetch();
-        } catch (e) {
-          console.error(e);
-        }
-      } else if (values.type === "teacher") {
-        try {
-          const fetch = async () => {
+          } else if (values.type === "teacher") {
             const { data } = await api.post("/Professor/login", {
               email: values.email,
               password: values.password,
             });
-
             const { id, token } = data;
 
-            if (data.id) {
+            if (id) {
               setUserdata((prevState) => ({
                 ...prevState,
                 id,
@@ -131,24 +108,13 @@ export function SignIn() {
               localStorage.setItem("type", values.type);
               localStorage.setItem("id", id);
               navigate(TEACHER_HOME);
-            } else {
-              alert("Usuário não encontrado");
             }
-          };
-          fetch();
+          }
         } catch (error) {
-          alert(error.response.data);
+          alert("E-mail ou senha incorreta!!");
         }
-      }
-      //only just tests
-      // const typeTest = "teacher";
-
-      // localStorage.setItem("type", typeTest);
-      // localStorage.setItem("id", 1);
-
-      // // setTypeUser(userData.type)
-
-      // console.log(userData);
+      };
+      fetch();
     },
   });
 
@@ -181,7 +147,7 @@ export function SignIn() {
       </Modal>
       <Paper elevation={5}>
         <Box>
-          <Card elevation={0} >
+          <Card elevation={0}>
             <CardMedia component="img" image={Logo} />
           </Card>
         </Box>

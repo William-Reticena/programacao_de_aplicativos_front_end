@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext } from "react";
-// import api
 
 export const UserContext = createContext();
 

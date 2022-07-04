@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useFormik } from "formik";
-import {
-  Box,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import api from "../../services/api";
 import { ModalTeacher } from "../";
 import { TextField } from "./style";
 
-export function InformationsCardProjects() {
+export function InformationsCardProjects({ projectCard }) {
   const { id } = useParams();
-  const [projectCard, setProjectCard] = useState({});
+  // const [projectCard, setProjectCard] = useState("");
   const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  useEffect(() => {
-    const fetch = async () => {
-      const { data } = await api.post("/ProjectShow", { id });
-      //console.log(data);
-      setProjectCard(data);
-    };
-    fetch();
-  }, [setProjectCard, id]);
+  const {
+    description_project,
+    schedules_project,
+    ideal_period_project,
+    remuneration_value_project,
+    requirements_project,
+  } = projectCard;
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const { data } = await api.post("/ProjectShow", { id });
+  //     setProjectCard(data);
+  //   };
+  //   fetch();
+  // }, [setProjectCard, id]);
+  console.log("projetos", projectCard);
 
   return (
     <Paper
@@ -39,72 +40,149 @@ export function InformationsCardProjects() {
           </Typography>
         </Box>
 
-        <TextField
-          disabled
-          multiline
-          minRows={3}
-          label="Descrição"
-          value={projectCard.description_project}
-          onChange={null}
-          sx={{ width: "100%" }}
-        />
+        <form>
+          <Box
+            variant="div"
+            sx={{
+              border: "1px solid rgba(0, 0, 0, 0.38)",
+              position: "relative",
+              borderRadius: "4px",
+              height: "60px",
+              padding: "16px",
+              fontFamily: "Roboto",
+            }}
+          >
+            <span
+              style={{
+                position: "absolute",
+                background: "white",
+                padding: "0 2px",
+                top: "-11px",
+                left: "8px",
+              }}
+            >
+              Descrição
+            </span>
+            {description_project}
+          </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            marginTop: "16px",
-            justifyContent: "space-between",
-          }}
-        >
-          <TextField
-            disabled
-            size="small"
-            label="Carga Horária Semanal"
-            value={projectCard.schedules_project}
-            onChange={null}
-            sx={{ width: "31%" }}
-          />
+          <Box
+            sx={{
+              display: "flex",
+              marginTop: "16px",
+              justifyContent: "space-between",
+            }}
+          >
 
-          <TextField
-            disabled
-            size="small"
-            label="Período"
-            value={projectCard.ideal_period_project}
-            onChange={null}
-            sx={{ width: "31%" }}
-          />
+            <Box
+              variant="div"
+              sx={{
+                border: "1px solid rgba(0, 0, 0, 0.38)",
+                position: "relative",
+                borderRadius: "4px",
+                height: "8px",
+                padding: "16px",
+                width: "200px",
+                fontFamily: "Roboto",
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  background: "white",
+                  padding: "0 2px",
+                  top: "-11px",
+                  left: "8px",
+                }}
+              >
+                Carga Horária Semanal
+              </span>
+              {schedules_project}
+            </Box>
 
-          <TextField
-            disabled
-            size="small"
-            label="Valor da Bolsa"
-            value={projectCard.remuneration_value_project}
-            onChange={null}
-            sx={{ width: "31%" }}
-          />
-        </Box>
+            <Box
+              variant="div"
+              sx={{
+                border: "1px solid rgba(0, 0, 0, 0.38)",
+                position: "relative",
+                borderRadius: "4px",
+                height: "8px",
+                padding: "16px",
+                width: "200px",
+                fontFamily: "Roboto",
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  background: "white",
+                  padding: "0 2px",
+                  top: "-11px",
+                  left: "8px",
+                }}
+              >
+                Período ideal
+              </span>
+              {ideal_period_project}
+            </Box>
+
+            <Box
+              variant="div"
+              sx={{
+                border: "1px solid rgba(0, 0, 0, 0.38)",
+                position: "relative",
+                borderRadius: "4px",
+                height: "8px",
+                padding: "16px",
+                width: "200px",
+                fontFamily: "Roboto",
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  background: "white",
+                  padding: "0 2px",
+                  top: "-11px",
+                  left: "8px",
+                }}
+              >
+                Remuneração
+              </span>
+              {remuneration_value_project}
+            </Box>
+          </Box>
+        </form>
       </Grid>
       <Box
         sx={{
-          display: "flex",
           marginTop: "16px",
-          justifyContent: "space-between",
         }}
       >
-        <TextField
-          disabled
-          size="small"
-          multiline
-          minRows={3}
-          label="Requisitos"
-          value={projectCard.requirements_project}
-          onChange={null}
-          sx={{ width: "100%" }}
-        />
-      </Box>
-
-      <Box sx={{ display: "flex", marginTop: "16px", justifyContent: "end" }}>
-        <ModalTeacher open={open} onClose={handleClose} infos={projectCard} />
+        <Box
+          variant="div"
+          sx={{
+            border: "1px solid rgba(0, 0, 0, 0.38)",
+            position: "relative",
+            borderRadius: "4px",
+            height: "60px",
+            padding: "16px",
+            fontFamily: "Roboto",
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              background: "white",
+              padding: "0 2px",
+              top: "-11px",
+              left: "8px",
+            }}
+          >
+            Requisitos
+          </span>
+          {requirements_project}
+        </Box>
       </Box>
     </Paper>
   );

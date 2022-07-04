@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import PerfilImage from "../../images/perfil-image.png";
 import { TextField } from "./style";
 import api from "../../services/api";
 import {
@@ -14,6 +13,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import Avatar from "../../images/avatar.jpg";
 
 export function ProfileTeacherCard({ register, userData, onClose }) {
   const [refFileInput, setRefFileInput] = useState(null);
@@ -48,10 +48,10 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
       id: userData.id,
       idTeacher: userData.id_professor,
       type: userData.type,
-      image: "", // não tem
-      imageURL: "", // não tem
-      fullName: userData.username_professor, //ok
-      course: userData.course_professor, //ok
+      image: "",
+      imageURL: "",
+      fullName: userData.username_professor,
+      course: userData.course_professor,
       shift: userData.turno_professor,
       city: userData.city_professor,
       cellphone: userData.contact_professor,
@@ -63,19 +63,17 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
     onSubmit: async (values) => {
       setIsDisabled(true);
       const {
-        type, //não tem
-        image, // não tem
-        imageURL, // não tem
-        fullName, //ok
-        course, //ok
+        imageURL,
+        fullName,
+        course,
         idTeacher,
-        id, // não tem
-        shift, //não tem
-        city, //ok
-        cellphone, //ok
-        email, //ok
-        password, //ok
-        description, //ok
+        id,
+        shift,
+        city,
+        cellphone,
+        email,
+        password,
+        description,
       } = values;
 
       const file = new FormData();
@@ -95,27 +93,12 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
 
       try {
         await api.post("/ProfessorUpdate", file);
-        // await api.post("/ProfessorUpdate", {
-        //   id_professor: values.id,
-        //   username_professor: values?.fullName,
-        //   password_professor: values?.passwordConfirmation,
-        //   turno_professor: values.shift,
-        //   course_professor: values?.course,
-        //   email_professor: values?.email,
-        //   contact_professor: values?.cellphone,
-        //   city_professor: values?.city,
-        //   description_professor: values?.description,
-        //   status_professor: 0,
-        // });
         onClose();
         document.location.reload();
       } catch (error) {
         console.log("teste", error);
       }
     },
-    // onSubmit: async (values) => {
-    //   alert(JSON.stringify(values, null, 2));
-    // },
   });
 
   const handleClick = (event) => {
@@ -131,8 +114,6 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
 
       reader.readAsDataURL(refFileInput.files[0]);
     });
-
-    // console.log(refFileInput);
   };
 
   return (
@@ -164,12 +145,21 @@ export function ProfileTeacherCard({ register, userData, onClose }) {
             }}
             onClick={handleClick}
           >
-            <CardMedia
-              component="img"
-              image={userData.img?.url}
-              id="cardMedia"
-              sx={{ backgroundSize: "contain" }}
-            />
+            {userData.img ? (
+              <CardMedia
+                component="img"
+                image={userData.img?.url}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            ) : (
+              <CardMedia
+                component="img"
+                image={Avatar}
+                id="cardMedia"
+                sx={{ backgroundSize: "contain" }}
+              />
+            )}
           </Card>
         </Grid>
 
